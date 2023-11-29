@@ -720,19 +720,21 @@
                 <div class="col-lg-6">
                     
                     <!-- Contact Form -->
-                    <form id="contactForm" data-toggle="validator" data-focus="false">
+                    <form id="contactForm" name="contactForm"  method="post" action="{% url 'submit_contact_form' %}" data-toggle="validator" data-focus="false" onsubmit="return showPopup()">
+                       
+                        {% csrf_token %}
                         <div class="form-group">
-                            <input type="text" class="form-control-input" id="cname" required>
+                            <input type="text" name="first_name" class="form-control-input" id="cname" required>
                             <label class="label-control" for="cname">Name</label>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control-input" id="cemail" required>
+                            <input type="email" class="form-control-input" name="email" id="cemail" required>
                             <label class="label-control" for="cemail">Email</label>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control-textarea" id="cmessage" required></textarea>
+                            <textarea class="form-control-textarea" id="cmessage" name="message" required></textarea>
                             <label class="label-control" for="cmessage">Your message</label>
                             <div class="help-block with-errors"></div>
                         </div>
@@ -834,4 +836,17 @@
     </div> <!-- end of copyright --> 
     <!-- end of copyright -->
     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+       async function showPopup() {
+    event.preventDefault();
+    await Swal.fire({
+        title: 'Form submitted successfully!',
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false,
+    });
+    document.getElementById('contactForm').submit();
+}
+    </script>
 {% endblock content %}
