@@ -4,6 +4,9 @@ from django.contrib import messages
 from .models import Contact
 from django.core.mail import send_mail
 from django.conf import settings
+from .models import Household
+from django.http import JsonResponse
+
 
 # Create your views here.
 
@@ -48,4 +51,33 @@ def submit_contact_form(request):
     else:
         # Handle GET request or other methods if needed
         return render(request, 'index.html')
+
+
+# views.py
+
+def submit_household(request):
+    if request.method == 'POST':
+        q1 = float(request.POST.get('q1', 0))
+        q2 = float(request.POST.get('q2', 0))
+        q3 = float(request.POST.get('q3', 0))
+        q4 = float(request.POST.get('q4', 0))
+        q5 = float(request.POST.get('q5', 0))
+        q6 = float(request.POST.get('q6', 0))
+        q7 = float(request.POST.get('q7', 0))
+        q8 = float(request.POST.get('q8', 0))
+        q9 = float(request.POST.get('q9', 0))
+        q10 = float(request.POST.get('q10', 0))
+        q11 = float(request.POST.get('q11', 0))
+        q12 = float(request.POST.get('q12', 0))
+        q13 = float(request.POST.get('q13', 0))
+
+        Household.objects.create(
+            q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6,
+            q7=q7, q8=q8, q9=q9, q10=q10, q11=q11, q12=q12, q13=q13
+        )
+        
+        return redirect('eval')  # Replace 'eval' with the actual URL or name of the success page
+    else:
+        return render(request, 'eval.html')
+    
 

@@ -743,8 +743,9 @@
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="form-control-submit-button">SUBMIT MESSAGE</button>
+                            <button type="submit" class="form-control-submit-button" onclick="return validateContactForm();">SUBMIT MESSAGE</button>
                         </div>
+                        <p id="formErrorMessage" style="color: red; display: none;">Please answer all nedeed to fill out before submitting.</p> 
                         <div class="form-message">
                             <div id="cmsgSubmit" class="h3 text-center hidden"></div>
                         </div>
@@ -849,4 +850,19 @@
     document.getElementById('contactForm').submit();
 }
     </script>
+    <script>
+        function validateContactForm() {
+            var nameInput = document.getElementById('cname').value;
+            var emailInput = document.getElementById('cemail').value;
+            var messageInput = document.getElementById('cmessage').value;
+        
+            if (nameInput.trim() === '' || emailInput.trim() === '' || messageInput.trim() === '') {
+                var errorMessage = document.getElementById('formErrorMessage');
+                errorMessage.style.display = 'block';
+                return false;
+            }
+        
+            return true;
+        }
+        </script>
 {% endblock content %}

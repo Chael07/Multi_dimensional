@@ -10,4 +10,17 @@ class Contact(models.Model):
     def __str__(self):
         return self.first_name
 
-    
+class Household(models.Model):
+    q1 = models.FloatField()
+    q2 = models.FloatField()
+    q3 = models.FloatField()
+    q4 = models.FloatField()
+    q5 = models.FloatField()
+    q6 = models.FloatField()
+    q7 = models.FloatField()
+    q8 = models.FloatField()
+    q9 = models.FloatField()
+    q10 = models.FloatField()
+    q11 = models.FloatField()
+    q12 = models.FloatField()
+    q13 = models.FloatField()

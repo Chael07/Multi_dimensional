@@ -21,7 +21,8 @@
 
 
 <div class="question_contain">
-    <form id="questionForm" action="result.html" method="post" onsubmit="return validateForm();">
+  <form id="questionForm" action="{% url 'submit_household' %}" method="post" onsubmit="return householdValidateForm();">
+     {% csrf_token %}
       <div class="question">
           <span>1. Is there a household member aged 18 or older who does not complete basic k-12 curriculum?</span>
           <div class="custom-options">
@@ -127,7 +128,7 @@
           </div>
           <p id="formErrorMessage" style="color: red; display: none;">Please answer all questions before submitting.</p> 
           <div class="submit-button">
-            <button type="submit" class="btn-solid-reg page-scroll">Submit</button>
+            <button type="submit" class="btn-solid-reg page-scroll" onclick="return householdSubmitForm();">Submit</button>
           </div>           
 
 </form>
@@ -197,62 +198,65 @@
         </div> <!-- end of container -->
     </div> <!-- end of footer -->  
     <!-- end of footer -->
-<script>
-// Add an event listener to all radio buttons to reset the border color when an option is selected
-var radioButtons = document.querySelectorAll('input[type="radio"]');
-radioButtons.forEach(function (radioButton) {
-  radioButton.addEventListener('change', function () {
-    resetQuestionBorders();
-  });
-});
-
-function validateForm() {
-  // Get all radio button groups
-  var radioGroups = document.querySelectorAll('input[type="radio"]:checked');
-
-  // Check if the number of selected radio buttons is equal to the total number of questions
-  if (radioGroups.length === 13) {
-    // Reset border color for all questions
-    resetQuestionBorders();
-    return true; // All questions are answered, allow form submission
-  } else {
-    // Display the error message
-    var errorMessage = document.getElementById('formErrorMessage');
-    errorMessage.style.display = 'block';
-
-    // Identify unanswered questions
-    var unansweredQuestions = [];
-    for (var i = 1; i <= 13; i++) {
-      var questionName = 'q' + i;
-      var selectedAnswer = document.querySelector('input[name="' + questionName + '"]:checked');
-      if (!selectedAnswer) {
-        unansweredQuestions.push(i);
-
-        // Change the border color of the unanswered question to red
-        var questionElement = document.querySelector('.question:nth-child(' + i + ')');
-        questionElement.style.border = '2px solid red';
+    <script>
+      function householdValidateForm() {
+        // Get all radio button groups
+        var radioGroups = document.querySelectorAll('input[type="radio"]:checked');
+      
+        // Check if the number of selected radio buttons is equal to the total number of questions
+        if (radioGroups.length === 13) {
+          // Reset border color for all questions
+          resetQuestionBorders();
+          return true; // All questions are answered, allow form submission
+        } else {
+          // Display the error message
+          var errorMessage = document.getElementById('formErrorMessage');
+          errorMessage.style.display = 'block';
+      
+          // Identify unanswered questions
+          var unansweredQuestions = [];
+          var questions = document.querySelectorAll('.question');
+      
+          questions.forEach(function (question, index) {
+            var questionName = 'q' + (index + 1);
+            var selectedAnswer = document.querySelector('input[name="' + questionName + '"]:checked');
+            
+            if (!selectedAnswer) {
+              unansweredQuestions.push(index + 1);
+      
+              // Change the border color of the unanswered question to red
+              question.style.border = '2px solid red';
+            }
+          });
+      
+          // Add an event listener to each radio button to remove the red border when clicked
+          var radioButtons = document.querySelectorAll('input[type="radio"]');
+          radioButtons.forEach(function (radioButton) {
+            radioButton.addEventListener('change', function () {
+              var question = radioButton.closest('.question');
+              question.style.border = 'none';
+            });
+          });
+      
+          // Display a more detailed error message
+          if (unansweredQuestions.length > 0) {
+            errorMessage.innerHTML = 'Please answer questions ' + unansweredQuestions.join(', ') + ' before submitting.';
+          }
+      
+          // Prevent form submission
+          return false;
+        }
       }
-    }
-
-    // Display a more detailed error message
-    if (unansweredQuestions.length > 0) {
-      errorMessage.innerHTML = 'Please answer questions ' + unansweredQuestions.join(', ') + ' before submitting.';
-    }
-
-    // Prevent form submission
-    return false;
-  }
-}
-
-// Function to reset the border color for all questions
-function resetQuestionBorders() {
-  var questions = document.querySelectorAll('.question');
-  questions.forEach(function (question) {
-    question.style.border = 'none'; // Change to the original border color
-  });
-}
-</script>
-
+      
+      // Function to reset the border color for all questions
+      function resetQuestionBorders() {
+        var questions = document.querySelectorAll('.question');
+        questions.forEach(function (question) {
+          question.style.border = 'none'; // Change to the original border color
+        });
+      }
+      </script>
+      
 {% endblock content %}
 
 

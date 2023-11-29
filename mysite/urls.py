@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from interface.views import(
-    home_screen_view, privacy_screen_view, condition_screen_view, evaluation_screen_view, submit_contact_form
+    home_screen_view, privacy_screen_view, condition_screen_view, evaluation_screen_view, submit_contact_form, submit_household,
     )
       
 urlpatterns = [
@@ -26,5 +26,6 @@ urlpatterns = [
     path('privacy/', privacy_screen_view, name='privacy'),
     path('conditions/', condition_screen_view, name='condtions'),
     path('evaluations/', evaluation_screen_view, name='eval'),
-    path('submit_contact_form/', submit_contact_form, name='submit_contact_form')
+    path('submit_contact_form/', submit_contact_form, name='submit_contact_form'),
+    path('submit_household/', submit_household, name='submit_household')
 ]
