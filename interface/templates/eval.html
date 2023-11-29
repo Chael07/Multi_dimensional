@@ -1,0 +1,258 @@
+{% extends 'base_about.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/eval.css' %}">
+
+   <!-- Header -->
+   <header id="header" class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Evaluation</h1>
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</header> <!-- end of ex-header -->
+<!-- end of header -->
+
+
+
+
+<div class="question_contain">
+    <form id="questionForm" action="result.html" method="post" onsubmit="return validateForm();">
+      <div class="question">
+          <span>1. Is there a household member aged 18 or older who does not complete basic k-12 curriculum?</span>
+          <div class="custom-options">
+            <input type="radio" name="q1" id="q1_yes" value="0.076923077" ><label for="q1_yes"> Yes</label>
+            <input type="radio" name="q1" id="q1_no" value="0" ><label for="q1_no"> No</label>
+          </div>
+        </div>
+    
+        <div class="question">
+          <span>2. Is there a household member whose age ranges from 5 to 18 that is not attending school?</span>
+          <div class="custom-options">
+            <input type="radio" name="q2" id="q2_yes" value="0.076923077" ><label for="q2_yes"> Yes</label>
+            <input type="radio" name="q2" id="q2_no" value="0" ><label for="q2_no"> No</label>
+          </div>
+        </div>
+    
+        <div class="question">
+          <span>3. Is there a household member that experienced hunger for the past months?</span>
+          <div class="custom-options">
+            <input type="radio" name="q3" id="q3_yes" value="0.076923077" ><label for="q3_yes"> Yes</label>
+            <input type="radio" name="q3" id="q3_no" value="0" ><label for="q3_no"> No</label>
+          </div>
+        </div>
+    
+        <div class="question">
+          <span>4. Is there a household member who does not eat three times a day?</span>
+          <div class="custom-options">
+            <input type="radio" name="q4" id="q4_yes" value="0.076923077" ><label for="q4_yes"> Yes</label>
+            <input type="radio" name="q4" id="q4_no" value="0" ><label for="q4_no"> No</label>
+          </div>
+        </div>
+    
+        <div class="question">
+          <span>5. Is there a household member who does not have access to health insurance?</span>
+          <div class="custom-options">
+            <input type="radio" name="q5" id="q5_yes" value="0.076923077" ><label for="q5_yes"> Yes</label>
+            <input type="radio" name="q5" id="q5_no" value="0" ><label for="q5_no"> No</label>
+          </div>
+        </div>
+    
+        <div class="question">
+            <span>6.	Does the household lack basic appliances such as a TV, cellphone, radio, etc.?</span>
+            <div class="custom-options">
+                <input type="radio" name="q6" id="q6_yes" value="0.076923077" ><label for="q6_yes"> Yes</label>
+                <input type="radio" name="q6" id="q6_no" value="0" ><label for="q6_no"> No</label>
+            </div>
+          </div>
+      
+          <div class="question">
+            <span>7.	Does the household lack its own toilet facility?</span>
+            <div class="custom-options">
+                <input type="radio" name="q7" id="q7_yes" value="0.076923077" ><label for="q7_yes"> Yes</label>
+                <input type="radio" name="q7" id="q7_no" value="0" ><label for="q7_no"> No</label>
+            </div>
+          </div>
+    
+          <div class="question">
+            <span>8.	Does the household lack access to safe drinking water?</span>
+            <div class="custom-options">
+                <input type="radio" name="q8" id="q8_yes" value="0.076923077" ><label for="q8_yes"> Yes</label>
+                <input type="radio" name="q8" id="q8_no" value="0" ><label for="q8_no"> No</label>
+            </div>
+          </div>
+      
+          <div class="question">
+            <span>9.	Does the household lack access to electricity?</span>
+            <div class="custom-options">
+                <input type="radio" name="q9" id="q9_yes" value="0.076923077" ><label for="q9_yes"> Yes</label>
+                <input type="radio" name="q9" id="q9_no" value="0" ><label for="q9_no"> No</label>
+            </div>
+          </div>
+    
+          <div class="question">
+            <span>10.	Does the household lack ownership rights to its dwelling?</span>
+            <div class="custom-options">
+                <input type="radio" name="q10" id="q10_yes" value="0.076923077" ><label for="q10_yes"> Yes</label>
+                <input type="radio" name="q10" id="q10_no" value="0" ><label for="q10_no"> No</label>
+            </div>
+          </div>
+      
+          <div class="question">
+            <span>11.	Is the house made entirely of wood?</span>
+            <div class="custom-options">
+                <input type="radio" name="q11" id="q11_yes" value="0.076923077" ><label for="q11_yes"> Yes</label>
+                <input type="radio" name="q11" id="q11_no" value="0" ><label for="q11_no"> No</label>
+            </div>
+          </div>
+    
+          <div class="question">
+            <span>12.	Is there a household member capable of working but currently not employed?</span>
+            <div class="custom-options">
+                <input type="radio" name="q12" id="q12_yes" value="0.076923077" ><label for="q12_yes"> Yes</label>
+                <input type="radio" name="q12" id="q12_no" value="0" ><label for="q12_no"> No</label>
+            </div>
+          </div>
+      
+          <div class="question">
+            <span>13.	Is there a household member aged 5 to 17 who is employed rather than attending school?</span>
+            <div class="custom-options">
+                <input type="radio" name="q13" id="q13_yes" value="0.076923077" ><label for="q13_yes"> Yes</label>
+                <input type="radio" name="q13" id="q13_no" value="0" ><label for="q13_no"> No</label>
+            </div>
+          </div>
+          <p id="formErrorMessage" style="color: red; display: none;">Please answer all questions before submitting.</p> 
+          <div class="submit-button">
+            <button type="submit" class="btn-solid-reg page-scroll">Submit</button>
+          </div>           
+
+</form>
+</div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-col">
+                        <h4>About Evolo</h4>
+                        <p>We're passionate about offering some of the best business growth services for startups</p>
+                    </div>
+                </div> <!-- end of col -->
+                <div class="col-md-4">
+                    <div class="footer-col middle">
+                        <h4>Important Links</h4>
+                        <ul class="list-unstyled li-space-lg">
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body">Our business partners <a class="turquoise" href="#your-link">startupguide.com</a></div>
+                            </li>
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body">Read our <a class="turquoise" href="terms-conditions.html">Terms & Conditions</a>, <a class="turquoise" href="privacy-policy.html">Privacy Policy</a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> <!-- end of col -->
+                <div class="col-md-4">
+                    <div class="footer-col last">
+                        <h4>Social Media</h4>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-facebook-f fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-google-plus-g fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-instagram fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                            </a>
+                        </span>
+                    </div> 
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of footer -->  
+    <!-- end of footer -->
+<script>
+// Add an event listener to all radio buttons to reset the border color when an option is selected
+var radioButtons = document.querySelectorAll('input[type="radio"]');
+radioButtons.forEach(function (radioButton) {
+  radioButton.addEventListener('change', function () {
+    resetQuestionBorders();
+  });
+});
+
+function validateForm() {
+  // Get all radio button groups
+  var radioGroups = document.querySelectorAll('input[type="radio"]:checked');
+
+  // Check if the number of selected radio buttons is equal to the total number of questions
+  if (radioGroups.length === 13) {
+    // Reset border color for all questions
+    resetQuestionBorders();
+    return true; // All questions are answered, allow form submission
+  } else {
+    // Display the error message
+    var errorMessage = document.getElementById('formErrorMessage');
+    errorMessage.style.display = 'block';
+
+    // Identify unanswered questions
+    var unansweredQuestions = [];
+    for (var i = 1; i <= 13; i++) {
+      var questionName = 'q' + i;
+      var selectedAnswer = document.querySelector('input[name="' + questionName + '"]:checked');
+      if (!selectedAnswer) {
+        unansweredQuestions.push(i);
+
+        // Change the border color of the unanswered question to red
+        var questionElement = document.querySelector('.question:nth-child(' + i + ')');
+        questionElement.style.border = '2px solid red';
+      }
+    }
+
+    // Display a more detailed error message
+    if (unansweredQuestions.length > 0) {
+      errorMessage.innerHTML = 'Please answer questions ' + unansweredQuestions.join(', ') + ' before submitting.';
+    }
+
+    // Prevent form submission
+    return false;
+  }
+}
+
+// Function to reset the border color for all questions
+function resetQuestionBorders() {
+  var questions = document.querySelectorAll('.question');
+  questions.forEach(function (question) {
+    question.style.border = 'none'; // Change to the original border color
+  });
+}
+</script>
+
+{% endblock content %}
+
+

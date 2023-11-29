@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from interface.views import(
-    home_screen_view, privacy_screen_view, condition_screen_view,
+    home_screen_view, privacy_screen_view, condition_screen_view, evaluation_screen_view
     )
       
 urlpatterns = [
@@ -25,4 +25,5 @@ urlpatterns = [
     path('', home_screen_view, name='home'),
     path('privacy/', privacy_screen_view, name='privacy'),
     path('conditions/', condition_screen_view, name='condtions'),
+    path('evaluations/', evaluation_screen_view, name='eval'),
 ]
