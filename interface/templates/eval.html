@@ -128,7 +128,7 @@
           </div>
           <p id="formErrorMessage" style="color: red; display: none;">Please answer all questions before submitting.</p> 
           <div class="submit-button">
-            <button type="submit" class="btn-solid-reg page-scroll" onclick="return householdSubmitForm();">Submit</button>
+            <button type="submit" class="btn-solid-reg page-scroll eval-submit-button" onclick="return householdSubmitForm();">Submit</button>
           </div>           
 
 </form>
@@ -161,7 +161,8 @@
               unansweredQuestions.push(index + 1);
       
               // Change the border color of the unanswered question to red
-              question.style.border = '2px solid red';
+              question.style.border = '1px solid rgb(212, 127, 127)';
+              question.style.borderRadius = '10px';
             }
           });
       

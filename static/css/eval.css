@@ -1,5 +1,21 @@
 /* questions */
 
+@font-face {
+  font-family: Headers;
+  src:url('fonts/Lato-BlackItalic.ttf');
+}
+
+@font-face {
+  font-family: logo-txt;
+  src:url('fonts/Lato-LightItalic.ttf');
+}
+
+@font-face {
+  font-family: paragraph-txt;
+  src:url('fonts/Lato-Regular.ttf');
+}
+
+
 .custom-options {
     display: flex;
     gap: 0.8em;
@@ -21,7 +37,8 @@
     border-radius: 0.5em;
     align-items: center;
     margin-top: 0.5cm;
-    margin-left:2cm ;
+    margin-left:3.5cm ;
+    margin-right:-1.5cm ;
   }
   
   .custom-options label::before {
@@ -49,7 +66,7 @@
     align-items: center;
     justify-content: center;
     margin-top: -3cm;
-    margin-left: 2cm;
+    margin-left: 0cm;
   }
   .submit-button {
     margin-top: 1cm;
@@ -61,19 +78,22 @@
     max-width: 600px;
     width: 100%;
   }
-  .question-h4{
+  .question span{
     font-family:logo-txt;
-    margin-left: 5.5cm;
-    font-size: 28px;
+    font-size: 18px;
   }
   .question {
     padding-top:1cm ;
+    margin-bottom: 0.5cm;
+    text-align: justify;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   
   .question_text{
-    text-align: right;
+    text-align: center;
   }
-  .eval-submit-button     {margin-left: 3.8cm; margin-top: 1.5cm; font-family: logo-txt; font-weight:bolder; width: 250px;height: 40px;border-width: 2px; background-color: rgb(30, 206, 33); border-color:rgba(9, 10, 9, 0.439); border-radius: 5px;padding: 10px 20px;cursor: pointer;font-size: 18px; }
+  .eval-submit-button     {margin-left: -1.1cm; margin-top: 1.4cm; width: 8.5cm;}
   
   /* end of .question_contain */
   
