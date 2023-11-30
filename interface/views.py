@@ -76,12 +76,17 @@ def submit_household(request):
         q12 = float(request.POST.get('q12', 0))
         q13 = float(request.POST.get('q13', 0))
 
+        # Calculate MPI
+        MPI = (q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13) * 100
+
+        # Create Household object with MPI
         Household.objects.create(
-            q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6,
-            q7=q7, q8=q8, q9=q9, q10=q10, q11=q11, q12=q12, q13=q13
+        q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6,
+        q7=q7, q8=q8, q9=q9, q10=q10, q11=q11, q12=q12, q13=q13, mpi=MPI
         )
-        
-        return redirect('result')  # Replace 'eval' with the actual URL or name of the success page
+
+
+        return redirect('result')  # Replace 'result' with the actual URL or name of the success page
     
     else:
         return render(request, 'eval.html')

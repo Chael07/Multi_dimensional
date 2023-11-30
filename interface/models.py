@@ -11,6 +11,7 @@ class Contact(models.Model):
         return self.first_name
 
 class Household(models.Model):
+    mpi = models.FloatField(default=0.0)
     q1 = models.FloatField()
     q2 = models.FloatField()
     q3 = models.FloatField()
