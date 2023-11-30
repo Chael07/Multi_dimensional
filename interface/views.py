@@ -26,6 +26,11 @@ def evaluation_screen_view(request):
 	print(request.headers)
 	return render(request, "eval.html", {})
 
+def result_screen_view(request):
+	print(request.headers)
+	return render(request, "result.html", {})
+
+
 	
 def submit_contact_form(request):
     if request.method == 'POST':
@@ -76,7 +81,8 @@ def submit_household(request):
             q7=q7, q8=q8, q9=q9, q10=q10, q11=q11, q12=q12, q13=q13
         )
         
-        return redirect('eval')  # Replace 'eval' with the actual URL or name of the success page
+        return redirect('result')  # Replace 'eval' with the actual URL or name of the success page
+    
     else:
         return render(request, 'eval.html')
     
