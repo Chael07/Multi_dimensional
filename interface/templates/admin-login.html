@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="ynq_body">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/admin-login.css' %}">
+  <title>LOGIN MDPA</title>
+  <link rel="icon" href="{% static 'images/MDPA-logo.png' %}">
+</head>
+<body>
+  <div class="ynq_container">
+    <div class="ynq_screen">
+      <div class="ynq_screen__content">
+        <div class="ynq_social-login">
+          <h3>log in as Admin</h3>
+        </div>
+        <form class="ynq_login">
+          {% csrf_token %}
+          <div class="ynq_login__field">
+            <i class="ynq_login__icon fas fa-user"></i>
+            <input type="text" class="ynq_login__input" name="username" placeholder="User name">
+          </div>
+          <div class="ynq_login__field">
+            <i class="ynq_login__icon fas fa-lock"></i>
+            <input type="password" class="ynq_login__input" name="password" placeholder="Password">
+          </div>
+          <button class="ynq_button ynq_login__submit">
+            <span class="ynq_button__text">Log In Now</span>
+            <i class="ynq_button__icon fas fa-chevron-right"></i>
+          </button>				
+        </form>
+        
+      </div>
+      <div class="ynq_screen__background">
+        <span class="ynq_screen__background__shape ynq_screen__background__shape4"></span>
+        <span class="ynq_screen__background__shape ynq_screen__background__shape3"></span>		
+        <span class="ynq_screen__background__shape ynq_screen__background__shape2"></span>
+        <span class="ynq_screen__background__shape ynq_screen__background__shape1"></span>
+      </div>		
+    </div>
+  </div>
+</body>
+</html>

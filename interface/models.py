@@ -25,3 +25,5 @@ class Household(models.Model):
     q11 = models.FloatField()
     q12 = models.FloatField()
     q13 = models.FloatField()
+
+

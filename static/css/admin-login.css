@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;	
+  font-family: Raleway, sans-serif;
+}
+
+.ynq_body {
+  background: linear-gradient(90deg, #e9e9f5, #5d4be5);		
+}
+
+.ynq_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ynq_screen {		
+  background: linear-gradient(90deg, #3e27ec, #7C78B8);		
+  position: relative;	
+  height: 600px;
+  width: 360px;	
+  box-shadow: 0px 0px 24px #5C5696;
+}
+
+.ynq_screen__content {
+  z-index: 1;
+  position: relative;	
+  height: 100%;
+}
+
+.ynq_screen__background {		
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  -webkit-clip-path: inset(0 0 0 0);
+  clip-path: inset(0 0 0 0);	
+}
+
+.ynq_screen__background__shape {
+  transform: rotate(45deg);
+  position: absolute;
+}
+
+.ynq_screen__background__shape1 {
+  height: 520px;
+  width: 520px;
+  background: #FFF;	
+  top: -50px;
+  right: 120px;	
+  border-radius: 0 72px 0 0;
+}
+
+.ynq_screen__background__shape2 {
+  height: 220px;
+  width: 220px;
+  background: #b3aaf9;	
+  top: -172px;
+  right: 0;	
+  border-radius: 32px;
+}
+
+.ynq_screen__background__shape3 {
+  height: 540px;
+  width: 190px;
+  background: linear-gradient(270deg, #8e7ffe, #7b74f6);
+  top: -24px;
+  right: 0;	
+  border-radius: 32px;
+}
+
+.ynq_screen__background__shape4 {
+  height: 400px;
+  width: 200px;
+  background: #5f57f0;	
+  top: 420px;
+  right: 50px;	
+  border-radius: 60px;
+}
+
+.ynq_login {
+  width: 320px;
+  padding: 30px;
+  padding-top: 156px;
+}
+
+.ynq_login__field {
+  padding: 20px 0px;	
+  position: relative;	
+}
+
+.ynq_login__icon {
+  position: absolute;
+  top: 30px;
+  color: #7875B5;
+}
+
+.ynq_login__input {
+  border: none;
+  border-bottom: 2px solid #D1D1D4;
+  background: none;
+  padding: 10px;
+  padding-left: 24px;
+  font-weight: 700;
+  width: 75%;
+  transition: .2s;
+}
+
+.ynq_login__input:active,
+.ynq_login__input:focus,
+.ynq_login__input:hover {
+  outline: none;
+  border-bottom-color: #6A679E;
+}
+
+.ynq_login__submit {
+  background: #fff;
+  font-size: 14px;
+  margin-top: 30px;
+  padding: 16px 20px;
+  border-radius: 26px;
+  border: 1px solid #D4D3E8;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: #4C489D;
+  box-shadow: 0px 2px 2px #5C5696;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.ynq_login__submit:active,
+.ynq_login__submit:focus,
+.ynq_login__submit:hover {
+  border-color: #5d55f2;
+  outline: none;
+}
+
+.ynq_button__icon {
+  font-size: 24px;
+  margin-left: auto;
+  color: #7875B5;
+}
+
+.ynq_social-login {	
+  position: absolute;
+  top: 2.5cm;
+  left: 1cm;
+  height: 140px;
+  width: 160px;
+  text-align: center;
+  color: #000000;
+}
+
+.ynq_social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
