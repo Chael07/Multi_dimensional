@@ -4,8 +4,7 @@ from django.contrib import messages
 from .models import Contact
 from django.core.mail import send_mail
 from .models import Household
-from django.contrib.auth import authenticate, login
-from .forms import LoginForm
+
 
 
 # Create your views here.
@@ -34,22 +33,6 @@ def login(request):
 	print(request.headers)
 	return render(request, "admin-login.html", {})
 
-
-def login_view(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username_or_email = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username_or_email, password=password)
-            if user is not None:
-                login(request, user)
-                # Redirect to a success page or dashboard
-                return redirect('dashboard')  # Replace 'dashboard' with your desired URL
-    else:
-        form = LoginForm()
-
-    return render(request, 'admin-login.html', {'form': form})
 
 
 def submit_contact_form(request):
