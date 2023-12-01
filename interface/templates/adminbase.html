@@ -16,10 +16,10 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'admin-plugins/images/MDPA-logo.png' %}">
     <!-- Custom CSS -->
-    <link href="plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <link href="{% static 'admin-plugins/bower_components/chartist/dist/chartist.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'admin-plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css' %}">
     <!-- Custom CSS -->
-    <link href="css/style.min.css" rel="stylesheet">
+    <link href="{% static 'admin-css/style.min.css' %}" rel="stylesheet">
 </head>
 
 <body>
@@ -42,21 +42,21 @@
         <!-- ============================================================== -->
         <header class="topbar" data-navbarbg="skin5">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin6">
+                <div class="navbar-header" data-logobg="skin6" style="position: fixed;">
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="dashboard.html">
+                    <a class="navbar-brand" href="{% url 'dashboard' %}">
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!-- Dark Logo icon -->
-                            <img src="plugins/images/MDPA-logo.png" alt="homepage" />
+                            <img src="{% static 'admin-plugins/images/MDPA-logo.png' %}" alt="homepage" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="plugins/images/text.png" alt="homepage" />
+                            <img src="{% static 'admin-plugins/images/text.png' %}" alt="homepage" />
                         </span>
                     </a>
                     <!-- ============================================================== -->
@@ -79,30 +79,30 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <aside class="left-sidebar" data-sidebarbg="skin6">
+        <aside class="left-sidebar" data-sidebarbg="skin6" >
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
+                <nav class="sidebar-nav" style="position: fixed;">
                     <ul id="sidebarnav">
                         <!-- User Profile-->
-                        <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.html"
+                        <li class="sidebar-item pt-2" style="margin-top: 1cm; font-size: 18px;">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'dashboard' %}"
                                 aria-expanded="false">
                                 <i class="far fa-clock" aria-hidden="true"></i>
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="basic-table.html"
+                        <li class="sidebar-item" style="margin-top: 0.5cm; font-size: 18px;"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'table' %}"
                                 aria-expanded="false">
                                 <i class="fa fa-table" aria-hidden="true"></i>
                                 <span class="hide-menu">Basic Table</span>
                             </a>
                         </li>
-                        <li class="text-center p-20 upgrade-btn">
+                        <li class="text-center p-20 " style="margin-top: 7cm;">
                             <a href="{% url 'home' %}"
-                                class="btn d-grid btn-danger text-white" target="_blank">
+                                class="btn d-grid btn-danger text-white" >
                                 Log-out</a>
                         </li>
                     </ul>
@@ -121,22 +121,22 @@
 {% block content %}
 
 {% endblock content %}
-<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="{% static 'admin-plugins/bower_components/jquery/dist/jquery.min.js' %}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/app-style-switcher.js"></script>
-    <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="{% static 'admin-bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'admin-js/app-style-switcher.js' %}"></script>
+    <script src="{% static 'admin-plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
     <!--Wave Effects -->
-    <script src="js/waves.js"></script>
+    <script src="{% static 'admin-js/waves.js' %}"></script>
     <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
+    <script src="{% static 'admin-js/sidebarmenu.js' %}"></script>
     <!--Custom JavaScript -->
-    <script src="js/custom.js"></script>
+    <script src="{% static 'admin-js/custom.js' %}"></script>
     <!--This page JavaScript -->
     <!--chartis chart-->
-    <script src="plugins/bower_components/chartist/dist/chartist.min.js"></script>
-    <script src="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="js/pages/dashboards/dashboard1.js"></script>
+    <script src="{% static 'admin-plugins/bower_components/chartist/dist/chartist.min.js' %}"></script>
+    <script src="{% static 'admin-plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' %}"></script>
+    <script src="{% static 'admin-js/pages/dashboards/dashboard1.js' %}"></script>
 </body>
 
 </html>
