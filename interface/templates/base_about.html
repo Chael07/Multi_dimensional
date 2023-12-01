@@ -72,16 +72,9 @@
                     <a class="nav-link page-scroll" href="{% url 'home' %}#services">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="{% url 'home' }#details">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="{% url 'home' %}#pricing">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="{% url 'eval' %}">Eval</a>
+                    <a class="nav-link page-scroll" href="{% url 'eval' %}">Evaluation</a>
                 </li>
         
-
                 <!-- Dropdown Menu -->          
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle page-scroll" href="{% url 'home' %}#about" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">About</a>
@@ -99,7 +92,15 @@
                 </li>
             </ul>
             <span class="nav-item social-icons">
-
+                <span class="fa-stack">
+                    <img src="{% static 'images/brgy.png' %}" alt="">
+                </span>
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <img src="{% static 'images/ppc.png' %}" style="margin-left: 20px;" alt="">
+                    </a>
+                </span>
+            </span>
         </div>
     </nav> <!-- end of navbar -->
     <!-- end of navbar -->

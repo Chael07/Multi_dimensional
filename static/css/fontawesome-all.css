@@ -163,11 +163,17 @@
 
 .fa-stack {
   display: inline-block;
-  height: 2em;
+  height: 4em;
   line-height: 2em;
   position: relative;
   vertical-align: middle;
   width: 2em; }
+
+.fa-stack img{
+  width: 200%;
+  height: auto;
+  margin-bottom: 4cm;
+}
 
 .fa-stack-1x,
 .fa-stack-2x {
