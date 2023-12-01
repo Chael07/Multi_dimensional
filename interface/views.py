@@ -33,6 +33,13 @@ def login(request):
 	print(request.headers)
 	return render(request, "admin-login.html", {})
 
+def officials_dashboard_screen_view(request):
+    print(request.headers)
+    return render(request, "dashboard.html", {})
+
+def officials_table_screen_view(request):
+    print(request.headers)
+    return render(request, "table.html", {})
 
 
 def submit_contact_form(request):
