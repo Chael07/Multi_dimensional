@@ -30,7 +30,7 @@ urlpatterns = [
     path('result/', result_screen_view, name='result'),
     path('submit_contact_form/', submit_contact_form, name='submit_contact_form'),
     path('submit_household/', submit_household, name='submit_household'),
-    path('Login/', login, name='login'),
+    path('login/', login, name='login'),
     path('', include('interface.urls')),  # Include your app's URLs
     
 ]

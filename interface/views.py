@@ -41,6 +41,9 @@ def officials_table_screen_view(request):
     print(request.headers)
     return render(request, "table.html", {})
 
+def officials_addacc_screen_view(request):
+    print(request.headers)
+    return render(request, "add-acc.html", {})
 
 def submit_contact_form(request):
     if request.method == 'POST':
