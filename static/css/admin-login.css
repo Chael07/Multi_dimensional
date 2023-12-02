@@ -122,7 +122,7 @@
 .ynq_login__submit {
   background: #fff;
   font-size: 14px;
-  margin-top: 30px;
+  margin-top: 15px;
   padding: 16px 20px;
   border-radius: 26px;
   border: 1px solid #D4D3E8;
@@ -166,3 +166,21 @@
   justify-content: center;
 }
 
+.forgot-password-link {
+  margin-top: 10px;
+  text-align: left;
+  font-size: 14px;
+  color: #000000;
+  padding-left: 1cm;
+  margin-top: -0.5cm;
+}
+
+.forgot-password-link a {
+  color: #000000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.forgot-password-link a:hover {
+  text-decoration: underline;
+}

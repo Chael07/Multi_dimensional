@@ -76,7 +76,13 @@ def login_account_form(request):
             login(request, user)
             return redirect('dashboard')
         else:
-            messages.error(request, "Bad Credentials!")
+            # Check if the username exists in the database
+            user_with_username = User.objects.filter(username=loginUsername).exists()
+            
+            if not user_with_username:
+                messages.error(request, "Username does not exist.")
+            else:
+                messages.error(request, "Wrong password")
             return redirect('loginAcc')
 
 def submit_contact_form(request):
