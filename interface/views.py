@@ -4,9 +4,10 @@ from django.contrib import messages
 from .models import Contact
 from django.core.mail import send_mail
 from .models import Household
-
-
-
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
 # Create your views here.
 
 def home_screen_view(request):
@@ -29,7 +30,7 @@ def result_screen_view(request):
 	print(request.headers)
 	return render(request, "result.html", {})
 
-def login(request):
+def login_acc(request):
 	print(request.headers)
 	return render(request, "admin-login.html", {})
 
@@ -44,6 +45,43 @@ def officials_table_screen_view(request):
 def officials_addacc_screen_view(request):
     print(request.headers)
     return render(request, "add-acc.html", {})
+
+def add_account_form(request):
+    if request.method == "POST":
+        Adminfname = request.POST['fname']
+        Adminlname = request.POST['lname']
+        AdminUsername = request.POST['Username']
+        AdminEmail = request.POST['Admin-email']
+        AdminPass1 = request.POST['password1']
+        AdminPass2 = request.POST['password2']
+
+        # Check if passwords match
+        if AdminPass1 != AdminPass2:
+            messages.error(request, "Passwords do not match.")
+            return redirect('AddAcc')
+
+        # Create the user with the correct arguments
+        myadmin = User.objects.create_user(AdminUsername, AdminEmail, password=AdminPass1)
+        myadmin.first_name = Adminfname 
+        myadmin.last_name = Adminlname
+        myadmin.save()
+
+        messages.success(request, "Your account has been successfully created.")
+        return redirect('AddAcc')
+    
+def login_account_form(request):
+    if request.method == 'POST':
+        loginUsername = request.POST['Username']
+        password1 = request.POST['password1']
+
+        user = authenticate(username=loginUsername, password=password1)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            messages.error(request, "Bad Credentials!")
+            return redirect('loginAcc')
 
 def submit_contact_form(request):
     if request.method == 'POST':

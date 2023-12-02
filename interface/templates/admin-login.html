@@ -16,15 +16,15 @@
         <div class="ynq_social-login">
           <h3>log in as Admin</h3>
         </div>
-        <form class="ynq_login">
+        <form class="ynq_login" method="post" action="{% url 'login_account_form' %}">
           {% csrf_token %}
           <div class="ynq_login__field">
             <i class="ynq_login__icon fas fa-user"></i>
-            <input type="text" class="ynq_login__input" name="username" placeholder="User name">
+            <input type="text" class="ynq_login__input" name="Username" placeholder="User name">
           </div>
           <div class="ynq_login__field">
             <i class="ynq_login__icon fas fa-lock"></i>
-            <input type="password" class="ynq_login__input" name="password" placeholder="Password">
+            <input type="password" class="ynq_login__input" name="password1" placeholder="Password">
           </div>
           <button class="ynq_button ynq_login__submit">
             <span class="ynq_button__text">Log In Now</span>
