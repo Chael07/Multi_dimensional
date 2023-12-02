@@ -71,20 +71,17 @@
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="{% url 'eval' %}">Evaluation</a>
                 </li>
-                <!-- Dropdown Menu -->          
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle page-scroll" href="#about" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">About</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'condtions' %}"><span class="item-text">Terms Conditions</span></a>
-                        <div class="dropdown-items-divide-hr"></div>
-                        <a class="dropdown-item" href="{% url 'privacy' %}"><span class="item-text">Privacy Policy</span></a>
-                    </div>
-                </li>
-                <!-- end of dropdown menu -->
-
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="#contact">Contact</a>
                 </li>
+                    <!-- Dropdown Menu -->          
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle page-scroll" href="{% url 'home' %}#about" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">About</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'privacy' %}"><span class="item-text">Privacy Policy</span></a>
+                        </div>
+                    </li>
+                    <!-- end of dropdown menu -->
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="{% url 'loginAcc' %}">ADMIN</a>
                 </li>
@@ -109,14 +106,14 @@
 
 {% endblock content %}
 
- <!-- Footer -->
- <div class="footer">
+<!-- Footer -->
+   <div class="footer">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <div class="footer-col">
-                    <h4>About Evolo</h4>
-                    <p>We're passionate about offering some of the best business growth services for startups</p>
+                    <h4>About MDPA</h4>
+                    <p>Empowering Communities, One Calculation at a Time: Simplifying Household Poverty Analysis for a Brighter Future.</p>
                 </div>
             </div> <!-- end of col -->
             <div class="col-md-4">
@@ -125,11 +122,7 @@
                     <ul class="list-unstyled li-space-lg">
                         <li class="media">
                             <i class="fas fa-square"></i>
-                            <div class="media-body">Our business partners <a class="turquoise" href="#your-link">startupguide.com</a></div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i>
-                            <div class="media-body">Read our <a class="turquoise" href="{% url 'condtions' %}">Terms & Conditions</a>, <a class="turquoise" href="{% url 'privacy' %}">Privacy Policy</a></div>
+                            <div class="media-body">Read our <a class="turquoise" href="{% url 'privacy' %}">Privacy Policy</a></div>
                         </li>
                     </ul>
                 </div>
@@ -137,34 +130,16 @@
             <div class="col-md-4">
                 <div class="footer-col last">
                     <h4>Social Media</h4>
-                    <span class="fa-stack">
+                    <span class="fa-stack fa-lg">
                         <a href="#your-link">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fab fa-facebook-f fa-stack-1x"></i>
                         </a>
                     </span>
-                    <span class="fa-stack">
-                        <a href="#your-link">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fab fa-twitter fa-stack-1x"></i>
-                        </a>
-                    </span>
-                    <span class="fa-stack">
+                    <span class="fa-stack fa-lg">
                         <a href="#your-link">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fab fa-google-plus-g fa-stack-1x"></i>
-                        </a>
-                    </span>
-                    <span class="fa-stack">
-                        <a href="#your-link">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fab fa-instagram fa-stack-1x"></i>
-                        </a>
-                    </span>
-                    <span class="fa-stack">
-                        <a href="#your-link">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fab fa-linkedin-in fa-stack-1x"></i>
                         </a>
                     </span>
                 </div> 
@@ -176,17 +151,16 @@
 
 
 <!-- Copyright -->
-<div class="copyright">
-    <div class="container">
+<div class="copyright" style="background-color:#00bfd892">
+    <div class="container" >
         <div class="row">
-            <div class="col-lg-12">
-                <p class="p-small">Copyright © 2020 <a href="https://inovatik.com">Inovatik</a> - All rights reserved</p>
+            <div class="col-lg-12" >
+                <p class="p-small" style="color: black; font-size: 13px;">Copyright © 2023 <a href="{% url 'home' %}">Multidimensional Poverty Analyzer</a> - All rights reserved</p>
             </div> <!-- end of col -->
         </div> <!-- enf of row -->
     </div> <!-- end of container -->
 </div> <!-- end of copyright --> 
 <!-- end of copyright -->
-
     <!-- Scripts -->
     <script src="{% static 'js/jquery.min.js' %}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src="{% static 'js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->

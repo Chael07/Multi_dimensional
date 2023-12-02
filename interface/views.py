@@ -18,10 +18,6 @@ def privacy_screen_view(request):
 	print(request.headers)
 	return render(request, "privacy.html", {})
 
-def condition_screen_view(request):
-	print(request.headers)
-	return render(request, "terms.html", {})
-
 def evaluation_screen_view(request):
 	print(request.headers)
 	return render(request, "eval.html", {})
