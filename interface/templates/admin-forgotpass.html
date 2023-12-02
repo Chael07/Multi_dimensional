@@ -26,25 +26,20 @@
     <div class="ynq_screen">
       <div class="ynq_screen__content">
         <div class="ynq_social-login">
-          <h3>log in as Admin</h3>
+          <h3>Fogot Password</h3>
         </div>
-        <form class="ynq_login" method="post" action="{% url 'login_account_form' %}">
+        <form class="ynq_login" method="post" action="{% url 'changepassword' %}">
           {% csrf_token %}
-          <div class="ynq_login__field">
+          <div class="ynq_login__field" style="margin-top: 1cm;">
             <i class="ynq_login__icon fas fa-user"></i>
-            <input type="text" class="ynq_login__input" name="Username" placeholder="User name">
+            <input type="text" class="ynq_login__input" name="Username" placeholder="Please Enter Username">
           </div>
-          <div class="ynq_login__field">
-            <i class="ynq_login__icon fas fa-lock"></i>
-            <input type="password" class="ynq_login__input" name="password1" placeholder="Password">
-          </div>
-          <button class="ynq_button ynq_login__submit">
-            <span class="ynq_button__text">Log In Now</span>
+          <button class="ynq_button ynq_login__submit" style="margin-top: 1cm;">
+            <span class="ynq_button__text">Send</span>
             <i class="ynq_button__icon fas fa-chevron-right"></i>
           </button>				
         </form>
-        <p class="forgot-password-link"><a href="{% url 'forgot-pass' %}">Forgot Password?</a></p>
-        <a class="btn-solid-lg page-scroll" href="{% url 'home' %}" style="background-color: black; border-color: black; margin-left: 3cm; margin-top: 1.5cm; " >BACK</a>
+        <a class="btn-solid-lg page-scroll" href="{% url 'loginAcc' %}" style="background-color: black; border-color: black; margin-left: 3cm; margin-top: 1.5cm; " >BACK</a>
 
         {% if messages %}
         <style>
@@ -71,7 +66,7 @@
     <div class="container" >
         <div class="row">
             <div class="col-lg-12" >
-                <p class="p-small" style="color: black; font-size: 13px;">Copyright © 2023 <a href="{% url 'home' % }" style="color:black ;">Multidimensional Poverty Analyzer</a> - All rights reserved</p>
+                <p class="p-small" style="color: black; font-size: 13px;">Copyright © 2023 <a href="{% url 'home' %}" style="color:black ;">Multidimensional Poverty Analyzer</a> - All rights reserved</p>
             </div> <!-- end of col -->
         </div> <!-- enf of row -->
     </div> <!-- end of container -->
