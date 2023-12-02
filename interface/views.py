@@ -32,15 +32,15 @@ def login_acc(request):
 
 def officials_dashboard_screen_view(request):
     print(request.headers)
-    return render(request, "dashboard.html", {})
+    return render(request, "user-admin/dashboard.html", {})
 
 def officials_table_screen_view(request):
     print(request.headers)
-    return render(request, "table.html", {})
+    return render(request, "user-admin/table.html", {})
 
 def officials_addacc_screen_view(request):
     print(request.headers)
-    return render(request, "add-acc.html", {})
+    return render(request, "user-admin/add-acc.html", {})
 
 def add_account_form(request):
     if request.method == "POST":
