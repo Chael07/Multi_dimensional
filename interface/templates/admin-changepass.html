@@ -13,7 +13,7 @@
 <body data-spy="scroll" data-target=".fixed-top">
     
     <!-- Preloader -->
-	<div class="spinner-wrapper">
+    <div class="spinner-wrapper">
         <div class="spinner">
             <div class="bounce1"></div>
             <div class="bounce2"></div>
@@ -32,13 +32,34 @@
                     
                     <form class="ynq_login" method="post">
                         {% csrf_token %}
-                    
-                        {{ form.as_p }}
+                        
+                        {{ form.new_password1.label_tag }}
+                        {{ form.new_password1 }}
+                        <div class="error-message">
+                            {% if form.errors.new_password1 %}
+                                <strong>Error:</strong> {{ form.errors.new_password1 }}
+                            {% endif %}
+                        </div>
+                        
+                        {{ form.new_password2.label_tag }}
+                        {{ form.new_password2 }}
+                        <div class="error-message">
+                            {% if form.errors.new_password2 %}
+                                <strong>Error:</strong> {{ form.errors.new_password2 }}
+                            {% endif %}
+                        </div>
+                        
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                <strong>Error:</strong> {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        
                         <button type="submit" class="ynq_button ynq_login__submit">
                             <span class="ynq_button__text">Confirm</span>
                             <i class="ynq_button__icon fas fa-chevron-right"></i>
                         </button>				
-                      </form>
+                    </form>
                 </div>
 
                 <div class="ynq_screen__background">
@@ -69,8 +90,8 @@
         </p>
     {% endif %}
 </body>
-  
-</body>
+
+
 <!-- Copyright -->
 
   <!-- Scripts -->
