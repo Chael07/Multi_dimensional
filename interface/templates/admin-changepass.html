@@ -33,8 +33,8 @@
                     <form class="ynq_login" method="post">
                         {% csrf_token %}
                         <div style="margin-top: 1cm;">
-                            <label for="{{ form.new_password1.id_for_label }}">New Password</label>
-                            <input type="password" name="{{ form.new_password1.name }}" id="{{ form.new_password1.id_for_label }}"
+                            <label for="{{ form.new_password1.id_for_label }}"><strong>New Password</strong></label><br>
+                            <input style="margin-top: 0.2cm; margin-bottom: 0.5cm; width: 5cm; height: 0.8cm;" type="password" name="{{ form.new_password1.name }}" id="{{ form.new_password1.id_for_label }}"
                                    placeholder="Enter your new password" required>
                             
                             <div class="error-message" style="color: red;">
@@ -43,8 +43,8 @@
                                 {% endif %}
                             </div>
                             
-                            <label for="{{ form.new_password2.id_for_label }}">Confirm Password</label>
-                            <input type="password" name="{{ form.new_password2.name }}" id="{{ form.new_password2.id_for_label }}"
+                            <label for="{{ form.new_password2.id_for_label }}"><strong>Confirm Password</strong></label>
+                            <input style="margin-top: 0.2cm; margin-bottom: 0.5cm; width: 5cm; height: 0.8cm;" type="password" name="{{ form.new_password2.name }}" id="{{ form.new_password2.id_for_label }}"
                                    placeholder="Confirm Password" required>
                             
                             <div class="error-message" style="color: red;">
@@ -59,7 +59,7 @@
                                 </div>
                             {% endif %}
                             
-                            <button type="submit" class="ynq_button ynq_login__submit">
+                            <button type="submit" class="ynq_button ynq_login__submit" style="margin-top: 1cm;">
                                 <span class="ynq_button__text">Confirm</span>
                                 <i class="ynq_button__icon fas fa-chevron-right"></i>
                             </button>		

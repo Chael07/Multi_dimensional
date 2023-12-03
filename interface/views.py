@@ -33,13 +33,62 @@ def login_acc(request):
 def officials_dashboard_screen_view(request):
     print(request.headers)
     contact_data_set = Contact.objects.all().order_by('-submission_time')[:5]
-    return render(request, "user-admin/dashboard.html", {'contact_data_set': contact_data_set})
+    poor_count_dt, non_poor_count_dt, poor_count_svm, non_poor_count_svm = get_poor_non_poor_counts()
+    return render(request, "user-admin/dashboard.html", 
+        {'contact_data_set': contact_data_set, 
+        'poor_count_dt': poor_count_dt,
+        'non_poor_count_dt': non_poor_count_dt,
+        'poor_count_svm': poor_count_svm,
+        'non_poor_count_svm': non_poor_count_svm,
+         })
+
+def get_poor_non_poor_counts():
+    # Fetch data from the Household model
+    household_data = Household.objects.values('q1', 'q2')
+
+    # Initialize counters
+    poor_count_dt = 0
+    non_poor_count_dt = 0
+    poor_count_svm = 0
+    non_poor_count_svm = 0
+
+    # Count based on the values of q1, q2, q3, and q4
+    for record in household_data:
+        if record['q1'] == 0.076923077:
+            poor_count_dt += 1
+        else:
+            non_poor_count_dt += 1
+
+    for record in household_data:
+        if record['q2'] == 0.076923077:
+            poor_count_svm += 1
+        else:
+            non_poor_count_svm += 1
+
+        # Similar counting logic for SVM, adjust as needed based on your conditions
+    return poor_count_dt, non_poor_count_dt, poor_count_svm, non_poor_count_svm
+
 
 def officials_table_screen_view(request):
     print(request.headers)
     household_data = Household.objects.values('q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13').order_by('id')
-    print(household_data)
-    return render(request, "user-admin/table.html", {'household_data': household_data})
+    
+    converted_household_data = []
+    for record in household_data:
+        converted_record = {key: convert_to_yes_no(value) for key, value in record.items()}
+        converted_household_data.append(converted_record)
+
+    print(converted_household_data)
+    return render(request, "user-admin/table.html", {'household_data': converted_household_data})
+
+def convert_to_yes_no(value):
+    if value == 0.076923077:
+        return 'yes'
+    elif value == 0.0:
+        return 'no'
+    else:
+        return 'none'
+
 
 def officials_addacc_screen_view(request):
     print(request.headers)

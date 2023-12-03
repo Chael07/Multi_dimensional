@@ -47,7 +47,7 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                <li class="ms-auto"><span class="counter text-success">659</span></li>
+                                <li class="ms-auto"><span class="counter text-success">{{ poor_count_dt }}</span></li>
                             </ul>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                <li class="ms-auto"><span class="counter text-purple">869</span></li>
+                                <li class="ms-auto"><span class="counter text-purple">{{ non_poor_count_dt }}</span></li>
                             </ul>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                <li class="ms-auto"><span class="counter text-purple">869</span></li>
+                                <li class="ms-auto"><span class="counter text-purple">{{ poor_count_svm }}</span></li>
                             </ul>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                <li class="ms-auto"><span class="counter text-info">911</span>
+                                <li class="ms-auto"><span class="counter text-info">{{ non_poor_count_svm }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -98,7 +98,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">Products Yearly Sales</h3>
+                            <h3 class="box-title">The most siginificant factors(MLR)</h3>
                             <div class="d-md-flex">
                                 <ul class="list-inline d-flex ms-auto">
                                     <li class="ps-3">
@@ -182,7 +182,7 @@
                                         <textarea rows="5" class="form-control" id="message" name="message" placeholder="Input A Message Here" style="border: 0.5px solid #00BFD8; width: 280px; height: 200px; box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);" required></textarea>
                                     </div>
                                     
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary" style="margin-left: 2.6cm;">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -196,8 +196,8 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a
-                    href="https://www.wrappixel.com/">wrappixel.com</a>
+            <footer class="footer text-center"> Copyright © 2023 <a
+                 href="{% url 'home' %}">Multidimensional Poverty Analyzer</a> - All rights reserved</a>
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
