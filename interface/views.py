@@ -32,11 +32,14 @@ def login_acc(request):
 
 def officials_dashboard_screen_view(request):
     print(request.headers)
-    return render(request, "user-admin/dashboard.html", {})
+    contact_data_set = Contact.objects.all().order_by('-submission_time')[:5]
+    return render(request, "user-admin/dashboard.html", {'contact_data_set': contact_data_set})
 
 def officials_table_screen_view(request):
     print(request.headers)
-    return render(request, "user-admin/table.html", {})
+    household_data = Household.objects.values('q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13').order_by('id')
+    print(household_data)
+    return render(request, "user-admin/table.html", {'household_data': household_data})
 
 def officials_addacc_screen_view(request):
     print(request.headers)
