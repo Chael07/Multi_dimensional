@@ -3,10 +3,10 @@ from .models import Contact
 from .models import Household
 from .models import Contact_Developer
 
-# Register your models here.
+# for the comments or contact
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'email', 'message')
-    search_fields = ('first_name', 'email', 'message')
+    list_display = ('first_name', 'email', 'message', 'submission_time')  
+    search_fields = ('first_name', 'email', 'message', 'submission_time')  
 
 admin.site.register(Contact, ContactAdmin)
 

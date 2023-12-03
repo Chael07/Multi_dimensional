@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail
+from django.utils import timezone
 
 from .models import Household
 from .models import Contact
@@ -93,44 +94,44 @@ def login_account_form(request):
 # this is for the contact form
 def submit_contact_form(request):
     if request.method == 'POST':
-        # Get form data
+ 
         first_name = request.POST.get('first_name')
         email = request.POST.get('email')
         message = request.POST.get('message')
 
-         # Save to the database
-        contact_model_instance = Contact(first_name=first_name, email=email, message=message)
+
+        contact_model_instance = Contact(
+            first_name=first_name,
+            email=email,
+            message=message,
+            submission_time=timezone.now()  # Set the submission time to the current time
+        )
         contact_model_instance.save()
 
-        # Send email to the developer
-        subject = 'New Feedback Submission'
+        subject = 'Feedback Submission from the User'
         message_body = f"Name: {first_name}\nEmail: {email}\nMessage: {message}"
 
-        # Change the recipient email address to the actual developer's email
         recipient_email = '202080469@psu.palawan.edu.ph'
 
         send_mail(subject, message_body, email, [recipient_email])
         messages.success(request, 'Form submitted successfully!')
-        return redirect('home')  # Redirect to a success page or wherever you want
+        return redirect('home') 
     else:
-        # Handle GET request or other methods if needed
         return render(request, 'index.html')
 
 
 def submit_developer_contact_form(request):
     if request.method == 'POST':
-        # Get form data
+   
         name_admin = request.POST.get('name')
         issue = request.POST.get('issue')
         message_content = request.POST.get('message') 
         email = request.POST.get('email')
 
-        # Save to the database
         devdeloper_contact_model_instance = Contact_Developer(name_admin=name_admin, issue=issue, messages=message_content)
         devdeloper_contact_model_instance.save()
 
-    
-        subject = 'New Feedback Submission'
+        subject = 'New Feedback Submission from the Admin'
         message_body = f"Name: {name_admin}\nIssue: {issue}\nMessage: {message_content}"
 
         recipient_email = '202080469@psu.palawan.edu.ph'
