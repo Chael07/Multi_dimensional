@@ -1,18 +1,13 @@
 
-
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Contact
-from django.core.mail import send_mail
-from .models import Household
 from django.contrib.auth.models import User
-from django.contrib import messages
 from django.contrib.auth import authenticate, login
-# from .helpers import send_forget_password_mail
-# from .models import Profile
-# import uuid
+from django.core.mail import send_mail
 
-# Create your views here.
+from .models import Household
+from .models import Contact
+from .models import Contact_Developer
 
 def home_screen_view(request):
 	print(request.headers)
@@ -93,14 +88,6 @@ def login_account_form(request):
             else:
                 messages.error(request, "Wrong password")
             return redirect('loginAcc')
-        
-# change password
-# def change_pass_screen_view(request, token):
-   
-
-
-# def ForgetPassword(request):
-  
 
 
 # this is for the contact form
@@ -129,6 +116,30 @@ def submit_contact_form(request):
         # Handle GET request or other methods if needed
         return render(request, 'index.html')
 
+
+def submit_developer_contact_form(request):
+    if request.method == 'POST':
+        # Get form data
+        name_admin = request.POST.get('name')
+        issue = request.POST.get('issue')
+        message_content = request.POST.get('message') 
+        email = request.POST.get('email')
+
+        # Save to the database
+        devdeloper_contact_model_instance = Contact_Developer(name_admin=name_admin, issue=issue, messages=message_content)
+        devdeloper_contact_model_instance.save()
+
+    
+        subject = 'New Feedback Submission'
+        message_body = f"Name: {name_admin}\nIssue: {issue}\nMessage: {message_content}"
+
+        recipient_email = '202080469@psu.palawan.edu.ph'
+
+        send_mail(subject, message_body, email, [recipient_email])
+        messages.success(request, 'Form submitted successfully!')
+        return redirect('dashboard')  
+    else:
+        return render(request, 'user-admin/dashboard.html')
 
 # views.py
 

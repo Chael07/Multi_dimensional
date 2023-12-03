@@ -10,11 +10,14 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.first_name
-    
-# class Profile(models.Model):
-#       user = models.OneToOneField(User, on_delete=models.CASCADE)
-#       forget_password_token = models.CharField(max_length=100)
-#       create_at = models.DateTimeField(auto_now_add=True) 
+
+class Contact_Developer(models.Model):
+    name_admin = models.CharField(max_length=255)
+    issue = models.EmailField()
+    messages = models.TextField()
+
+    def __str__(self):
+        return self.first_name
 
 class Household(models.Model):
     mpi = models.FloatField(default=0.0)

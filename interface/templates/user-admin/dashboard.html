@@ -165,11 +165,39 @@
                                 <h3 class="box-title mb-0">Message to the Developer</h3>
                             </div>
                             <div class="card-body">
-                                 <div class="form-group mb-4" >
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <textarea rows="5"  style="border: 0.5px solid #00BFD8; width: 280px; height: 200px; box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);" placeholder="Input A Message Here"></textarea>
-                                        </div>
+                                <form method="post" action="{% url 'submit_developer_contact_form' %}">
+                                    {% csrf_token %}
+                                    
+                                    {% if messages %}
+                                        <ul class="messages">
+                                            {% for message in messages %}
+                                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                    
+                                    <div class="form-group mb-4">
+                                        <label for="name">Name:</label>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
                                     </div>
+                                    
+                                    <div class="form-group mb-4">
+                                        <label for="email">Email:</label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                                    </div>
+                                    
+                                    <div class="form-group mb-4">
+                                        <label for="issue">Issue:</label>
+                                        <input type="text" class="form-control" id="issue" name="issue" placeholder="Describe the Issue" required>
+                                    </div>
+                                    
+                                    <div class="form-group mb-4">
+                                        <label for="message">Message:</label>
+                                        <textarea rows="5" class="form-control" id="message" name="message" placeholder="Input A Message Here" style="border: 0.5px solid #00BFD8; width: 280px; height: 200px; box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);" required></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
