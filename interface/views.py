@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail
 from django.utils import timezone
+from django.contrib.auth import logout
 
 from .models import Household
 from .models import Contact
