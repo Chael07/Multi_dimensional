@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static 'css/admin-login.css' %}">
-  <title>LOGIN MDPA</title>
+  <title>Reset Password</title>
   <link rel="icon" href="{% static 'images/MDPA-logo.png' %}">
   <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
@@ -28,11 +28,12 @@
         <div class="ynq_social-login">
           <h3>Fogot Password</h3>
         </div>
-        <form class="ynq_login" method="post" action="{% url 'changepassword' %}">
+        
+        <form class="ynq_login" method="post" action="#">
           {% csrf_token %}
           <div class="ynq_login__field" style="margin-top: 1cm;">
             <i class="ynq_login__icon fas fa-user"></i>
-            <input type="text" class="ynq_login__input" name="Username" placeholder="Please Enter Username">
+           {{ form.as_p }}
           </div>
           <button class="ynq_button ynq_login__submit" style="margin-top: 1cm;">
             <span class="ynq_button__text">Send</span>
@@ -44,7 +45,7 @@
         {% if messages %}
         <style>
           .messages {list-style: none; padding: 0;}
-          .messages p {color: red; margin-bottom: 5px; margin-top: -2.7cm; padding-left: 32px; font-size: 14px; }
+          .messages p {color: red; margin-bottom: 5px; margin-top: -5.7cm; padding-left: 32px; font-size: 14px; }
         </style>
         <div class="messages">
             {% for message in messages %}

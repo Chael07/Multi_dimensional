@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static 'css/admin-login.css' %}">
-  <title>LOGIN MDPA</title>
+  <title>Reset Password</title>
   <link rel="icon" href="{% static 'images/MDPA-logo.png' %}">
   <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
@@ -21,64 +21,54 @@
         </div>
     </div>
     <!-- end of preloader -->
-<div class="ynq_body">
-  <div class="ynq_container">
-    <div class="ynq_screen">
-      <div class="ynq_screen__content">
-        <div class="ynq_social-login">
-          <h3>Change Pass</h3>
-        </div>
-        <form class="ynq_login" method="post" action="{% url 'login_account_form' %}">
-          {% csrf_token %}
-          <div class="ynq_login__field">
-            <i class="ynq_login__icon fas fa-user"></i>
-            <input type="text" class="ynq_login__input" name="Username" placeholder="User name">
-          </div>
-          <div class="ynq_login__field">
-            <i class="ynq_login__icon fas fa-lock"></i>
-            <input type="password" class="ynq_login__input" name="password1" placeholder="Password">
-          </div>
-          <button class="ynq_button ynq_login__submit">
-            <span class="ynq_button__text">Log In Now</span>
-            <i class="ynq_button__icon fas fa-chevron-right"></i>
-          </button>				
-        </form>
-        <p class="forgot-password-link"><a href="{% url 'forgot-pass' %}">Forgot Password?</a></p>
-        <a class="btn-solid-lg page-scroll" href="{% url 'home' %}" style="background-color: black; border-color: black; margin-left: 3cm; margin-top: 1.5cm; " >BACK</a>
+    {% if validlink %}
+    <div class="ynq_body">
+        <div class="ynq_container">
+            <div class="ynq_screen">
+                <div class="ynq_screen__content">
+                    <div class="ynq_social-login">
+                        <h3>Create New Password</h3>
+                    </div>
+                    
+                    <form class="ynq_login" method="post">
+                        {% csrf_token %}
+                    
+                        {{ form.as_p }}
+                        <button type="submit" class="ynq_button ynq_login__submit">
+                            <span class="ynq_button__text">Confirm</span>
+                            <i class="ynq_button__icon fas fa-chevron-right"></i>
+                        </button>				
+                      </form>
+                </div>
 
-        {% if messages %}
-        <style>
-          .messages {list-style: none; padding: 0;}
-          .messages p {color: red; margin-bottom: 5px; margin-top: -2.7cm; padding-left: 32px; font-size: 14px; }
-        </style>
-        <div class="messages">
-            {% for message in messages %}
-                <p class="{% if message.tags %} {{ message.tags }}{% endif %}">{{ message }}</p>
-            {% endfor %}
+                <div class="ynq_screen__background">
+                    <span class="ynq_screen__background__shape ynq_screen__background__shape4"></span>
+                    <span class="ynq_screen__background__shape ynq_screen__background__shape3"></span>		
+                    <span class="ynq_screen__background__shape ynq_screen__background__shape2"></span>
+                    <span class="ynq_screen__background__shape ynq_screen__background__shape1"></span>
+                </div>		
+            </div>
         </div>
-        {% endif %}
-        
-      </div>
-      <div class="ynq_screen__background">
-        <span class="ynq_screen__background__shape ynq_screen__background__shape4"></span>
-        <span class="ynq_screen__background__shape ynq_screen__background__shape3"></span>		
-        <span class="ynq_screen__background__shape ynq_screen__background__shape2"></span>
-        <span class="ynq_screen__background__shape ynq_screen__background__shape1"></span>
-      </div>		
-    </div>
-  </div>
-  <div class="copyright" style="background-color:#00bfd892; margin-top: 5cm;">
-    <div class="container" >
-        <div class="row">
-            <div class="col-lg-12" >
-                <p class="p-small" style="color: black; font-size: 13px;">Copyright © 2023 <a href="{% url 'home' % }" style="color:black ;">Multidimensional Poverty Analyzer</a> - All rights reserved</p>
-            </div> <!-- end of col -->
-        </div> <!-- enf of row -->
-    </div> <!-- end of container -->
-  </div> <!-- end of copyright --> 
-  <!-- end of copyright -->
-</div>
-  
+
+        <div class="copyright" style="background-color:#00bfd892; margin-top: 5cm;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="p-small" style="color: black; font-size: 13px;">
+                            Copyright © 2023 <a href="{% url 'home' %}" style="color:black;">Multidimensional Poverty Analyzer</a> - All rights reserved
+                        </p>
+                    </div> <!-- end of col -->
+                </div> <!-- enf of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of copyright --> 
+    </div> <!-- end of ynq_body -->
+    {% else %}
+        <p>
+            The password Reset link was invalid, Possibly because it has already been used.
+            Please request a new password reset
+        </p>
+    {% endif %}
+</body>
   
 </body>
 <!-- Copyright -->

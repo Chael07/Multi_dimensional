@@ -1,4 +1,5 @@
 
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Contact
@@ -6,10 +7,10 @@ from django.core.mail import send_mail
 from .models import Household
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
-from .helpers import send_forget_password_mail
-import uuid
+# from .helpers import send_forget_password_mail
+# from .models import Profile
+# import uuid
 
 # Create your views here.
 
@@ -49,10 +50,6 @@ def forgot_pass_screen_view(request):
     print(request.headers)
     return render(request, "admin-forgotpass.html", {})
 
-
-def change_pass_screen_view(request):
-    print(request.headers)
-    return render(request, "admin-changepass.html", {})
 
 def add_account_form(request):
     if request.method == "POST":
@@ -98,27 +95,15 @@ def login_account_form(request):
             return redirect('loginAcc')
         
 # change password
-def ChangePassword(request):
-    try:
-        if request.method =='POST':
-            username = request.POST.get('Username')
-
-            if not User.objects.filter(username=username).first():
-                messages.error(request, 'Not user found with this username.')
-                return redirect('forgot-pass')
-            
-            User_obj = User.objects.get(username=username)
-            token = str(uuid.uuid4())
-            send_forget_password_mail(User_obj.email, token)
-            messages.success(request, 'An Email is sent')
-            return redirect('forgot-pass')
-
-    except Exception as e:
-         print(e)
-    return render(request, 'admin-forgotpass.html')
+# def change_pass_screen_view(request, token):
+   
 
 
-# this is fot the contact form
+# def ForgetPassword(request):
+  
+
+
+# this is for the contact form
 def submit_contact_form(request):
     if request.method == 'POST':
         # Get form data
