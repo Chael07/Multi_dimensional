@@ -5,11 +5,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail
 from django.utils import timezone
-from django.contrib.auth import logout
+from django.urls import reverse
+import os
 
 from .models import Household
 from .models import Contact
 from .models import Contact_Developer
+
+import joblib
+from django.conf import settings
 
 def home_screen_view(request):
 	print(request.headers)
@@ -22,10 +26,6 @@ def privacy_screen_view(request):
 def evaluation_screen_view(request):
 	print(request.headers)
 	return render(request, "eval.html", {})
-
-def result_screen_view(request):
-	print(request.headers)
-	return render(request, "result.html", {})
 
 def login_acc(request):
 	print(request.headers)
@@ -218,14 +218,69 @@ def submit_household(request):
 
         # Create Household object with MPI
         Household.objects.create(
-        q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6,
-        q7=q7, q8=q8, q9=q9, q10=q10, q11=q11, q12=q12, q13=q13, mpi=MPI
+            q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6,
+            q7=q7, q8=q8, q9=q9, q10=q10, q11=q11, q12=q12, q13=q13, mpi=MPI
         )
 
-
-        return redirect('result')  # Replace 'result' with the actual URL or name of the success page
     
+        return redirect(reverse('result') +
+                        f'?q1={q1}&q2={q2}&q3={q3}&q4={q4}&q5={q5}&q6={q6}&q7={q7}&q8={q8}&q9={q9}&q10={q10}&q11={q11}&q12={q12}&q13={q13}&mpi={MPI}')
+
+       
+
     else:
         return render(request, 'eval.html')
     
+
+# def result_screen_view(request):
+#     print(request.headers)
+#     return render(request, "result.html",)
+#  return redirect('result')
+
+# from sklearn.preprocessing import LabelEncoder
+
+def convert_to_one_zero(record):
+    if record == 0.076923077:
+        return '1'
+    elif record == 0.0:
+        return '0'
+    else:
+        return 'none'
+
+def result_screen_view(request):
+    print(request.headers)
+
+    if request.method == 'GET':
+        q1 = float(request.GET.get('q1', 0))
+        q2 = float(request.GET.get('q2', 0))
+        q3 = float(request.GET.get('q3', 0))
+        q4 = float(request.GET.get('q4', 0))
+        q5 = float(request.GET.get('q5', 0))
+        q6 = float(request.GET.get('q6', 0))
+        q7 = float(request.GET.get('q7', 0))
+        q8 = float(request.GET.get('q8', 0))
+        q9 = float(request.GET.get('q9', 0))
+        q10 = float(request.GET.get('q10', 0))
+        q11 = float(request.GET.get('q11', 0))
+        q12 = float(request.GET.get('q12', 0))
+        q13 = float(request.GET.get('q13', 0))
+
+        questions = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13]
+
+        # Add both the "Deprived"/"Not Deprived" categories
+        converted_questions = []
+        for record in questions:
+            converted_value = convert_to_one_zero(record)
+            converted_questions.append(converted_value)
+            
+        print(converted_questions)
+
+        clf_path = os.path.join(settings.BASE_DIR, 'interface/decision_tree_model.joblib')
+        clf = joblib.load(clf_path)
+        result_data = [converted_questions] 
+        prediction = clf.predict(result_data)
+
+        # result = "Poor" if prediction == 1 else "Not Poor"
+        return render(request, "result.html", {'prediction': prediction})
+
 
