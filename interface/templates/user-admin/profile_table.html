@@ -47,9 +47,8 @@
                                             <th class="border-top-0">ID</th>
                                             <th class="border-top-0">First Name</th>
                                             <th class="border-top-0">Last Name</th>
-                                            <th class="border-top-0">MPI</th>
-                                            <th class="border-top-0">Decision Tree Results</th>
-                                            <th class="border-top-0">Support Vector Machine Results</th>
+                                            <th class="border-top-0">Email</th>
+                                            <th class="border-top-0">MPi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -58,9 +57,8 @@
                                                 <td>{{ forloop.counter }}</td>
                                                 <td>{{ data.first_name }}</td>
                                                 <td>{{ data.last_name }}</td>
+                                                <td>{{ data.user_email }}</td>
                                                 <td>{{ data.mpi }}</td>
-                                                <td>{{ data.dt_result }}</td>
-                                                <td>{{ data.svm_result }}</td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>

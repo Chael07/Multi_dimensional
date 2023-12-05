@@ -80,9 +80,8 @@ def get_poor_non_poor_counts():
 
 def profile_table_screen_view(request):
      print(request.headers)
-     household_profile_data = household_profile.objects.values('first_name', 'last_name','c_number' 'mpi', 'dt_result', 'svm_result').order_by('id')
-
-     return render(request, "user-admin/profile_table.html", {'household_profile_data': household_profile_data})
+     household_profile_data = household_profile.objects.values('first_name', 'last_name', 'user_email', 'mpi').order_by('id')
+     return render(request, "user-admin\profile_table.html", {'household_profile_data': household_profile_data})
 
 def household_table_screen_view(request):
     print(request.headers)
@@ -94,7 +93,7 @@ def household_table_screen_view(request):
         converted_household_data.append(converted_record)
 
     print(converted_household_data)
-    return render(request, "user-admin/Household_table.html", {'household_data': converted_household_data})
+    return render(request, "user-admin\Household_table.html", {'household_data': converted_household_data})
 
 def convert_to_yes_no(value):
     if value == 0.076923077:
