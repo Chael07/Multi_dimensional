@@ -20,6 +20,30 @@
 
 }
 
+/* Apply styles to the form fields */
+.ynq_login__field input[type="text"],
+.ynq_login__field input[type="email"],
+.ynq_login__field input[type="password"] {
+    width: 90%; /* Make the input fields take the full width */
+    padding: 10px; /* Add padding to the input fields */
+    margin-bottom: 10px; /* Add spacing between input fields */
+    border: 1px solid #070707; /* Add a border to the input fields */
+    border-radius: 5px; /* Add border radius for rounded corners */
+}
+
+/* Style the form labels */
+.ynq_login__field label {
+    display: block; /* Make labels display as block elements */
+    margin-bottom: 5px; /* Add spacing between labels and input fields */
+    font-weight: bold; /* Make labels bold */
+}
+
+/* Customize placeholder styles */
+.ynq_login__field input::placeholder {
+    color: #999; /* Placeholder text color */
+    font-style: italic; /* Placeholder text style */
+}
+
 .ynq_screen {		
   background: linear-gradient(90deg, #3e27ec, #7C78B8);		
   position: relative;	

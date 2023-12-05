@@ -90,29 +90,34 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'dashboard' %}"
                                 aria-expanded="false">
                                 <i class="far fa-clock" aria-hidden="true"></i>
-                                <span class="hide-menu">Dashboard</span>
+                                <span class="hide-menu" style="color: black;">Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item" style="margin-top: 0.5cm; font-size: 18px;"> 
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'household_table' %}"
                                 aria-expanded="false">
                                 <i class="fa fa-table" aria-hidden="true"></i>
-                                <span class="hide-menu">Households Table</span>
+                                <span class="hide-menu" style="color: black;">Households Table</span>
                             </a>
                         </li>
                         <li class="sidebar-item" style="margin-top: 0.5cm; font-size: 18px;"> 
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'household_profile_table' %}"
                                 aria-expanded="false">
                                 <i class="fa fa-table" aria-hidden="true"></i>
-                                <span class="hide-menu">Household Profile</span>
+                                <span class="hide-menu"style="color: black;">Household Profile</span>
                             </a>
                         </li>
-                        <li class="sidebar-item" style="font-size: 18px; margin-top: 0.5cm;">
+                        <li class="sidebar-item" style="font-size: 18px; margin-top: 0.5cm; ">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'AddAcc' %}"
                                 aria-expanded="false">
                                 <i class="fa fa-user" aria-hidden="true"></i>
-                                <span class="hide-menu">Add Admin</span>
+                                <span class="hide-menu" style="color: black;">Add Admin</span>
                             </a>
+                        </li>
+                        <li class="text-center p-20 upgrade-btn" style="margin-top: 4cm;">
+                            <a href="{% url 'user_logout' %}"
+                                class="btn d-grid btn-danger text-white">
+                                Log out</a>
                         </li>
                         <!-- <li class="text-center p-20 " style="margin-top: 7cm;">
                             <a href="{% url 'home' %}"

@@ -7,3 +7,7 @@ class HouseholdForm(forms.ModelForm):
         fields = '__all__'
 
 
+class email_forgot_pass(forms.Form):
+    email = forms.EmailField(
+        widget=forms.TextInput(attrs={'placeholder': 'Please enter your email here'})
+    )

@@ -32,27 +32,28 @@
         <form class="ynq_login" method="post" action="{% url 'reset_password' %}">
           {% csrf_token %}
           <div class="ynq_login__field" style="margin-top: 1cm;">
-            <i class="ynq_login__icon fas fa-user"></i>
-           {{ form.as_p }}
+              <i class="ynq_login__icon fas fa-user"></i>
+              {{ form.as_p }}
           </div>
-          <button class="ynq_button ynq_login__submit" style="margin-top: 1cm;">
-            <span class="ynq_button__text">Send</span>
-            <i class="ynq_button__icon fas fa-chevron-right"></i>
-          </button>				
-        </form>
-        <a class="btn-solid-lg page-scroll" href="{% url 'loginAcc' %}" style="background-color: black; border-color: black; margin-left: 3cm; margin-top: 1.5cm; " >BACK</a>
+          <button class="ynq_button ynq_login__submit" style="margin-top: 0.5cm;">
+              <span class="ynq_button__text">Send</span>
+              <i class="ynq_button__icon fas fa-chevron-right"></i>
+          </button>
+      </form>
 
-        {% if messages %}
-        <style>
+      <a class="btn-solid-lg page-scroll" href="{% url 'loginAcc' %}" style="background-color: black; border-color: black; margin-left: 3cm; margin-top: 1cm;">BACK</a>
+      
+      {% if messages %}
+      <style>
           .messages {list-style: none; padding: 0;}
           .messages p {color: red; margin-bottom: 5px; margin-top: -5.7cm; padding-left: 32px; font-size: 14px; }
-        </style>
-        <div class="messages">
-            {% for message in messages %}
-                <p class="{% if message.tags %} {{ message.tags }}{% endif %}">{{ message }}</p>
-            {% endfor %}
-        </div>
-        {% endif %}
+      </style>
+      <div class="messages">
+          {% for message in messages %}
+          <p class="{% if message.tags %} {{ message.tags }}{% endif %}">{{ message }}</p>
+          {% endfor %}
+      </div>
+      {% endif %}
         
       </div>
       <div class="ynq_screen__background">
