@@ -44,21 +44,25 @@
                                 <table class="table text-nowrap">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0">ID</th>
-                                            <th class="border-top-0">First Name</th>
-                                            <th class="border-top-0">Last Name</th>
-                                            <th class="border-top-0">Email</th>
-                                            <th class="border-top-0">MPi</th>
+                                            <th>ID</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>User Email</th>
+                                            <th>MPI</th>
+                                            <th>DT Result</th>
+                                            <th>SVM Result</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for data in household_profile_data %}
+                                        {% for row in combined_data %}
                                             <tr>
-                                                <td>{{ forloop.counter }}</td>
-                                                <td>{{ data.first_name }}</td>
-                                                <td>{{ data.last_name }}</td>
-                                                <td>{{ data.user_email }}</td>
-                                                <td>{{ data.mpi }}</td>
+                                                <td>{{ row.id }}</td>
+                                                <td>{{ row.first_name }}</td>
+                                                <td>{{ row.last_name }}</td>
+                                                <td>{{ row.user_email }}</td>
+                                                <td>{{ row.mpi }}</td>
+                                                <td>{{ row.dt_result }}</td>
+                                                <td>{{ row.svm_result }}</td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>

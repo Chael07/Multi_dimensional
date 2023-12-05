@@ -53,7 +53,7 @@ def user_logout(request):
 
 def get_poor_non_poor_counts():
     # Fetch data from the Household model
-    household_data = Household.objects.values('q1', 'q2')
+    result_classify_data = result_classify.objects.values('dt_result', 'svm_result')
 
     # Initialize counters
     poor_count_dt = 0
@@ -62,26 +62,60 @@ def get_poor_non_poor_counts():
     non_poor_count_svm = 0
 
     # Count based on the values of q1, q2, q3, and q4
-    for record in household_data:
-        if record['q1'] == 0.076923077:
+    for record in result_classify_data:
+        if record['dt_result'] == 0.0:
             poor_count_dt += 1
         else:
             non_poor_count_dt += 1
 
-    for record in household_data:
-        if record['q2'] == 0.076923077:
+    for record in result_classify_data:
+        if record['svm_result'] == 0.0:
             poor_count_svm += 1
         else:
             non_poor_count_svm += 1
 
-        # Similar counting logic for SVM, adjust as needed based on your conditions
+        
     return poor_count_dt, non_poor_count_dt, poor_count_svm, non_poor_count_svm
 
 
+def map_to_poor_non_poor(value):
+    # Map 1 to "non-poor" and 0 to "poor"
+    if value == 1:
+        return "Non-poor"
+    elif value == 0:
+        return "Poor"
+    else:
+        return "None" 
+    
 def profile_table_screen_view(request):
-     print(request.headers)
-     household_profile_data = household_profile.objects.values('first_name', 'last_name', 'user_email', 'mpi').order_by('id')
-     return render(request, "user-admin\profile_table.html", {'household_profile_data': household_profile_data})
+    print(request.headers)
+    
+    result_classify_data = result_classify.objects.values('id', 'dt_result', 'svm_result')
+    household_profile_data = household_profile.objects.values('id', 'first_name', 'last_name', 'user_email', 'mpi')
+
+    combined_data = []
+
+    for profile_row in household_profile_data:
+        profile_id = profile_row['id']
+
+        # Find the matching row in result_classify_data
+        classify_row = next((row for row in result_classify_data if row['id'] == profile_id), None)
+
+        if classify_row:
+            # Combine the data from both tables
+            combined_row = {**profile_row, **classify_row}
+
+            # Map dt_result and svm_result to "Poor" or "Non-poor"
+            combined_row['dt_result'] = map_to_poor_non_poor(combined_row['dt_result'])
+            combined_row['svm_result'] = map_to_poor_non_poor(combined_row['svm_result'])
+
+            combined_data.append(combined_row)
+
+    # Order the combined data by the 'id' field
+    combined_data = sorted(combined_data, key=lambda x: x['id'])
+    
+    return render(request, "user-admin/profile_table.html", {'combined_data': combined_data})
+
 
 def household_table_screen_view(request):
     print(request.headers)
