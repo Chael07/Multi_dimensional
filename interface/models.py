@@ -1,6 +1,6 @@
 from django.db import models
-import pandas as pd
-from datetime import datetime
+import uuid
+from django.core.validators import MaxValueValidator
 
 # Create your models here.
 class Contact(models.Model):
@@ -19,9 +19,9 @@ class Contact_Developer(models.Model):
 
     def __str__(self):
         return self.first_name
-
+    
 class Household(models.Model):
-    mpi = models.FloatField(default=0.0)
+    id = models.AutoField(primary_key=True, auto_created=True)
     q1 = models.FloatField()
     q2 = models.FloatField()
     q3 = models.FloatField()
@@ -35,11 +35,24 @@ class Household(models.Model):
     q11 = models.FloatField()
     q12 = models.FloatField()
     q13 = models.FloatField()
-   
+
+    def __str__(self):
+        return f"Household {self.id}"
 
 class household_profile(models.Model):
+    id = models.AutoField(primary_key=True, auto_created=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    c_number = models.IntegerField()
-    dt_result = models.CharField(max_length=255, default="")
-    svm_result = models.CharField(max_length=255, default="")
+    user_email = models.CharField(max_length=11, validators=[MaxValueValidator(99999999999)])
+    mpi = models.FloatField(default=0.0)
+
+    def __str__(self):
+        return f"Household {self.id}"
+
+class result_classify(models.Model):
+    id = models.AutoField(primary_key=True, auto_created=True)
+    dt_result = models.FloatField()
+    svm_result = models.FloatField()
+
+    def __str__(self):
+        return str(self.id)

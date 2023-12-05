@@ -6,11 +6,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.utils import timezone
 from django.urls import reverse
+
 import os
+import uuid
 
 from .models import Household
 from .models import Contact
 from .models import Contact_Developer
+from .models import household_profile , result_classify
 
 import joblib
 from django.conf import settings
@@ -75,7 +78,13 @@ def get_poor_non_poor_counts():
     return poor_count_dt, non_poor_count_dt, poor_count_svm, non_poor_count_svm
 
 
-def officials_table_screen_view(request):
+def profile_table_screen_view(request):
+     print(request.headers)
+     household_profile_data = household_profile.objects.values('first_name', 'last_name','c_number' 'mpi', 'dt_result', 'svm_result').order_by('id')
+
+     return render(request, "user-admin/profile_table.html", {'household_profile_data': household_profile_data})
+
+def household_table_screen_view(request):
     print(request.headers)
     household_data = Household.objects.values('q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13').order_by('id')
     
@@ -85,7 +94,7 @@ def officials_table_screen_view(request):
         converted_household_data.append(converted_record)
 
     print(converted_household_data)
-    return render(request, "user-admin/Household_table", {'household_data': converted_household_data})
+    return render(request, "user-admin/Household_table.html", {'household_data': converted_household_data})
 
 def convert_to_yes_no(value):
     if value == 0.076923077:
@@ -204,6 +213,11 @@ def submit_developer_contact_form(request):
 
 def submit_household(request):
     if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        user_email = request.POST.get('email')
+
+    if request.method == 'POST':
         q1 = float(request.POST.get('q1', 0))
         q2 = float(request.POST.get('q2', 0))
         q3 = float(request.POST.get('q3', 0))
@@ -218,24 +232,22 @@ def submit_household(request):
         q12 = float(request.POST.get('q12', 0))
         q13 = float(request.POST.get('q13', 0))
 
-        # Calculate MPI
-        MPI = (q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13) * 100
-
-        # Create Household object with MPI
-        Household.objects.create(
+        household = Household.objects.create(
             q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6,
-            q7=q7, q8=q8, q9=q9, q10=q10, q11=q11, q12=q12, q13=q13, mpi=MPI,
+            q7=q7, q8=q8, q9=q9, q10=q10, q11=q11, q12=q12, q13=q13,
         )
-
-    
+        household_profile.objects.create(
+            first_name=first_name,
+            last_name=last_name,
+            user_email=user_email,
+            mpi=(q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13) * 100,
+        )
+        
         return redirect(reverse('result') +
-                        f'?q1={q1}&q2={q2}&q3={q3}&q4={q4}&q5={q5}&q6={q6}&q7={q7}&q8={q8}&q9={q9}&q10={q10}&q11={q11}&q12={q12}&q13={q13}&mpi={MPI}')
-
-       
+                        f'?q1={q1}&q2={q2}&q3={q3}&q4={q4}&q5={q5}&q6={q6}&q7={q7}&q8={q8}&q9={q9}&q10={q10}&q11={q11}&q12={q12}&q13={q13}')
 
     else:
         return render(request, 'eval.html')
-    
 
 # def result_screen_view(request):
 #     print(request.headers)
@@ -254,7 +266,7 @@ def convert_to_one_zero(record):
 
 def result_screen_view(request):
     print(request.headers)
-
+    
     if request.method == 'GET':
         q1 = float(request.GET.get('q1', 0))
         q2 = float(request.GET.get('q2', 0))
@@ -284,6 +296,10 @@ def result_screen_view(request):
         clf = joblib.load(clf_path)
         result_data = [converted_questions] 
         prediction = clf.predict(result_data)
+
+        prediction1 = '1' if prediction == 'Not Poor' else '0'
+
+        result_classify.objects.create(dt_result = prediction1, svm_result= prediction1)
 
         # result = "Poor" if prediction == 1 else "Not Poor"
         return render(request, "result.html", {'prediction': prediction})
