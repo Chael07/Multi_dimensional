@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import officials_dashboard_screen_view, officials_table_screen_view, officials_addacc_screen_view, add_account_form, login_account_form, submit_developer_contact_form
+from .views import officials_dashboard_screen_view, officials_table_screen_view, officials_addacc_screen_view, add_account_form, login_account_form, submit_developer_contact_form, user_logout
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -8,6 +8,7 @@ urlpatterns = [
     path('login/AddAccount', officials_addacc_screen_view, name='AddAcc'),
     path('add_account_form/', add_account_form, name='add_account_form'),
     path('login_account_form/', login_account_form, name='login_account_form'),
+    path('user_logout/', user_logout, name='user_logout'),
     path('submit_developer_contact_form/', submit_developer_contact_form, name='submit_developer_contact_form'),
     
 
