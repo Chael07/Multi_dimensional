@@ -29,7 +29,7 @@
           <h3>Fogot Password</h3>
         </div>
         
-        <form class="ynq_login" method="post" action="#">
+        <form class="ynq_login" method="post" action="{% url 'reset_password' %}">
           {% csrf_token %}
           <div class="ynq_login__field" style="margin-top: 1cm;">
             <i class="ynq_login__icon fas fa-user"></i>

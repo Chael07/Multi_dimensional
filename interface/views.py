@@ -31,6 +31,7 @@ def login_acc(request):
 	print(request.headers)
 	return render(request, "admin-login.html", {})
 
+
 def officials_dashboard_screen_view(request):
     print(request.headers)
     contact_data_set = Contact.objects.all().order_by('-submission_time')[:5]
