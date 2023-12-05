@@ -1,8 +1,8 @@
 from django.contrib import admin
 from .models import Contact
-from .models import Household
+from .models import Household 
 from .models import Contact_Developer
-
+from .models import household_profile
 # for the comments or contact
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'email', 'message', 'submission_time')  
@@ -24,3 +24,10 @@ class HouseholdAdmin(admin.ModelAdmin):
     ordering = ['id']
 
 admin.site.register(Household, HouseholdAdmin)
+
+class household_profile_admin(admin.ModelAdmin):
+    list_display =('id', 'first_name', 'last_name', 'c_number', 'dt_result', 'svm_result',)
+    search_fields =('id', 'first_name', 'last_name', 'c_number', 'dt_result', 'svm_result',)
+    ordering = ['id']
+
+admin.site.register(household_profile, household_profile_admin)

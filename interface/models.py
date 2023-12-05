@@ -35,5 +35,11 @@ class Household(models.Model):
     q11 = models.FloatField()
     q12 = models.FloatField()
     q13 = models.FloatField()
+   
 
-
+class household_profile(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    c_number = models.IntegerField()
+    dt_result = models.CharField(max_length=255, default="")
+    svm_result = models.CharField(max_length=255, default="")
