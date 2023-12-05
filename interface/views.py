@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.utils import timezone
 from django.urls import reverse
@@ -43,6 +43,10 @@ def officials_dashboard_screen_view(request):
         'poor_count_svm': poor_count_svm,
         'non_poor_count_svm': non_poor_count_svm,
          })
+
+def user_logout(request):
+    logout(request)
+    return redirect('home')
 
 def get_poor_non_poor_counts():
     # Fetch data from the Household model
