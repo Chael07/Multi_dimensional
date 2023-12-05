@@ -85,7 +85,7 @@ def officials_table_screen_view(request):
         converted_household_data.append(converted_record)
 
     print(converted_household_data)
-    return render(request, "user-admin/table.html", {'household_data': converted_household_data})
+    return render(request, "user-admin/Household_table", {'household_data': converted_household_data})
 
 def convert_to_yes_no(value):
     if value == 0.076923077:

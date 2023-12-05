@@ -1,0 +1,124 @@
+{% extends 'user-admin/adminbase.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Household Data</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <div class="d-md-flex">
+                            <ol class="breadcrumb ms-auto">
+                                <li><a href="{% url 'table' %}" class="fw-normal" style="color: black;" >Refresh</a></li>
+                            </ol>
+                            <a href="{% url 'user_logout' %}"
+                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Household Data</h3>
+                            <p class="text-muted">You can view here all the data from the evaluation form<code></code></p>
+                            <div class="table-responsive">
+                                <table class="table text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0">ID</th>
+                                            <th class="border-top-0">Q1</th>
+                                            <th class="border-top-0">Q2</th>
+                                            <th class="border-top-0">Q3</th>
+                                            <th class="border-top-0">Q4</th>
+                                            <th class="border-top-0">Q5</th>
+                                            <th class="border-top-0">Q6</th>
+                                            <th class="border-top-0">Q7</th>
+                                            <th class="border-top-0">Q8</th>
+                                            <th class="border-top-0">Q9</th>
+                                            <th class="border-top-0">Q10</th>
+                                            <th class="border-top-0">Q11</th>
+                                            <th class="border-top-0">Q12</th>
+                                            <th class="border-top-0">Q13</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for data in household_data %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ data.q1 }}</td>
+                                                <td>{{ data.q2 }}</td>
+                                                <td>{{ data.q3 }}</td>
+                                                <td>{{ data.q4 }}</td>
+                                                <td>{{ data.q5 }}</td>
+                                                <td>{{ data.q6 }}</td>
+                                                <td>{{ data.q7 }}</td>
+                                                <td>{{ data.q8 }}</td>
+                                                <td>{{ data.q9 }}</td>
+                                                <td>{{ data.q10 }}</td>
+                                                <td>{{ data.q11 }}</td>
+                                                <td>{{ data.q12 }}</td>
+                                                <td>{{ data.q13 }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center"> Copyright © 2023 <a
+                href="{% url 'home' %}">Multidimensional Poverty Analyzer</a> - All rights reserved</a>
+           </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+{% endblock content %}
