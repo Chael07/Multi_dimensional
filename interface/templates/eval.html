@@ -24,6 +24,8 @@
   <form id="questionForm" action="{% url 'submit_household' %}" method="post" onsubmit="return householdValidateForm();">
      {% csrf_token %}
 
+<h3>TITLE</h3>
+
      <div class="form-group">
       <label for="first_name">First Name:</label>
       <input type="text" id="first_name" name="first_name" required>
@@ -47,6 +49,7 @@
     <input type="text" id="Address" name="Address" required>
     </div>
 
+    <h3>questions</h3>
       <div class="question">
           <span>1. Is there a household member aged 18 or older who does not complete basic k-12 curriculum?</span>
           <div class="custom-options">
