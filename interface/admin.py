@@ -25,8 +25,8 @@ class HouseholdAdmin(admin.ModelAdmin):
 admin.site.register(Household, HouseholdAdmin)
 
 class household_profile_admin(admin.ModelAdmin):
-    list_display =('id', 'first_name', 'last_name','user_number', 'user_email', 'mpi', )
-    search_fields =('id', 'first_name', 'last_name', 'user_number','user_email', 'mpi',)
+    list_display =('id', 'first_name', 'last_name','user_number', 'user_email', 'user_address', 'mpi')
+    search_fields =('id', 'first_name', 'last_name', 'user_number','user_email','user_address' ,'mpi')
 
 admin.site.register(household_profile, household_profile_admin)
 

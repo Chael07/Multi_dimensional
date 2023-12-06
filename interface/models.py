@@ -44,6 +44,7 @@ class household_profile(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     user_number = models.CharField(max_length=255)
+    user_address = models.CharField(max_length=255)
     user_email = models.CharField(max_length=50, validators=[MaxValueValidator(99999999999)])
     mpi = models.FloatField(default=0.0)
 
