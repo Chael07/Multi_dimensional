@@ -8,7 +8,6 @@ from django.utils import timezone
 from django.urls import reverse
 
 import os
-import uuid
 
 from .models import Household
 from .models import Contact
@@ -91,7 +90,7 @@ def profile_table_screen_view(request):
     print(request.headers)
     
     result_classify_data = result_classify.objects.values('id', 'dt_result', 'svm_result')
-    household_profile_data = household_profile.objects.values('id', 'first_name', 'last_name', 'user_email', 'mpi')
+    household_profile_data = household_profile.objects.values('id', 'first_name', 'last_name', 'user_number', 'user_email', 'mpi')
 
     combined_data = []
 
@@ -249,6 +248,7 @@ def submit_household(request):
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         user_email = request.POST.get('email')
+        user_number = request.POST.get('Cnumber')
 
     if request.method == 'POST':
         q1 = float(request.POST.get('q1', 0))
@@ -272,6 +272,7 @@ def submit_household(request):
         household_profile.objects.create(
             first_name=first_name,
             last_name=last_name,
+            user_number = user_number,
             user_email=user_email,
             mpi=(q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13) * 100,
         )
