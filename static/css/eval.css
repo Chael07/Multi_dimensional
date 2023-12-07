@@ -97,3 +97,23 @@
   
   /* end of .question_contain */
   
+  @media only screen and (min-width: 300px) and (max-width: 600px) {
+    .custom-options label {
+      margin-left: 1cm;
+      margin-right: 0cm;
+    }
+  
+    .submit-button {
+      margin-left: 2cm;
+    }
+  
+    .question_contain {
+      margin-top: -2cm;
+    }
+  
+    .eval-submit-button {
+      margin-left: -0.6cm;
+      margin-top: 1.2cm;
+      width: 100%;
+    }
+  }

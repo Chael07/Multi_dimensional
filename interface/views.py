@@ -300,6 +300,7 @@ def convert_to_one_zero(record):
     else:
         return 'none'
 
+
 def result_screen_view(request):
     print(request.headers)
     
@@ -326,7 +327,16 @@ def result_screen_view(request):
             converted_value = convert_to_one_zero(record)
             converted_questions.append(converted_value)
             
-        print(converted_questions)
+        count_yes = 0
+        count_no = 0
+
+        for response in questions:
+            converted_value = convert_to_one_zero(response)
+
+            if converted_value == '1':
+                count_yes += 1
+            elif converted_value == '0':
+                count_no += 1
 
         clf_path = os.path.join(settings.BASE_DIR, 'interface/decision_tree_model.joblib')
         clf = joblib.load(clf_path)
@@ -337,7 +347,11 @@ def result_screen_view(request):
 
         result_classify.objects.create(dt_result = prediction1, svm_result= prediction1)
 
-        # result = "Poor" if prediction == 1 else "Not Poor"
-        return render(request, "result.html", {'prediction': prediction})
+        context = {
+            'prediction': prediction,
+            'count_yes': count_yes,
+            'count_no': count_no
+        }
 
+        return render(request, "result.html", context)
 
