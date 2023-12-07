@@ -17,39 +17,74 @@
 </header> <!-- end of ex-header -->
 <!-- end of header -->
 
+<style>
+     .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
 
+        .form-input {
+            width: calc(100% - 16px);
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #302f2f;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .form-input-short {
+            width: calc(50% - 16px);
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #302f2f;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .form-input:focus {
+            border-color: #4682b4; /* Steel Blue */
+            outline: none;
+        }
+</style>
 
 
 <div class="question_contain">
   <form id="questionForm" action="{% url 'submit_household' %}" method="post" onsubmit="return householdValidateForm();">
      {% csrf_token %}
 
-<h3 style="margin-top: 1cm;">TITLE</h3>
+<h3 style="margin-top: 1cm; padding-bottom: 0.8cm;">Personal Information</h3>
 
-     <div class="form-group">
-      <label for="first_name">First Name:</label>
-      <input type="text" id="first_name" name="first_name" required>
-   </div>
+      <div class="form-group">
+        <label class="form-label" for="first_name">First Name:</label>
+        <input class="form-input-short" type="text" id="first_name" name="first_name" placeholder="Enter First Name" required>
+      </div>
 
-   <div class="form-group">
-      <label for="last_name">Last Name:</label>
-      <input type="text" id="last_name" name="last_name" required>
-   </div>
+      <div class="form-group">
+        <label class="form-label" for="last_name">Last Name:</label>
+        <input class="form-input-short" type="text" id="last_name" name="last_name" placeholder="Enter Last Name" required>
+      </div>
 
-   <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-   </div>
-    <div class="form-group">
-      <label for="email">Contact Number</label>
-      <input type="tel" id="Cnumber" name="Cnumber" required>
-   </div>
-   <div class="form-group">
-    <label for="street">Address</label>
-    <input type="text" id="Address" name="Address" required>
-    </div>
+      <div class="form-group">
+        <label class="form-label" for="email">Email:</label>
+        <input class="form-input-short" type="email" id="email" name="email" placeholder="Enter Email" required>
+      </div>
 
-    <h3>questions</h3>
+      <div class="form-group">
+        <label class="form-label" for="Cnumber">Contact Number</label>
+        <input class="form-input-short" type="tel" id="Cnumber" name="Cnumber" placeholder="09123456789" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Address">Address</label>
+        <input class="form-input" type="text" id="Address" name="Address" placeholder="Enter your Address" required>
+      </div>
+
+    <h3 style="margin-top: 1cm; ">Questions for Evaluation </h3>
+
       <div class="question">
           <span>1. Is there a household member aged 18 or older who does not complete basic k-12 curriculum?</span>
           <div class="custom-options">

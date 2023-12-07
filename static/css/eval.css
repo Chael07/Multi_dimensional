@@ -77,10 +77,12 @@
   form {
     max-width: 600px;
     width: 100%;
+    color: black;
   }
   .question span{
     font-family:logo-txt;
     font-size: 18px;
+    color: black;
   }
   .question {
     padding-top:1cm ;
