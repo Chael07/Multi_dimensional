@@ -127,6 +127,21 @@ def profile_table_screen_view(request):
 
     return render(request, "user-admin/profile_table.html", context)
 
+def delete(request, id):
+    # Get the household_profile instance by ID
+    household_profile_instance = household_profile.objects.get(id=id)
+
+    # Get corresponding Household and result_classify instances
+    household_instance = Household.objects.get(id=id)
+    result_classify_instance = result_classify.objects.get(id=id)
+
+    # Delete instances from all three tables
+    household_profile_instance.delete()
+    household_instance.delete()
+    result_classify_instance.delete()
+
+    return redirect('household_profile_table')
+
 
 def household_table_screen_view(request):
     print(request.headers)

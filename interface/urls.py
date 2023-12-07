@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import officials_dashboard_screen_view, household_table_screen_view, profile_table_screen_view, officials_addacc_screen_view, add_account_form, login_account_form, submit_developer_contact_form, user_logout
+from .views import officials_dashboard_screen_view, household_table_screen_view, profile_table_screen_view, officials_addacc_screen_view, add_account_form, login_account_form, submit_developer_contact_form, user_logout, delete
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
     path('user_logout/', user_logout, name='user_logout'),
     path('submit_developer_contact_form/', submit_developer_contact_form, name='submit_developer_contact_form'),
     
+    path('delete/<int:id>/', delete, name='delete'),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='admin-forgotpass.html'), name="reset_password"),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name='reset_password_sent.html'), name="password_reset_done"),
