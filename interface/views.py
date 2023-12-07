@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.utils import timezone
 from django.urls import reverse
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
 
 from .models import Household
@@ -112,8 +112,20 @@ def profile_table_screen_view(request):
 
     # Order the combined data by the 'id' field
     combined_data = sorted(combined_data, key=lambda x: x['id'])
-    
-    return render(request, "user-admin/profile_table.html", {'combined_data': combined_data})
+    paginator = Paginator(combined_data, 30)
+    page_number = request.GET.get('page')
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+
+    context = {
+        'page_obj': page_obj
+    }
+
+    return render(request, "user-admin/profile_table.html", context)
 
 
 def household_table_screen_view(request):
@@ -124,9 +136,23 @@ def household_table_screen_view(request):
     for record in household_data:
         converted_record = {key: convert_to_yes_no(value) for key, value in record.items()}
         converted_household_data.append(converted_record)
-
     print(converted_household_data)
-    return render(request, "user-admin\Household_table.html", {'household_data': converted_household_data})
+    paginator = Paginator(converted_household_data, 30)
+    page_number = request.GET.get('page')
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+
+    context = {
+        'page_obj': page_obj
+    }
+
+    return render(request, "user-admin\Household_table.html", context)
+
+
 
 def convert_to_yes_no(value):
     if value == 0.076923077:
@@ -284,13 +310,6 @@ def submit_household(request):
 
     else:
         return render(request, 'eval.html')
-
-# def result_screen_view(request):
-#     print(request.headers)
-#     return render(request, "result.html",)
-#  return redirect('result')
-
-# from sklearn.preprocessing import LabelEncoder
 
 def convert_to_one_zero(record):
     if record == 0.076923077:
