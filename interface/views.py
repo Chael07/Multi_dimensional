@@ -52,6 +52,22 @@ def officials_dashboard_screen_view(request):
     # Concatenate DataFrames along columns
     data = pd.concat([household_df, profile_df], axis=1)
 
+    indicator_mapping = {
+    'q1': 'Educational Attainment',
+    'q2': 'School Attendance',
+    'q3': 'Hunger',
+    'q4': 'Food Consumption',
+    'q5': 'Health Insurance',
+    'q6': 'Ownership of Assets',
+    'q7': 'Toilet Facility',
+    'q8': 'Access to Water',
+    'q9': 'Access to Electricity',
+    'q10': 'House Tenure',
+    'q11': 'Housing Material',
+    'q12': 'Underemployment',
+    'q13': 'Working Children not in School',
+    }
+
     # Calculate the correlation matrix
     correlation_matrix = data.corr()
 
@@ -62,11 +78,12 @@ def officials_dashboard_screen_view(request):
 
     print("Top 5 indicators based on correlation with '{}':".format(target_variable))
     for indicator, score in zip(top_indicators, top_indicator_scores):
-        print(f"{indicator}: {score:.4f}")
+        display_name = indicator_mapping.get(indicator, indicator)
+        print(f"{display_name}: {score:.4f}")
 
+    display_data = [{'name': indicator_mapping.get(indicator, indicator), 'score': score} for indicator, score in zip(top_indicators, top_indicator_scores)]
     context = {
-        'target_variable': target_variable,
-        'top_indicators': zip(top_indicators, top_indicator_scores),
+        'top_indicators': display_data,
         'contact_data_set': contact_data_set, 
         'poor_count_dt': poor_count_dt,
         'non_poor_count_dt': non_poor_count_dt,
