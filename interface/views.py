@@ -41,15 +41,40 @@ def officials_dashboard_screen_view(request):
     contact_data_set = Contact.objects.all().order_by('-submission_time')[:5]
     poor_count_dt, non_poor_count_dt, poor_count_svm, non_poor_count_svm = get_poor_non_poor_counts()
 
-   
+    # Assuming you have a queryset for Household and household_profile models
+    household_data = Household.objects.values('q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13')
+    profile_data = household_profile.objects.values('mpi')
 
-    return render(request, "user-admin/dashboard.html", 
-        {'contact_data_set': contact_data_set, 
+    # Convert queryset to DataFrame
+    household_df = pd.DataFrame.from_records(household_data)
+    profile_df = pd.DataFrame.from_records(profile_data)
+
+    # Concatenate DataFrames along columns
+    data = pd.concat([household_df, profile_df], axis=1)
+
+    # Calculate the correlation matrix
+    correlation_matrix = data.corr()
+
+    # Identify the top 5 indicators based on correlation with the target variable
+    target_variable = 'mpi'  # Change to 'mpi' as per the new model
+    top_indicators = correlation_matrix[target_variable].abs().sort_values(ascending=False).index[1:6]
+    top_indicator_scores = correlation_matrix.loc[top_indicators, target_variable].values
+
+    print("Top 5 indicators based on correlation with '{}':".format(target_variable))
+    for indicator, score in zip(top_indicators, top_indicator_scores):
+        print(f"{indicator}: {score:.4f}")
+
+    context = {
+        'target_variable': target_variable,
+        'top_indicators': zip(top_indicators, top_indicator_scores),
+        'contact_data_set': contact_data_set, 
         'poor_count_dt': poor_count_dt,
         'non_poor_count_dt': non_poor_count_dt,
         'poor_count_svm': poor_count_svm,
         'non_poor_count_svm': non_poor_count_svm,
-         })
+    }
+
+    return render(request, "user-admin/dashboard.html", context)
 
 def user_logout(request):
     logout(request)

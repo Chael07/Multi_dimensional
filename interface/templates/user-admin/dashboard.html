@@ -101,8 +101,8 @@
                             <h3 class="box-title">The most significant factors (MLR)</h3>
                             <div class="d-md-flex">
                                 <ul class="list-inline d-flex ms-auto">
-                                    {% if zipped_data %}
-                                        {% for indicator, score in zipped_data %}
+                                    {% if top_indicators %}
+                                        {% for indicator, score in top_indicators %}
                                             <li class="ps-3">
                                                 <h5><i class="fa fa-circle me-1 text-info"></i>{{ indicator }}</h5>
                                                 <p>Score: {{ score|floatformat:4 }}</p>
