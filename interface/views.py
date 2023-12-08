@@ -8,6 +8,8 @@ from django.utils import timezone
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
+import pandas as pd
+
 
 from .models import Household
 from .models import Contact
@@ -38,6 +40,9 @@ def officials_dashboard_screen_view(request):
     print(request.headers)
     contact_data_set = Contact.objects.all().order_by('-submission_time')[:5]
     poor_count_dt, non_poor_count_dt, poor_count_svm, non_poor_count_svm = get_poor_non_poor_counts()
+
+   
+
     return render(request, "user-admin/dashboard.html", 
         {'contact_data_set': contact_data_set, 
         'poor_count_dt': poor_count_dt,
@@ -126,6 +131,8 @@ def profile_table_screen_view(request):
     }
 
     return render(request, "user-admin/profile_table.html", context)
+
+
 
 def delete(request, id):
     # Get the household_profile instance by ID
