@@ -95,21 +95,37 @@
                 <!-- ============================================================== -->
                 <!-- PRODUCTS YEARLY SALES -->
                 <!-- ============================================================== -->
+                <style>
+                    .correlation-list {
+                        list-style-type: none;
+                        padding: 0;
+                    }
+                
+                    .correlation-item {
+                        margin-bottom: 10px;
+                    }
+                
+                    .correlation-item h5::before {
+                        content: '';
+                        margin-right: 5px;
+                    }
+                </style>
+                
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">The most significant factors (MLR)</h3>
+                            <h3 class="box-title">The most significant factors</h3>
                             <div class="d-md-flex">
-                                <ul class="list-inline d-flex ms-auto">
+                                <ul class="correlation-list">
                                     {% if top_indicators %}
                                         {% for indicator, score in top_indicators %}
-                                            <li class="ps-3">
+                                            <li class="correlation-item">
                                                 <h5><i class="fa fa-circle me-1 text-info"></i>{{ indicator }}</h5>
                                                 <p>Score: {{ score|floatformat:4 }}</p>
                                             </li>
                                         {% endfor %}
                                     {% else %}
-                                        <li class="ps-3">
+                                        <li class="correlation-item">
                                             <p>No data available</p>
                                         </li>
                                     {% endif %}
@@ -118,6 +134,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <!-- ============================================================== -->
                 <!-- Recent Comments -->
                 <!-- ============================================================== -->
@@ -214,4 +231,5 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
+    
     {% endblock content %}
