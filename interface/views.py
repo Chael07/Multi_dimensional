@@ -443,8 +443,10 @@ def result_screen_view(request):
             user_address = user_address,
         )
         ResultMPI.objects.create(mpi=(indi1 + indi2 + indi3 + indi4 + indi5 + indi6 + indi7 + indi8 + indi9 + indi10 + indi11 + indi12 + indi13) * 100,)
+
+        prediction2 = 'Not Poor' if prediction == 'Not Poor' else 'Poor'
         context = {
-            'prediction': prediction,
+            'prediction': prediction2,
             'count_yes': count_yes,
             'count_no': count_no
         }
