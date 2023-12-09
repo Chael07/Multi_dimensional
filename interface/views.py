@@ -14,7 +14,7 @@ import pandas as pd
 from .models import Household
 from .models import Contact
 from .models import Contact_Developer
-from .models import household_profile , result_classify
+from .models import HouseholdProfile , result_classify, ResultMPI
 
 import joblib
 from django.conf import settings
@@ -43,7 +43,7 @@ def officials_dashboard_screen_view(request):
 
     # Assuming you have a queryset for Household and household_profile models
     household_data = Household.objects.values('indi1', 'indi2', 'indi3', 'indi4', 'indi5', 'indi6', 'indi7', 'indi8', 'indi9', 'indi10', 'indi11', 'indi12', 'indi13')
-    profile_data = household_profile.objects.values('mpi')
+    profile_data = ResultMPI.objects.values('mpi')
 
     # Convert queryset to DataFrame
     household_df = pd.DataFrame.from_records(household_data)
@@ -123,34 +123,39 @@ def get_poor_non_poor_counts():
 
 
 def map_to_poor_non_poor(value):
-    # Map 1 to "non-poor" and 0 to "poor"
+    # Map 1 to "Non-poor" and 0 to "Poor"
     if value == 1:
         return "Non-poor"
     elif value == 0:
         return "Poor"
     else:
-        return "None" 
-    
+        return "None"
+
 def profile_table_screen_view(request):
     print(request.headers)
-    
+
+    result_mpi_data = ResultMPI.objects.values('id', 'mpi')
     result_classify_data = result_classify.objects.values('id', 'svm_result')
-    household_profile_data = household_profile.objects.values('id', 'first_name', 'last_name', 'user_number', 'user_email','user_address', 'mpi')
+    household_profile_data = HouseholdProfile.objects.values('id', 'first_name', 'last_name', 'user_number', 'user_email', 'user_address')
 
     combined_data = []
 
     for profile_row in household_profile_data:
         profile_id = profile_row['id']
 
+        # Find the matching row in result_mpi_data
+        mpi_row = next((row for row in result_mpi_data if row['id'] == profile_id), None)
+
         # Find the matching row in result_classify_data
         classify_row = next((row for row in result_classify_data if row['id'] == profile_id), None)
 
-        if classify_row:
+        if mpi_row:
             # Combine the data from both tables
-            combined_row = {**profile_row, **classify_row}
+            combined_row = {**profile_row, **mpi_row}
 
-            # Map dt_result and svm_result to "Poor" or "Non-poor"
-            combined_row['svm_result'] = map_to_poor_non_poor(combined_row['svm_result'])
+            # Add svm_result to the combined data if available
+            if classify_row:
+                combined_row['svm_result'] = map_to_poor_non_poor(classify_row['svm_result'])
 
             combined_data.append(combined_row)
 
@@ -158,6 +163,7 @@ def profile_table_screen_view(request):
     combined_data = sorted(combined_data, key=lambda x: x['id'])
     paginator = Paginator(combined_data, 30)
     page_number = request.GET.get('page')
+
     try:
         page_obj = paginator.page(page_number)
     except PageNotAnInteger:
@@ -175,16 +181,18 @@ def profile_table_screen_view(request):
 
 def delete(request, id):
     # Get the household_profile instance by ID
-    household_profile_instance = household_profile.objects.get(id=id)
+    household_profile_instance = HouseholdProfile.objects.get(id=id)
 
     # Get corresponding Household and result_classify instances
     household_instance = Household.objects.get(id=id)
     result_classify_instance = result_classify.objects.get(id=id)
+    result_mpi_instance = ResultMPI.objects.get(id=id)
 
     # Delete instances from all three tables
     household_profile_instance.delete()
     household_instance.delete()
     result_classify_instance.delete()
+    result_mpi_instance.delete()
 
     return redirect('household_profile_table')
 
@@ -357,14 +365,15 @@ def submit_household(request):
             indi1=q1, indi2=q2, indi3=q3, indi4=q4, indi5=q5, indi6=q6,
             indi7=q7, indi8=q8, indi9=q9, indi10=q10, indi11=q11, indi12=q12, indi13=q13,
         )
-        household_profile.objects.create(
+
+        HouseholdProfile.objects.create(
             first_name=first_name,
             last_name=last_name,
             user_number = user_number,
             user_email=user_email,
             user_address = user_address,
-            mpi=(q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13) * 100,
         )
+        ResultMPI.objects.create(mpi=(q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13) * 100,)
         
         return redirect(reverse('result') +
                         f'?q1={q1}&q2={q2}&q3={q3}&q4={q4}&q5={q5}&q6={q6}&q7={q7}&q8={q8}&q9={q9}&q10={q10}&q11={q11}&q12={q12}&q13={q13}')

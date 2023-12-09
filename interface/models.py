@@ -1,6 +1,7 @@
 from django.db import models
-import uuid
 from django.core.validators import MaxValueValidator
+from django.db import models
+
 
 # Create your models here.
 class Contact(models.Model):
@@ -36,18 +37,18 @@ class Household(models.Model):
     indi12 = models.FloatField()
     indi13 = models.FloatField()
 
-class household_profile(models.Model):
+class ResultMPI(models.Model):
+    id = models.AutoField(primary_key=True, auto_created=True)
+    mpi = models.FloatField(default=0.0)
+
+class HouseholdProfile(models.Model):
     id = models.AutoField(primary_key=True, auto_created=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     user_number = models.CharField(max_length=255)
     user_address = models.CharField(max_length=255)
     user_email = models.CharField(max_length=50, validators=[MaxValueValidator(99999999999)])
-    mpi = models.FloatField(default=0.0)
-
-
 
 class result_classify(models.Model):
     id = models.AutoField(primary_key=True, auto_created=True)
     svm_result = models.FloatField()
-

@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Contact
 from .models import Household 
 from .models import Contact_Developer
-from .models import household_profile, result_classify
+from .models import HouseholdProfile, result_classify, ResultMPI
 # for the comments or contact
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'email', 'message', 'submission_time')  
@@ -24,14 +24,18 @@ class HouseholdAdmin(admin.ModelAdmin):
 
 admin.site.register(Household, HouseholdAdmin)
 
-class household_profile_admin(admin.ModelAdmin):
-    list_display =('id', 'first_name', 'last_name','user_number', 'user_email', 'user_address', 'mpi')
-    search_fields =('id', 'first_name', 'last_name', 'user_number','user_email','user_address' ,'mpi')
-
-admin.site.register(household_profile, household_profile_admin)
+class HouseholdProfileAdmin(admin.ModelAdmin):
+    list_display = ('id', 'first_name', 'last_name', 'user_number', 'user_email', 'user_address',)
+    search_fields = ('id', 'first_name', 'last_name', 'user_number', 'user_email', 'user_address',)
+admin.site.register(HouseholdProfile, HouseholdProfileAdmin)
 
 class result_classify_admin(admin.ModelAdmin):
-    list_display =('id',  'svm_result',)
-    list_display =('id',  'svm_result',)
+    list_display =('id', 'svm_result',)
+    list_display =('id', 'svm_result',)
 
 admin.site.register(result_classify, result_classify_admin)
+
+class result_mpi_admin(admin.ModelAdmin):
+    list_display =('id', 'mpi',)
+    list_display =('id', 'mpi',)
+admin.site.register(ResultMPI, result_mpi_admin)
