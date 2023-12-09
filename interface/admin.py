@@ -19,8 +19,8 @@ admin.site.register(Contact_Developer, Contact_DeveloperAdmin)
 
 # this is for the evaluation
 class HouseholdAdmin(admin.ModelAdmin):
-    list_display = ('id', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13')
-    search_fields = ('id', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13')
+    list_display = ('id', 'indi1', 'indi2', 'indi3', 'indi4', 'indi5', 'indi6', 'indi7', 'indi8', 'indi9', 'indi10', 'indi11', 'indi12', 'indi13')
+    search_fields = ('id', 'indi1', 'indi2', 'indi3', 'indi4', 'indi5', 'indi6', 'indi7', 'indi8', 'indi9', 'indi10', 'indi11', 'indi12', 'indi13')
 
 admin.site.register(Household, HouseholdAdmin)
 
@@ -31,7 +31,7 @@ class household_profile_admin(admin.ModelAdmin):
 admin.site.register(household_profile, household_profile_admin)
 
 class result_classify_admin(admin.ModelAdmin):
-    list_display =('id', 'dt_result', 'svm_result',)
-    list_display =('id', 'dt_result', 'svm_result',)
+    list_display =('id',  'svm_result',)
+    list_display =('id',  'svm_result',)
 
 admin.site.register(result_classify, result_classify_admin)

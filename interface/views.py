@@ -39,10 +39,10 @@ def login_acc(request):
 def officials_dashboard_screen_view(request):
     print(request.headers)
     contact_data_set = Contact.objects.all().order_by('-submission_time')[:5]
-    poor_count_dt, non_poor_count_dt, poor_count_svm, non_poor_count_svm = get_poor_non_poor_counts()
+    poor_count_svm, non_poor_count_svm = get_poor_non_poor_counts()
 
     # Assuming you have a queryset for Household and household_profile models
-    household_data = Household.objects.values('q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13')
+    household_data = Household.objects.values('indi1', 'indi2', 'indi3', 'indi4', 'indi5', 'indi6', 'indi7', 'indi8', 'indi9', 'indi10', 'indi11', 'indi12', 'indi13')
     profile_data = household_profile.objects.values('mpi')
 
     # Convert queryset to DataFrame
@@ -53,19 +53,19 @@ def officials_dashboard_screen_view(request):
     data = pd.concat([household_df, profile_df], axis=1)
 
     indicator_mapping = {
-    'q1': 'Educational Attainment',
-    'q2': 'School Attendance',
-    'q3': 'Hunger',
-    'q4': 'Food Consumption',
-    'q5': 'Health Insurance',
-    'q6': 'Ownership of Assets',
-    'q7': 'Toilet Facility',
-    'q8': 'Access to Water',
-    'q9': 'Access to Electricity',
-    'q10': 'House Tenure',
-    'q11': 'Housing Material',
-    'q12': 'Underemployment',
-    'q13': 'Working Children not in School',
+    'indi1': 'Educational Attainment',
+    'indi2': 'School Attendance',
+    'indi3': 'Hunger',
+    'indi4': 'Food Consumption',
+    'indi5': 'Health Insurance',
+    'indi6': 'Ownership of Assets',
+    'indi7': 'Toilet Facility',
+    'indi8': 'Access to Water',
+    'indi9': 'Access to Electricity',
+    'indi10': 'House Tenure',
+    'indi11': 'Housing Material',
+    'indi12': 'Underemployment',
+    'indi13': 'Working Children not in School',
     }
 
     # Calculate the correlation matrix
@@ -85,8 +85,6 @@ def officials_dashboard_screen_view(request):
     context = {
         'top_indicators': display_data,
         'contact_data_set': contact_data_set, 
-        'poor_count_dt': poor_count_dt,
-        'non_poor_count_dt': non_poor_count_dt,
         'poor_count_svm': poor_count_svm,
         'non_poor_count_svm': non_poor_count_svm,
     }
@@ -99,20 +97,20 @@ def user_logout(request):
 
 def get_poor_non_poor_counts():
     # Fetch data from the Household model
-    result_classify_data = result_classify.objects.values('dt_result', 'svm_result')
+    result_classify_data = result_classify.objects.values('svm_result')
 
     # Initialize counters
-    poor_count_dt = 0
-    non_poor_count_dt = 0
+    # poor_count_dt = 0
+    # non_poor_count_dt = 0
     poor_count_svm = 0
     non_poor_count_svm = 0
 
     # Count based on the values of q1, q2, q3, and q4
-    for record in result_classify_data:
-        if record['dt_result'] == 0.0:
-            poor_count_dt += 1
-        else:
-            non_poor_count_dt += 1
+    # for record in result_classify_data:
+    #     if record['dt_result'] == 0.0:
+    #         poor_count_dt += 1
+    #     else:
+    #         non_poor_count_dt += 1
 
     for record in result_classify_data:
         if record['svm_result'] == 0.0:
@@ -121,7 +119,7 @@ def get_poor_non_poor_counts():
             non_poor_count_svm += 1
 
         
-    return poor_count_dt, non_poor_count_dt, poor_count_svm, non_poor_count_svm
+    return poor_count_svm, non_poor_count_svm
 
 
 def map_to_poor_non_poor(value):
@@ -136,7 +134,7 @@ def map_to_poor_non_poor(value):
 def profile_table_screen_view(request):
     print(request.headers)
     
-    result_classify_data = result_classify.objects.values('id', 'dt_result', 'svm_result')
+    result_classify_data = result_classify.objects.values('id', 'svm_result')
     household_profile_data = household_profile.objects.values('id', 'first_name', 'last_name', 'user_number', 'user_email','user_address', 'mpi')
 
     combined_data = []
@@ -152,7 +150,6 @@ def profile_table_screen_view(request):
             combined_row = {**profile_row, **classify_row}
 
             # Map dt_result and svm_result to "Poor" or "Non-poor"
-            combined_row['dt_result'] = map_to_poor_non_poor(combined_row['dt_result'])
             combined_row['svm_result'] = map_to_poor_non_poor(combined_row['svm_result'])
 
             combined_data.append(combined_row)
@@ -194,7 +191,7 @@ def delete(request, id):
 
 def household_table_screen_view(request):
     print(request.headers)
-    household_data = Household.objects.values('q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13').order_by('id')
+    household_data = Household.objects.values('indi1', 'indi2', 'indi3', 'indi4', 'indi5', 'indi6', 'indi7', 'indi8', 'indi9', 'indi10', 'indi11', 'indi12', 'indi13').order_by('id')
     
     converted_household_data = []
     for record in household_data:
@@ -357,8 +354,8 @@ def submit_household(request):
         q13 = float(request.POST.get('q13', 0))
 
         household = Household.objects.create(
-            q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6,
-            q7=q7, q8=q8, q9=q9, q10=q10, q11=q11, q12=q12, q13=q13,
+            indi1=q1, indi2=q2, indi3=q3, indi4=q4, indi5=q5, indi6=q6,
+            indi7=q7, indi8=q8, indi9=q9, indi10=q10, indi11=q11, indi12=q12, indi13=q13,
         )
         household_profile.objects.create(
             first_name=first_name,
@@ -428,7 +425,7 @@ def result_screen_view(request):
 
         prediction1 = '1' if prediction == 'Not Poor' else '0'
 
-        result_classify.objects.create(dt_result = prediction1, svm_result= prediction1)
+        result_classify.objects.create(svm_result= prediction1)
 
         context = {
             'prediction': prediction,

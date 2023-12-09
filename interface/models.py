@@ -22,19 +22,19 @@ class Contact_Developer(models.Model):
     
 class Household(models.Model):
     id = models.AutoField(primary_key=True, auto_created=True)
-    q1 = models.FloatField()
-    q2 = models.FloatField()
-    q3 = models.FloatField()
-    q4 = models.FloatField()
-    q5 = models.FloatField()
-    q6 = models.FloatField()
-    q7 = models.FloatField()
-    q8 = models.FloatField()
-    q9 = models.FloatField()
-    q10 = models.FloatField()
-    q11 = models.FloatField()
-    q12 = models.FloatField()
-    q13 = models.FloatField()
+    indi1 = models.FloatField()
+    indi2 = models.FloatField()
+    indi3 = models.FloatField()
+    indi4 = models.FloatField()
+    indi5 = models.FloatField()
+    indi6 = models.FloatField()
+    indi7 = models.FloatField()
+    indi8 = models.FloatField()
+    indi9 = models.FloatField()
+    indi10 = models.FloatField()
+    indi11 = models.FloatField()
+    indi12 = models.FloatField()
+    indi13 = models.FloatField()
 
 class household_profile(models.Model):
     id = models.AutoField(primary_key=True, auto_created=True)
@@ -49,6 +49,5 @@ class household_profile(models.Model):
 
 class result_classify(models.Model):
     id = models.AutoField(primary_key=True, auto_created=True)
-    dt_result = models.FloatField()
     svm_result = models.FloatField()
 
