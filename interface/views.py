@@ -361,22 +361,10 @@ def submit_household(request):
         q12 = float(request.POST.get('q12', 0))
         q13 = float(request.POST.get('q13', 0))
 
-        household = Household.objects.create(
-            indi1=q1, indi2=q2, indi3=q3, indi4=q4, indi5=q5, indi6=q6,
-            indi7=q7, indi8=q8, indi9=q9, indi10=q10, indi11=q11, indi12=q12, indi13=q13,
-        )
-
-        HouseholdProfile.objects.create(
-            first_name=first_name,
-            last_name=last_name,
-            user_number = user_number,
-            user_email=user_email,
-            user_address = user_address,
-        )
-        ResultMPI.objects.create(mpi=(q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13) * 100,)
+       
         
         return redirect(reverse('result') +
-                        f'?q1={q1}&q2={q2}&q3={q3}&q4={q4}&q5={q5}&q6={q6}&q7={q7}&q8={q8}&q9={q9}&q10={q10}&q11={q11}&q12={q12}&q13={q13}')
+                    f'?first_name={first_name}&last_name={last_name}&user_email={user_email}&user_number={user_number}&user_address={user_address}&q1={q1}&q2={q2}&q3={q3}&q4={q4}&q5={q5}&q6={q6}&q7={q7}&q8={q8}&q9={q9}&q10={q10}&q11={q11}&q12={q12}&q13={q13}')
 
     else:
         return render(request, 'eval.html')
@@ -394,21 +382,28 @@ def result_screen_view(request):
     print(request.headers)
     
     if request.method == 'GET':
-        q1 = float(request.GET.get('q1', 0))
-        q2 = float(request.GET.get('q2', 0))
-        q3 = float(request.GET.get('q3', 0))
-        q4 = float(request.GET.get('q4', 0))
-        q5 = float(request.GET.get('q5', 0))
-        q6 = float(request.GET.get('q6', 0))
-        q7 = float(request.GET.get('q7', 0))
-        q8 = float(request.GET.get('q8', 0))
-        q9 = float(request.GET.get('q9', 0))
-        q10 = float(request.GET.get('q10', 0))
-        q11 = float(request.GET.get('q11', 0))
-        q12 = float(request.GET.get('q12', 0))
-        q13 = float(request.GET.get('q13', 0))
+        first_name = request.GET.get('first_name')
+        last_name = request.GET.get('last_name')
+        user_email = request.GET.get('user_email')
+        user_number = request.GET.get('user_number')
+        user_address = request.GET.get('user_address')
 
-        questions = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13]
+    if request.method == 'GET':
+        indi1 = float(request.GET.get('q1', 0))
+        indi2 = float(request.GET.get('q2', 0))
+        indi3 = float(request.GET.get('q3', 0))
+        indi4 = float(request.GET.get('q4', 0))
+        indi5 = float(request.GET.get('q5', 0))
+        indi6 = float(request.GET.get('q6', 0))
+        indi7 = float(request.GET.get('q7', 0))
+        indi8 = float(request.GET.get('q8', 0))
+        indi9 = float(request.GET.get('q9', 0))
+        indi10 = float(request.GET.get('q10', 0))
+        indi11 = float(request.GET.get('q11', 0))
+        indi12 = float(request.GET.get('q12', 0))
+        indi13 = float(request.GET.get('q13', 0))
+
+        questions = [indi1, indi2, indi3, indi4, indi5, indi6, indi7, indi8, indi9, indi10, indi11, indi12, indi13]
 
         # Add both the "Deprived"/"Not Deprived" categories
         converted_questions = []
@@ -427,7 +422,7 @@ def result_screen_view(request):
             elif converted_value == '0':
                 count_no += 1
 
-        clf_path = os.path.join(settings.BASE_DIR, 'interface/decision_tree_model.joblib')
+        clf_path = os.path.join(settings.BASE_DIR, 'interface/svm_model.joblib')
         clf = joblib.load(clf_path)
         result_data = [converted_questions] 
         prediction = clf.predict(result_data)
@@ -435,7 +430,19 @@ def result_screen_view(request):
         prediction1 = '1' if prediction == 'Not Poor' else '0'
 
         result_classify.objects.create(svm_result= prediction1)
+        household = Household.objects.create(
+            indi1=indi1, indi2=indi2, indi3=indi3, indi4=indi4, indi5=indi5, indi6=indi6,
+            indi7=indi7, indi8=indi8, indi9=indi9, indi10=indi10, indi11=indi11, indi12=indi12, indi13=indi13,
+        )
 
+        HouseholdProfile.objects.create(
+            first_name=first_name,
+            last_name=last_name,
+            user_number = user_number,
+            user_email=user_email,
+            user_address = user_address,
+        )
+        ResultMPI.objects.create(mpi=(indi1 + indi2 + indi3 + indi4 + indi5 + indi6 + indi7 + indi8 + indi9 + indi10 + indi11 + indi12 + indi13) * 100,)
         context = {
             'prediction': prediction,
             'count_yes': count_yes,
