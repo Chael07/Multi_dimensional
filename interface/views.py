@@ -72,7 +72,7 @@ def officials_dashboard_screen_view(request):
     correlation_matrix = data.corr()
 
     # Identify the top 5 indicators based on correlation with the target variable
-    target_variable = 'mpi'  # Change to 'mpi' as per the new model
+    target_variable = 'mpi' 
     top_indicators = correlation_matrix[target_variable].abs().sort_values(ascending=False).index[1:6]
     top_indicator_scores = correlation_matrix.loc[top_indicators, target_variable].values
 

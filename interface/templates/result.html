@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/result.css' %}">
 
    <!-- Header -->
-   <header id="header" class="ex-header">
+   <header id="header" class="ex-header" >
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -17,33 +17,33 @@
 </header> <!-- end of ex-header -->
 <!-- end of header -->
 
-<div class="result-body">
+<div class="result-body" style="margin-top: -1.5cm;">
   <main class="result-container">
     <div class="result-dashboard">
-        <h1 class="result-dashboard__header">Your Result Using Decision Tree</h1>
+        <h1 class="result-dashboard__header">Your Result </h1>
+        <p class="result-score-text" style="font-size: 16px; color: aliceblue; margin-top: -0.5cm;">You answered yes</p>
         <div class="result-dashboard__score">
           <h2 id="result-score-number" class="result-score-number" data-target="76">{{ count_yes }}</h2>
           <p class="result-score-text">of 13</p>
         </div>
-        <p class="result-score-text" style="font-size: 16px; color: aliceblue; margin-top: -0.5cm;">You answered yes</p>
         <div class="result-dashboard__grade">
           <h2 class="result-grade-text">{{ prediction }} </h2>
           <!-- <h3 class="result-grade-description">You scored higher than 65% of the people who have taken these tests.</h3> -->
         </div>
     </div>
 
-    <div class="result-dashboard">
-      <h1 class="result-dashboard__header">Your Result Using Support Vector Machine </h1>
-      <div class="result-dashboard__score">
-        <h2 id="result-score-number" class="result-score-number" data-target="76">12</h2>
-        <p class="result-score-text">of 13</p>
-      </div>
-      <p class="result-score-text" style="font-size: 16px; color: aliceblue; margin-top: -0.5cm;">You answered yes</p>
-      <div class="result-dashboard__grade">
-        <h2 class="result-grade-text">POOR or NON POOR</h2>
-        <!-- <h3 class="result-grade-description">You scored higher than 65% of the people who have taken these tests.</h3> -->
-      </div>
-  </div>
+            <!-- <div class="result-dashboard">
+              <h1 class="result-dashboard__header">Your Result Using Support Vector Machine </h1>
+              <div class="result-dashboard__score">
+                <h2 id="result-score-number" class="result-score-number" data-target="76">12</h2>
+                <p class="result-score-text">of 13</p>
+              </div>
+              <p class="result-score-text" style="font-size: 16px; color: aliceblue; margin-top: -0.5cm;">You answered yes</p>
+              <div class="result-dashboard__grade">
+                <h2 class="result-grade-text">POOR or NON POOR</h2> -->
+                <!-- <h3 class="result-grade-description">You scored higher than 65% of the people who have taken these tests.</h3> -->
+              <!-- </div>
+          </div> -->
 
     <div class="result-summary">
       <h1 class="result-summary__header">"Thank you for participating in the evaluation."</h1>
