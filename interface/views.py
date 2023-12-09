@@ -42,7 +42,7 @@ def officials_dashboard_screen_view(request):
     poor_count_svm, non_poor_count_svm = get_poor_non_poor_counts()
 
     # Assuming you have a queryset for Household and household_profile models
-    household_data = Household.objects.values('indi1', 'indi2', 'indi3', 'indi4', 'indi5', 'indi6', 'indi7', 'indi8', 'indi9', 'indi10', 'indi11', 'indi12', 'indi13')
+    household_data = Household.objects.values('indi1', 'indi3', 'indi4', 'indi5', 'indi6', 'indi7', 'indi8', 'indi9',  'indi11', 'indi12')
     profile_data = ResultMPI.objects.values('mpi')
 
     # Convert queryset to DataFrame
@@ -51,10 +51,9 @@ def officials_dashboard_screen_view(request):
 
     # Concatenate DataFrames along columns
     data = pd.concat([household_df, profile_df], axis=1)
-
+    
     indicator_mapping = {
     'indi1': 'Educational Attainment',
-    'indi2': 'School Attendance',
     'indi3': 'Hunger',
     'indi4': 'Food Consumption',
     'indi5': 'Health Insurance',
@@ -62,12 +61,10 @@ def officials_dashboard_screen_view(request):
     'indi7': 'Toilet Facility',
     'indi8': 'Access to Water',
     'indi9': 'Access to Electricity',
-    'indi10': 'House Tenure',
     'indi11': 'Housing Material',
     'indi12': 'Underemployment',
-    'indi13': 'Working Children not in School',
     }
-
+ 
     # Calculate the correlation matrix
     correlation_matrix = data.corr()
 
@@ -387,8 +384,7 @@ def result_screen_view(request):
         user_email = request.GET.get('user_email')
         user_number = request.GET.get('user_number')
         user_address = request.GET.get('user_address')
-
-    if request.method == 'GET':
+        
         indi1 = float(request.GET.get('q1', 0))
         indi2 = float(request.GET.get('q2', 0))
         indi3 = float(request.GET.get('q3', 0))
@@ -442,7 +438,15 @@ def result_screen_view(request):
             user_email=user_email,
             user_address = user_address,
         )
-        ResultMPI.objects.create(mpi=(indi1 + indi2 + indi3 + indi4 + indi5 + indi6 + indi7 + indi8 + indi9 + indi10 + indi11 + indi12 + indi13) * 100,)
+
+        question_mlr = [indi1, indi3, indi4, indi5, indi6, indi7, indi8, indi9, indi11, indi12,]
+
+        mlf_path = os.path.join(settings.BASE_DIR, 'interface/mlr_model.joblib')
+        mlf = joblib.load(mlf_path)
+        result_data = [question_mlr]
+        mlr_prediction = mlf.predict(result_data)
+
+        ResultMPI.objects.create(mpi=mlr_prediction)
 
         prediction2 = 'Not Poor' if prediction == 'Not Poor' else 'Poor'
         context = {

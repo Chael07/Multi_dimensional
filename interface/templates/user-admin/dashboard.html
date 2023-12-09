@@ -114,14 +114,14 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">The most significant factors</h3>
+                            <h3 class="box-title" style="font-size: 24px; padding-bottom:10px;">The primary factors determining household poverty. </h3>
                             <div class="d-md-flex">
                                 <ul class="correlation-list">
                                     {% if top_indicators %}
                                         {% for item in top_indicators %}
                                             <li class="correlation-item">
                                                 <h5><i class="fa fa-circle me-1 text-info"></i>{{ item.name }}</h5>
-                                                <p>Score: {{ item.score|floatformat:4 }}</p>
+                                                <!-- <p>Score: {{ item.score|floatformat:4 }}</p> -->
                                             </li>
                                         {% endfor %}
                                     {% else %}
