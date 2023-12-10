@@ -238,6 +238,7 @@ def forgot_pass_screen_view(request):
     return render(request, "admin-forgotpass.html", {})
 
 
+
 def add_account_form(request):
     if request.method == "POST":
         Adminfname = request.POST['fname']
@@ -247,6 +248,11 @@ def add_account_form(request):
         AdminPass1 = request.POST['password1']
         AdminPass2 = request.POST['password2']
 
+        # Check if the provided admin username already exists in the database
+        if User.objects.filter(username=AdminUsername).exists():
+            messages.error(request, f"The username '{AdminUsername}' is already taken. Please choose a different username.")
+            return redirect('AddAcc')
+
         # Check if passwords match
         if AdminPass1 != AdminPass2:
             messages.error(request, "Passwords do not match.")
@@ -254,12 +260,13 @@ def add_account_form(request):
 
         # Create the user with the correct arguments
         myadmin = User.objects.create_user(AdminUsername, AdminEmail, password=AdminPass1)
-        myadmin.first_name = Adminfname 
+        myadmin.first_name = Adminfname
         myadmin.last_name = Adminlname
         myadmin.save()
 
         messages.success(request, "Your account has been successfully created.")
         return redirect('AddAcc')
+
     
 def login_account_form(request):
     if request.method == 'POST':
