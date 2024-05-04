@@ -329,22 +329,22 @@
     <div class="select">
         <select id="household-members-relationship" for="relationship" type="text" name="relationship">
           <option value=" " style="color: #ffffffb0;">Select</option> <!-- Blank placeholder -->
-            <option value="1">Head</option>
-            <option value="2">Spouse</option>
-            <option value="3">Son</option>
-            <option value="4">Daughter</option>
-            <option value="5">Step Son</option>
-            <option value="6">Step Daughter</option>
-            <option value="7">Son-in-law</option>
-            <option value="8">Daughter-in-law</option>
-            <option value="9">Granddaughter</option>
-            <option value="10">Grandson</option>
-            <option value="11">Father</option>
-            <option value="12">Mother</option>
-            <option value="13">Father-in-law</option>
-            <option value="14">Mother-in-law</option>
-            <option value="15">Brother</option>
-            <option value="15">Sister</option>
+            <option value="Head">Head</option>
+            <option value="Spouse">Spouse</option>
+            <option value="Son">Son</option>
+            <option value="Daughter">Daughter</option>
+            <option value="Step-Son">Step Son</option>
+            <option value="Step-Daughter">Step Daughter</option>
+            <option value="Son-in-law">Son-in-law</option>
+            <option value="Daughter-in-law">Daughter-in-law</option>
+            <option value="Granddaughter">Granddaughter</option>
+            <option value="Grandson">Grandson</option>
+            <option value="Father">Father</option>
+            <option value="Mother">Mother</option>
+            <option value="Father-in-law">Father-in-law</option>
+            <option value="Mother-in-law">Mother-in-law</option>
+            <option value="Brother">Brother</option>
+            <option value="Sister">Sister</option>
         </select>
     </div>
     </div>
@@ -422,34 +422,35 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
     </div>
 </div>
 
-<div class="question-container"  id="page4">
+<div class="question-container" id="page4">
   <div class="question">
-    <span>1. Is there a household member aged 18 or older who does not complete basic k-12 curriculum?</span>
+    <span>1. Is there a household member aged 18 or older who has not completed basic K-12 education?</span>
     <div class="custom-options">
       <input type="radio" name="q1" id="q1_yes" onchange="showFollowUpOptions()" value="0.076923077" required><label for="q1_yes"> Yes</label>
       <input type="radio" name="q1" id="q1_no" onchange="showFollowUpOptions()" value="0" required><label for="q1_no"> No</label>
     </div>
   </div>
 
-  <div id="followUpQuestion" class="Follow_up_options">
+  <div id="followUpQuestion" class="Follow_up_options" style="display: none;">
     <div class="follow_question">
       What is the highest educational attainment?
     </div>
     
     <div class="follow_options">
-      <input type="radio" id="early-childhood" name="education" value="early-childhood" required>
+      <input type="radio" id="early-childhood" name="education" value="early-childhood" >
       <label for="early-childhood">Early Childhood Education</label><br>
-      <input type="radio" id="elementary" name="education" value="elementary" required>
+      <input type="radio" id="elementary" name="education" value="elementary" >
       <label for="elementary">Elementary Education</label><br>
-      <input type="radio" id="High" name="education" value="junior-high"required>
+      <input type="radio" id="junior-high" name="education" value="junior-high" >
       <label for="junior-high">Junior High School</label><br>
-      <input type="radio" id="senior" name="education" value="none"required>
+      <input type="radio" id="none" name="education" value="none" >
       <label for="none">Did not complete any</label>
     </div>
   </div>
+  
   <div class="next_button">
-    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
-    <button onclick="validateAndNextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll">Back</button>   
+    <button onclick="validateAndNextQuestion()" class="btn-solid-lg page-scroll">Next</button>
   </div>
 </div>
 
@@ -981,41 +982,36 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
 </div>
 
 <script>
-function validateAndNextQuestion() {
-  const q1Yes = document.getElementById('q1_yes');
-  const q1No = document.getElementById('q1_no');
-  const followUpQuestion = document.getElementById('followUpQuestion');
-  const followUpRadios = document.getElementsByName('education');
+  function validateAndNextQuestion() {
+    const q1Yes = document.getElementById('q1_yes');
+    const q1No = document.getElementById('q1_no');
+    const followUpQuestion = document.getElementById('followUpQuestion');
+    const followUpRadios = document.getElementsByName('education');
 
-  // Check if "Yes" is selected and if the follow-up question is visible
-  if (q1Yes.checked && followUpQuestion.style.display !== 'none') {
-    // Check if at least one follow-up option is selected
-    let followUpAnswered = false;
-    for (let i = 0; i < followUpRadios.length; i++) {
-      if (followUpRadios[i].checked) {
-        followUpAnswered = true;
-        break;
+    if (q1Yes.checked && followUpQuestion.style.display !== 'none') {
+      let followUpAnswered = false;
+      for (let i = 0; i < followUpRadios.length; i++) {
+        if (followUpRadios[i].checked) {
+          followUpAnswered = true;
+          break;
+        }
+      }
+      if (!followUpAnswered) {
+        alert('Please select one option for the follow-up question');
+        return;
       }
     }
-    // If no follow-up option is selected, display an alert and return
-    if (!followUpAnswered) {
-      alert('Please select one option for the follow-up question');
-      return;
-    }
+
+    nextQuestion();
   }
 
-  // Proceed to the next page or page 5
-  nextQuestion();
-}
-
-function showFollowUpOptions() {
-  const followUpQuestion = document.getElementById('followUpQuestion');
-  if (document.getElementById('q1_yes').checked) {
-    followUpQuestion.style.display = 'block';
-  } else {
-    followUpQuestion.style.display = 'none';
-  }
-}
+  function showFollowUpOptions() {
+    const followUpQuestion = document.getElementById('followUpQuestion');
+    if (document.getElementById('q1_yes').checked) {
+      followUpQuestion.style.display = 'block';
+    } else {
+      followUpQuestion.style.display = 'none';
+    }}
 </script>
 
 <script>
