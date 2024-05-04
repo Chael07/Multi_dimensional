@@ -1562,7 +1562,7 @@ a:hover.back-to-top {
 .ex-basic-1 {
 	padding-top: 2rem;
 	padding-bottom: 0.875rem;
-	background-color: #f7fcfd;
+	background-color: #f7fcfd00;
 }
 
 .ex-basic-1 .breadcrumbs {
@@ -1577,6 +1577,7 @@ a:hover.back-to-top {
 .ex-basic-2 {
 	padding-top: 4.75rem;
 	padding-bottom: 4rem;
+	background-color: #ffffff00;
 }
 
 .ex-basic-2 h3 {
@@ -1619,7 +1620,7 @@ a:hover.back-to-top {
 
 .ex-basic-2 .text-container.dark-bg {
 	padding: 1.625rem 1.5rem 0.75rem 2rem;
-	background-color: #f9fafc;
+	background-color: #f9fafc00;
 }
 
 

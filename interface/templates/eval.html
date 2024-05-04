@@ -138,6 +138,8 @@
     }
     .select {
         margin-bottom: 20px;
+        width: 290px;
+        margin-left: 32px;
     }
 
     .input-field {
@@ -246,53 +248,30 @@
   }
 
 .next_button{
-  margin-top: 1cm;
+  margin-top: 2cm;
+  text-align: center;
 }
+
+.form-input-short::placeholder, .form-input::placeholder  {
+        text-align: center; /* Center align the placeholder text */
+    }
+
+  .next-button {
+    text-align: center;
+  }
 </style>
 
 <div class="question_contain">
   <form id="questionForm" action="{% url 'submit_household' %}" method="post" onsubmit="return householdValidateForm();">
      {% csrf_token %}
 
+
 <div class="question-container active"  id="page1">
-
-         <h3 style="margin-top: 0.5cm; padding-bottom: 0.8cm;">Demographic Profile</h3>
-
-         <div class="form-group">
-           <label class="form-label" for="first_name">First Name:</label>
-           <input class="form-input-short" type="text" id="first_name" name="first_name" placeholder="Enter First Name" required>
-         </div>
-
-         <div class="form-group" style="left: 8.5cm; top: -2.7cm;">
-            <label class="form-label" for="last_name">Last Name:</label>
-           <input class="form-input-short" type="text" id="last_name" name="last_name" placeholder="Enter Last Name" required>
-         </div>
-
-         <div class="form-group" style="margin-top: -3cm;">
-           <label class="form-label" for="email">Email:</label>
-           <input class="form-input-short" type="email" id="email" name="email" placeholder="Enter Email" required>
-          </div>
-
-         <div class="form-group">
-           <label class="form-label" for="Cnumber">Contact Number</label>
-           <input class="form-input-short" type="tel" id="Cnumber" name="Cnumber" placeholder="09123456789" required>
-         </div>
-
-          <div class="form-group">
-           <label class="form-label" for="Address">Address</label>
-           <input class="form-input" style="width: 604px;" type="text" id="Address" name="Address" placeholder="Enter your Address" required>
-         </div>
-       
-         <button onclick="nextQuestion()" class="btn-solid-lg page-scroll" style="position: absolute; left: 15.5cm; ">Next</button>
-         
-</div>
-
-<div class="question-container"  id="page2">
   <div class="gray-box">
-    <div class="label" style="text-align: center;">Number of Household Members:</div>
+    <div class="label" style="text-align: center; font-size: 16px;">Number of Household Members:</div>
     <div class="select">
-        <select id="household-members" onchange="showAdditionalFields()">
-            <option value="1">0</option>
+        <select  id="household-members" onchange="showAdditionalFields()" required>
+          <option value="" hidden></option> <!-- Blank placeholder -->
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -303,6 +282,11 @@
             <option value="8">8</option>
             <option value="9">9</option>
             <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
         </select>
     </div>
 </div>
@@ -310,15 +294,51 @@
 <div id="additional-fields" class="gray-box2 hidden">
    
 </div>
-    <div style="position: absolute; left: 14cm;">
-      <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <div class="next-button">
       <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
     </div>
- 
 </div>
-<div class="question-container"  id="page3">
-  <div class="gray-box">
-    <div class="label" style="text-align: center;">Respondent’s Relation to the Household Head</div>
+
+<div class="question-container" id="page2">
+  
+ <div style="text-align: center;">
+  <h3 style="margin-top: 0.5cm; padding-bottom: 0.8cm;">Demographic Profile</h3>
+
+  <div class="form-group">
+    <label class="form-label" for="first_name">First Name:</label>
+    <input class="form-input-short" type="text" id="first_name" name="first_name" placeholder=" Please Enter First Name" required>
+  </div>
+
+  <div class="form-group">
+     <label class="form-label" for="last_name">Last Name:</label>
+    <input class="form-input-short" type="text" id="last_name" name="last_name" placeholder="Please Enter Last Name" required>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label" for="email">Email:</label>
+    <input class="form-input-short" type="email" id="email" name="email" placeholder="Please Enter Email" required>
+   </div>
+
+  <div class="form-group">
+    <label class="form-label" for="Cnumber">Contact Number</label>
+    <input class="form-input-short" type="tel" id="Cnumber" name="Cnumber" placeholder="09123456789" required>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label" for="Address">Purok</label>
+    <select class="form-input-short" id="Address" name="Address" required>
+        <option value="">Select Purok</option>
+        <option value="purok1">Purok 1</option>
+        <option value="purok2">Purok 2</option>
+        <option value="purok3">Purok 3</option>
+        <!-- Add more options as needed -->
+    </select>
+</div>
+
+ </div>
+  
+  <div class="gray-box" style="margin-top: -0.5cm;">
+    <div class="form-label" style="text-align: center;">Respondent’s Relation to the Household Head</div>
     <div class="select">
         <select id="household-members-relationship">
             <option value="1">Head</option>
@@ -334,19 +354,19 @@
             <option value="11">Father</option>
             <option value="12">Mother</option>
             <option value="13">Father-in-law</option>
-            <option value="14">mother-in-law</option>
+            <option value="14">Mother-in-law</option>
             <option value="15">Brother</option>
             <option value="15">Sister</option>
         </select>
     </div>
 </div>
-    <div style="position: absolute; left: 14cm;">
+<div class="next-button">
       <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
       <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
     </div>
  
 </div>
-<div class="question-container"  id="page4">
+<div class="question-container"  id="page3">
   <div class="gray-box" style="margin-top: -0.2cm;">
     <div class="label" style="text-align: center; font-size: 22px;">Data Privacy Policy   </div>
     <div class="Data_privacy">
@@ -365,19 +385,18 @@ By clicking "Agree," you acknowledge and agree to abide by the terms and conditi
 This comprehensive privacy policy reflects our commitment to upholding the principles and requirements set forth in the Data Privacy Act of 2012, ensuring the protection and confidentiality of your personal information throughout our study.
 
 <div class="custom-options1">
-  <input type="radio" name="q1" required id="Agree" value="1" ><label for="Agree"> Agree</label>
-  <input type="radio" name="q1" required id="Disagree" value="0" ><label for="Disagree"> Disagree</label>
+  <input type="radio" name="q1" required id="Agree" value="1" ><label for="Agree"> Agree</label> 
 </div>
     </div>
   
 </div>
-    <div style="position: absolute; left: 14.2cm;">
+<div class="next-button">
       <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
       <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
     </div>
 </div>
 
-<div class="question-container"  id="page5">
+<div class="question-container"  id="page4">
   <div class="question">
     <span>1. Is there a household member aged 18 or older who does not complete basic k-12 curriculum?</span>
     <div class="custom-options">
@@ -401,13 +420,13 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
       <label for="none">Did not complete any</label>
     </div>
   </div>
-  <div class="next_button" style="position: absolute; left: 14.2cm;">
+  <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
 
-<div class="question-container"  id="page6">
+<div class="question-container"  id="page5">
   <div class="question">
     <span>2. Is there a household member whose age ranges from 5 to 18 that is not attending school?</span>
     <div class="custom-options">
@@ -457,12 +476,12 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
       <label for="Others">OTHER REASONS</label><br>
     </div>
   </div>
-  <div class="next_button" style="position: absolute; left: 14.2cm;">
+  <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
-<div class="question-container"  id="page7">
+<div class="question-container"  id="page6">
   <div class="question">
     <span>3. Is there a household member that experienced hunger for the past months?</span>
     <div class="custom-options">
@@ -516,12 +535,12 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
     </div>
    
   </div>
-  <div class="next_button" style="position: absolute; left: 14.2cm;">
+  <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
-<div class="question-container"  id="page8">
+<div class="question-container"  id="page7">
   <div class="question">
     <span>4. Is there a household member who does not eat three times a day?</span>
     <div class="custom-options">
@@ -546,13 +565,13 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
       </div>
     </div>
     </div>
-  <div class="next_button" style="position: absolute; left: 14.2cm;">
+    <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
 
-<div class="question-container"  id="page9">
+<div class="question-container"  id="page8">
   <div class="question">
     <span>5. Is there a household member who does not have access to health insurance?</span>
     <div class="custom-options">
@@ -561,13 +580,13 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
     </div>
   </div>
 
-  <div class="next_button" style="position: absolute; left: 14.2cm;">
+  <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
 
-<div class="question-container"  id="page10">
+<div class="question-container"  id="page9">
   <div class="question">
     <span>6.	Does the household lacks basic appliances?</span>
     <div class="custom-options">
@@ -608,12 +627,12 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
     </div>
   </div>
 
-  <div class="next_button" style="position: absolute; left: 14.2cm;">
+  <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
-<div class="question-container"  id="page11">
+<div class="question-container"  id="page10">
   <div class="question">
     <span>7.	Does the household lack its own toilet facility?</span>
     <div class="custom-options">
@@ -640,13 +659,13 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
     </div>
   </div>
 
-  <div  class="next_button" style="position: absolute; left: 14.2cm;">
+  <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
 
-<div class="question-container"  id="page12">
+<div class="question-container"  id="page11">
   <div class="question">
     <span>8.	Does the household lack access to safe drinking water?</span>
     <div class="custom-options">
@@ -692,12 +711,12 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
     </div>
   </div>
 
-  <div class="next_button" style="position: absolute; left: 14.2cm;">
+  <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
-<div class="question-container"  id="page13">
+<div class="question-container"  id="page12">
   <div class="question">
     <span>9.	Does the household lack access to electricity?</span>
     <div class="custom-options">
@@ -715,13 +734,13 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   </div>
   </div>
 
-  <div  class="next_button" style="position: absolute; left: 14.2cm;">
+  <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
 
-<div class="question-container"  id="page14">
+<div class="question-container"  id="page13">
   
   <div class="question">
     <span>10.	Does the household lack ownership rights to its dwelling?</span>
@@ -766,12 +785,12 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
 </div>                   
   </div>
 
-  <div  class="next_button" style="position: absolute; left: 14.2cm;">
+  <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
-<div class="question-container"  id="page15">
+<div class="question-container"  id="page14">
   <div class="question">
     <span>11.	Is the house made entirely of wood?</span>
     <div class="custom-options">
@@ -801,13 +820,13 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
            
   </div>
 
-  <div  class="next_button" style="position: absolute; left: 14.2cm;">
+  <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
 
-<div class="question-container" id="page16">
+<div class="question-container" id="page15">
 
   <div class="question">
     <span>12. Is there a household member capable of working but currently not employed?</span>
@@ -886,13 +905,13 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
     </div> 
   </div>
 
-  <div  class="next_button" style="position: absolute; left: 14.2cm;">
+  <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
 
-<div class="question-container"  id="page17">
+<div class="question-container"  id="page16">
   
       <div class="question">
         <span>13.	Is there a household member aged 5 to 17 who is employed rather than attending school?</span>
@@ -925,6 +944,7 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
 </div>      
 </form>
 </div>
+
 <script>
   function showFollowUpOptions() {
     var yesRadio = document.getElementById("q1_yes");
@@ -936,9 +956,9 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
       followUpDiv.style.display = "none";
     }
   }
-  </script>
+</script>
 
-  <script>
+<script>
     function showFollowUpOptions2() {
       var yesRadio = document.getElementById("q2_yes");
       var followUpDiv = document.getElementById("followUpQuestion2");
@@ -949,7 +969,7 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
         followUpDiv.style.display = "none";
       }
     }
-    </script>
+</script>
 
 <script>
   function showFollowUpOptions3() {
@@ -962,7 +982,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
       followUpDiv.style.display = "none";
     }
   }
-  </script>
+</script>
+
 <script>
   function showFollowUpOptions4() {
     var yesRadio = document.getElementById("q4_yes");
@@ -974,8 +995,9 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
       followUpDiv.style.display = "none";
     }
   }
-  </script>
-  <script>
+</script>
+
+<script>
     function showFollowUpOptions6() {
       var yesRadio = document.getElementById("q6_yes");
       var followUpDiv = document.getElementById("followUpQuestion6");
@@ -986,8 +1008,9 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
         followUpDiv.style.display = "none";
       }
     }
-    </script>
-    <script>
+</script>
+
+<script>
       function showFollowUpOptions7() {
         var yesRadio = document.getElementById("q7_yes");
         var followUpDiv = document.getElementById("followUpQuestion7");
@@ -998,8 +1021,9 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
           followUpDiv.style.display = "none";
         }
       }
-      </script>
-       <script>
+</script>
+
+<script>
         function showFollowUpOptions8() {
           var yesRadio = document.getElementById("q8_yes");
           var followUpDiv = document.getElementById("followUpQuestion8");
@@ -1010,8 +1034,9 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
             followUpDiv.style.display = "none";
           }
         }
-        </script>
-      <script>
+</script>
+      
+<script>
         function showFollowUpOptions9() {
           var yesRadio = document.getElementById("q9_yes");
           var followUpDiv = document.getElementById("followUpQuestion9");
@@ -1022,8 +1047,9 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
             followUpDiv.style.display = "none";
           }
         }
-        </script>
-      <script>
+</script>
+      
+<script>
         function showFollowUpOptions10() {
           var yesRadio = document.getElementById("q10_yes");
           var followUpDiv = document.getElementById("followUpQuestion10");
@@ -1034,9 +1060,9 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
             followUpDiv.style.display = "none";
           }
         }
-        </script>
+</script>
 
-         <script>
+ <script>
           function showFollowUpOptions11() {
             var yesRadio = document.getElementById("q11_yes");
             var followUpDiv = document.getElementById("followUpQuestion11");
@@ -1047,8 +1073,9 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
               followUpDiv.style.display = "none";
             }
           }
-          </script>
-           <script>
+</script>
+
+<script>
             function showFollowUpOptions12() {
               var yesRadio = document.getElementById("q12_yes");
               var followUpDiv = document.getElementById("followUpQuestion12");
@@ -1092,8 +1119,9 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
                 followUpDiv.style.display = "none";
               }
             }
-            </script>
-          <script>
+</script>
+          
+<script>
             function showFollowUpOptions13() {
               var yesRadio = document.getElementById("q13_yes");
               var followUpDiv = document.getElementById("followUpQuestion13");
@@ -1104,118 +1132,119 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
                 followUpDiv.style.display = "none";
               }
             }
-            </script>
-    <script>
-      function showAdditionalFields() {
-          var numberOfMembers = document.getElementById("household-members").value;
-          var additionalFieldsDiv = document.getElementById("additional-fields");
+</script>
+        
+<script>
+          function showAdditionalFields() {
+              var numberOfMembers = document.getElementById("household-members").value;
+              var additionalFieldsDiv = document.getElementById("additional-fields");
 
-          // Clear previous additional fields
-          additionalFieldsDiv.innerHTML = "";
+              // Clear previous additional fields
+              additionalFieldsDiv.innerHTML = "";
 
-          additionalFieldsDiv.classList.remove("hidden");
+              additionalFieldsDiv.classList.remove("hidden");
 
-          var heading = document.createElement("h3");
-          heading.textContent = "Profile of Household Members:";
-          heading.className = "profile-heading"; // Assigning a class
-          additionalFieldsDiv.appendChild(heading);
+              var heading = document.createElement("h3");
+              heading.textContent = "Profile of Household Members:";
+              heading.className = "profile-heading"; // Assigning a class
+              additionalFieldsDiv.appendChild(heading);
 
 
 
-          for (var i = 1; i <= numberOfMembers; i++) {
-              // Create input field for last name
-              var lastNameInputField = document.createElement("input");
-              lastNameInputField.type = "text";
-              lastNameInputField.placeholder = "Last Name";
-              lastNameInputField.name = "member" + i + "_last_name";
-              lastNameInputField.className = "input-field";
-              lastNameInputField.required = true; // Add required attribute
-              additionalFieldsDiv.appendChild(lastNameInputField);
+              for (var i = 1; i <= numberOfMembers; i++) {
+                  // Create input field for last name
+                  var lastNameInputField = document.createElement("input");
+                  lastNameInputField.type = "text";
+                  lastNameInputField.placeholder = "Last Name";
+                  lastNameInputField.name = "member" + i + "_last_name";
+                  lastNameInputField.className = "input-field";
+                  lastNameInputField.required = true; // Add required attribute
+                  additionalFieldsDiv.appendChild(lastNameInputField);
 
-              // Create input field for first name
-              var firstNameInputField = document.createElement("input");
-              firstNameInputField.type = "text";
-              firstNameInputField.placeholder = "First Name";
-              firstNameInputField.name = "member" + i + "_first_name";
-              firstNameInputField.className = "input-field";
-              firstNameInputField.required = true; // Add required attribute
-              additionalFieldsDiv.appendChild(firstNameInputField);
+                  // Create input field for first name
+                  var firstNameInputField = document.createElement("input");
+                  firstNameInputField.type = "text";
+                  firstNameInputField.placeholder = "First Name";
+                  firstNameInputField.name = "member" + i + "_first_name";
+                  firstNameInputField.className = "input-field";
+                  firstNameInputField.required = true; // Add required attribute
+                  additionalFieldsDiv.appendChild(firstNameInputField);
 
-              // Create input field for middle name
-              var middleNameInputField = document.createElement("input");
-              middleNameInputField.type = "text";
-              middleNameInputField.placeholder = "Middle Name";
-              middleNameInputField.name = "member" + i + "_middle_name";
-              middleNameInputField.className = "input-field";
-              middleNameInputField.required = true; // Add required attribute
-              additionalFieldsDiv.appendChild(middleNameInputField);
+                  // Create input field for middle name
+                  var middleNameInputField = document.createElement("input");
+                  middleNameInputField.type = "text";
+                  middleNameInputField.placeholder = "Middle Name";
+                  middleNameInputField.name = "member" + i + "_middle_name";
+                  middleNameInputField.className = "input-field";
+                  additionalFieldsDiv.appendChild(middleNameInputField);
 
-              // Create dropdown for suffix
-              var suffixSelect = document.createElement("select");
-              suffixSelect.name = "member" + i + "_suffix";
-              suffixSelect.className = "input-field2";
-              var suffixOptions = ["None", "Mr.", "Mrs.", "Ms.", "Dr.", "Prof."];
+                  // Create dropdown for suffix
+                  var suffixSelect = document.createElement("select");
+                  suffixSelect.name = "member" + i + "_suffix";
+                  suffixSelect.className = "input-field2";
+                  var suffixOptions = ["None", "Mr.", "Mrs.", "Ms.", "Dr.", "Prof."];
 
-              var placeholderOption = document.createElement("option");
-              placeholderOption.value = ""; // Set the value to an empty string
-              placeholderOption.textContent = "Suffix"; // Placeholder text
-              suffixSelect.required = true; // Add required attribute
-              suffixSelect.appendChild(placeholderOption);
+                  var placeholderOption = document.createElement("option");
+                  placeholderOption.value = ""; // Set the value to an empty string
+                  placeholderOption.textContent = "Suffix"; // Placeholder text
+                  suffixSelect.required = true; // Add required attribute
+                  suffixSelect.appendChild(placeholderOption);
 
-              for (var j = 0; j < suffixOptions.length; j++) {
-                  var option = document.createElement("option");
-                  option.value = suffixOptions[j];
-                  option.textContent = suffixOptions[j];
-                  suffixSelect.appendChild(option);
+                  for (var j = 0; j < suffixOptions.length; j++) {
+                      var option = document.createElement("option");
+                      option.value = suffixOptions[j];
+                      option.textContent = suffixOptions[j];
+                      suffixSelect.appendChild(option);
+                  }
+                  additionalFieldsDiv.appendChild(suffixSelect);
+
+                  var RTHHSelect = document.createElement("select");
+                  RTHHSelect.name = "member" + i + "_RTHH";
+                  RTHHSelect.className = "input-field2";
+                  var RTHHOptions = ["Head", "Spouse", "Son", "Daughter", "Step Son", "Step Daughter", "Son-in-law", "Daughter-in-law", "Granddaughter", "Grandson", "Father", "Mother",  "Father-in-law", "mother -in-law", "Brother", "Sister"];
+                  var placeholderOption = document.createElement("option");
+                  placeholderOption.value = ""; // Set the value to an empty string
+                  placeholderOption.textContent = "Relationship to the Head"; // Placeholder text
+                  RTHHSelect.required = true; // Add required attribute
+                  RTHHSelect.appendChild(placeholderOption);
+
+                  for (var j = 0; j < RTHHOptions.length; j++) {
+                      var option = document.createElement("option");
+                      option.value = RTHHOptions[j];
+                      option.textContent = RTHHOptions[j];
+                      RTHHSelect.appendChild(option);
+                  }
+                  additionalFieldsDiv.appendChild(RTHHSelect);
+
+                  var genderSelect = document.createElement("select");
+                  genderSelect.name = "member" + i + "_RTHH";
+                  genderSelect.className = "input-field2";
+                  var genderOptions = ["Male", "Female", "Nonbinary", "Transgender", "Gender Neutral", "Binary"];
+                  var placeholderOption = document.createElement("option");
+                  placeholderOption.value = ""; // Set the value to an empty string
+                  placeholderOption.textContent = "Gender"; // Placeholder text
+                  genderSelect.appendChild(placeholderOption);
+                  for (var j = 0; j < genderOptions.length; j++) {
+                      var option = document.createElement("option");
+                      option.value = genderOptions[j];
+                      option.textContent = genderOptions[j];
+                      genderSelect.appendChild(option);
+                  }
+                  genderSelect.required = true; // Add required attribute
+                  additionalFieldsDiv.appendChild(genderSelect);
+
+                  var BdayInputField = document.createElement("input");
+                  BdayInputField.type = "date"; // Change type to "date"
+                  BdayInputField.placeholder = "Birthday(MM/DD/YY)";
+                  BdayInputField.name = "member" + i + "_bday";
+                  BdayInputField.className = "input-field";
+                  BdayInputField.required = true; // Add required attribute
+                  additionalFieldsDiv.appendChild(BdayInputField);
+
+
               }
-              additionalFieldsDiv.appendChild(suffixSelect);
-
-              var RTHHSelect = document.createElement("select");
-              RTHHSelect.name = "member" + i + "_RTHH";
-              RTHHSelect.className = "input-field2";
-              var RTHHOptions = ["Head", "Spouse", "Son", "Daughter", "Step Son", "Step Daughter", "Son-in-law", "Daughter-in-law", "Granddaughter", "Grandson", "Father", "Mother",  "Father-in-law", "mother -in-law", "Brother", "Sister"];
-              var placeholderOption = document.createElement("option");
-              placeholderOption.value = ""; // Set the value to an empty string
-              placeholderOption.textContent = "Select Relationship to the Head"; // Placeholder text
-              RTHHSelect.required = true; // Add required attribute
-              RTHHSelect.appendChild(placeholderOption);
-
-              for (var j = 0; j < RTHHOptions.length; j++) {
-                  var option = document.createElement("option");
-                  option.value = RTHHOptions[j];
-                  option.textContent = RTHHOptions[j];
-                  RTHHSelect.appendChild(option);
-              }
-              additionalFieldsDiv.appendChild(RTHHSelect);
-
-              var genderSelect = document.createElement("select");
-              genderSelect.name = "member" + i + "_RTHH";
-              genderSelect.className = "input-field2";
-              var genderOptions = ["Male", "Female", "Nonbinary", "Transgender", "Gender Neutral", "Binary"];
-              var placeholderOption = document.createElement("option");
-              placeholderOption.value = ""; // Set the value to an empty string
-              placeholderOption.textContent = "Gender"; // Placeholder text
-              genderSelect.appendChild(placeholderOption);
-              for (var j = 0; j < genderOptions.length; j++) {
-                  var option = document.createElement("option");
-                  option.value = genderOptions[j];
-                  option.textContent = genderOptions[j];
-                  genderSelect.appendChild(option);
-              }
-              genderSelect.required = true; // Add required attribute
-              additionalFieldsDiv.appendChild(genderSelect);
-
-              var BdayInputField = document.createElement("input");
-              BdayInputField.type = "text";
-              BdayInputField.placeholder = "Birthday(MM/DD/YY)";
-              BdayInputField.name = "member" + i + "_bday";
-              BdayInputField.className = "input-field";
-              BdayInputField.required = true; // Add required attribute
-              additionalFieldsDiv.appendChild(BdayInputField);
-
           }
-      }
-    </script>
+</script>
 
 <script>
   let currentPage = 1;
@@ -1224,6 +1253,12 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   function nextQuestion() {
       // Scroll to the top of the page
       window.scrollTo(0, 0);
+
+      // Check if the current page is page1 and if the selection is still blank
+      if (currentPage === 1 && !validateSelection()) {
+          showAlert(); // Show alert if selection is still blank on page one
+          return; // Exit the function to prevent proceeding
+      }
 
       // Check if all required fields are filled
       if (validateInputs()) {
@@ -1236,8 +1271,16 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
           // Show the next question
           document.getElementById('page' + currentPage).classList.add('active');
       } else {
-         showAlert();
+          showAlert();
       }
+  }
+
+  // Add a function to validate the selection on page one
+  function validateSelection() {
+      // Get the select element
+      const selectElement = document.getElementById('household-members');
+      // Check if the selected value is not empty
+      return selectElement.value.trim() !== '';
   }
 
   function backQuestion() {
@@ -1266,7 +1309,6 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
       return true;
   }
 </script>
-
 
 
 <script>
