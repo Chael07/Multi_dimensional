@@ -141,7 +141,7 @@ def archive_table_screen_view(request):
 
     result_mpi_data = Backup_ResultMPI.objects.values('id', 'mpi')
     result_classify_data = Backup_result_classify.objects.values('id', 'svm_result')
-    household_profile_data = Backup_HouseholdProfile.objects.values('id', 'first_name', 'last_name', 'user_number', 'user_email', 'user_address')
+    household_profile_data = Backup_HouseholdProfile.objects.values('id', 'relationship', 'user_number', 'user_email', 'user_address')
 
     combined_data = []
 
@@ -187,7 +187,7 @@ def profile_table_screen_view(request):
 
     result_mpi_data = ResultMPI.objects.values('id', 'mpi')
     result_classify_data = result_classify.objects.values('id', 'svm_result')
-    household_profile_data = HouseholdProfile.objects.values('id', 'first_name', 'last_name', 'user_number', 'user_email', 'user_address')
+    household_profile_data = HouseholdProfile.objects.values('id', 'relationship', 'user_number', 'user_email', 'user_address')
 
     combined_data = []
 
@@ -237,8 +237,7 @@ def archive(request, id):
         # Create backup instances before deletion
     backup_household_profile = Backup_HouseholdProfile(
         id=household_profile_instance.id,
-        first_name=household_profile_instance.first_name,
-        last_name=household_profile_instance.last_name,
+        relationship=household_profile_instance.relationship,
         user_number=household_profile_instance.user_number,
         user_address=household_profile_instance.user_address,
         user_email=household_profile_instance.user_email
@@ -301,8 +300,7 @@ def return_data(request, id):
         # Create backup instances before deletion
     backup_household_profile = HouseholdProfile(
         id=household_profile_instance.id,
-        first_name=household_profile_instance.first_name,
-        last_name=household_profile_instance.last_name,
+        relationship=household_profile_instance.relationship,
         user_number=household_profile_instance.user_number,
         user_address=household_profile_instance.user_address,
         user_email=household_profile_instance.user_email
@@ -738,8 +736,7 @@ def submit_developer_contact_form(request):
 
 def submit_household(request):
     if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
+        relationship = request.POST.get('relationship')
         user_email = request.POST.get('email')
         user_number = request.POST.get('Cnumber')
         user_address = request.POST.get('Address')
@@ -762,7 +759,7 @@ def submit_household(request):
        
         
         return redirect(reverse('result') +
-                    f'?first_name={first_name}&last_name={last_name}&user_email={user_email}&user_number={user_number}&user_address={user_address}&q1={q1}&q2={q2}&q3={q3}&q4={q4}&q5={q5}&q6={q6}&q7={q7}&q8={q8}&q9={q9}&q10={q10}&q11={q11}&q12={q12}&q13={q13}')
+                    f'?relationship={relationship}&user_email={user_email}&user_number={user_number}&user_address={user_address}&q1={q1}&q2={q2}&q3={q3}&q4={q4}&q5={q5}&q6={q6}&q7={q7}&q8={q8}&q9={q9}&q10={q10}&q11={q11}&q12={q12}&q13={q13}')
 
     else:
         return render(request, 'eval.html')
@@ -780,8 +777,7 @@ def result_screen_view(request):
     print(request.headers)
     
     if request.method == 'GET':
-        first_name = request.GET.get('first_name')
-        last_name = request.GET.get('last_name')
+        relationship = request.GET.get('relationship')
         user_email = request.GET.get('user_email')
         user_number = request.GET.get('user_number')
         user_address = request.GET.get('user_address')
@@ -833,8 +829,7 @@ def result_screen_view(request):
         )
 
         HouseholdProfile.objects.create(
-            first_name=first_name,
-            last_name=last_name,
+            relationship = relationship,
             user_number = user_number,
             user_email=user_email,
             user_address = user_address,

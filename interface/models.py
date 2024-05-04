@@ -43,8 +43,7 @@ class ResultMPI(models.Model):
 
 class HouseholdProfile(models.Model):
     id = models.AutoField(primary_key=True, auto_created=True)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    relationship = models.CharField(max_length=255)
     user_number = models.CharField(max_length=255)
     user_address = models.CharField(max_length=255)
     user_email = models.CharField(max_length=50, validators=[MaxValueValidator(99999999999)])
@@ -77,8 +76,7 @@ class Backup_ResultMPI(models.Model):
 
 class Backup_HouseholdProfile(models.Model):
     id = models.AutoField(primary_key=True, auto_created=True)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    relationship = models.CharField(max_length=255)
     user_number = models.CharField(max_length=255)
     user_address = models.CharField(max_length=255)
     user_email = models.CharField(max_length=50, validators=[MaxValueValidator(99999999999)])

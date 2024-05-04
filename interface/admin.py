@@ -25,8 +25,8 @@ class HouseholdAdmin(admin.ModelAdmin):
 admin.site.register(Household, HouseholdAdmin)
 
 class HouseholdProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'first_name', 'last_name', 'user_number', 'user_email', 'user_address',)
-    search_fields = ('id', 'first_name', 'last_name', 'user_number', 'user_email', 'user_address',)
+    list_display = ('id', 'relationship',  'user_number', 'user_email', 'user_address',)
+    search_fields = ('id', 'relationship', 'user_number', 'user_email', 'user_address',)
 admin.site.register(HouseholdProfile, HouseholdProfileAdmin)
 
 class result_classify_admin(admin.ModelAdmin):
@@ -47,8 +47,8 @@ class Backup_HouseholdAdmin(admin.ModelAdmin):
 admin.site.register(Backup_Household, Backup_HouseholdAdmin)
 
 class Backup_HouseholdProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'first_name', 'last_name', 'user_number', 'user_email', 'user_address',)
-    search_fields = ('id', 'first_name', 'last_name', 'user_number', 'user_email', 'user_address',)
+    list_display = ('id', 'relationship', 'user_number', 'user_email', 'user_address',)
+    search_fields = ('id', 'relationship', 'user_number', 'user_email', 'user_address',)
 admin.site.register(Backup_HouseholdProfile, Backup_HouseholdProfileAdmin)
 
 class Backup_result_classify_admin(admin.ModelAdmin):

@@ -46,11 +46,10 @@
                                         <tr>
                                             <th style="border: 1px solid #ddd;"> </th>
                                             <th style="border: 1px solid #ddd;">ID</th>
-                                            <th style="border: 1px solid #ddd;">First Name</th>
-                                            <th style="border: 1px solid #ddd;">Last Name</th>
+                                            <th style="border: 1px solid #ddd;">Relationship</th>
+                                            <th style="border: 1px solid #ddd;">Purok</th>
                                             <th style="border: 1px solid #ddd;">Number</th>
                                             <th style="border: 1px solid #ddd;">Email</th>
-                                            <th style="border: 1px solid #ddd;">Address</th>
                                             <th style="border: 1px solid #ddd;">MPI Score</th>
                                             <!-- <th style="border: 1px solid #ddd;">DT Result</th> -->
                                             <th style="border: 1px solid #ddd;">SVM Result</th>
@@ -63,8 +62,7 @@
                                                 <a href="{% url 'return' row.id %}" style="background-color: rgb(0, 255, 102); border-color: rgb(4, 255, 75);" class="btn btn-danger">Restore</a>
                                             </td>
                                             <td style="border: 1px solid #ddd;">{{ forloop.counter }}</td>
-                                            <td style="border: 1px solid #ddd;">{{ row.first_name }}</td>
-                                            <td style="border: 1px solid #ddd;">{{ row.last_name }}</td>
+                                            <td style="border: 1px solid #ddd;">{{ row.relationship }}</td>
                                             <td style="border: 1px solid #ddd;">{{ row.user_number }}</td>
                                             <td style="border: 1px solid #ddd;">{{ row.user_email }}</td>
                                             <td style="border: 1px solid #ddd;">{{ row.user_address }}</td>

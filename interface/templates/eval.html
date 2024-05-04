@@ -253,7 +253,7 @@
 }
 
 .form-input-short::placeholder, .form-input::placeholder  {
-        text-align: center; /* Center align the placeholder text */
+        text-align: left; /* Center align the placeholder text */
     }
 
   .next-button {
@@ -313,7 +313,7 @@
 <div id="additional-fields" class="gray-box2 hidden">
    
 </div>
-    <div class="next-button">
+    <div class="next-button" >
       <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
     </div>
 </div>
@@ -327,7 +327,7 @@
   <div class="gray-box" style="margin-top: -0.5cm;">
     <div class="form-label" style="text-align: center;">Relationship to the Household Head</div>
     <div class="select">
-        <select id="household-members-relationship">
+        <select id="household-members-relationship" for="relationship" type="text" name="relationship">
           <option value=" " style="color: #ffffffb0;">Select</option> <!-- Blank placeholder -->
             <option value="1">Head</option>
             <option value="2">Spouse</option>
@@ -371,18 +371,17 @@
     <label class="form-label" for="Cnumber">Contact Number</label>
     <input class="form-input-short" type="tel" id="Cnumber" name="Cnumber" placeholder="09123456789" required>
   </div>
-
-<div class="form-group">
-  <label class="form-label" for="first_name">First Name:</label>
-  <input class="form-input-short" type="text" id="first_name" name="first_name" placeholder=" Please Enter First Name" required>
-</div>
-
-<div class="form-group">
-   <label class="form-label" for="last_name">Last Name:</label>
-  <input class="form-input-short" type="text" id="last_name" name="last_name" placeholder="Please Enter Last Name" required>
-</div>
+  <!-- <div class="form-group">
+    <label class="form-label" for="first_name">First Name:</label>
+    <input class="form-input-short" type="text" id="first_name" name="first_name" placeholder=" Please Enter First Name" required>
+  </div>
+  
+  <div class="form-group">
+     <label class="form-label" for="last_name">Last Name:</label>
+    <input class="form-input-short" type="text" id="last_name" name="last_name" placeholder="Please Enter Last Name" required>
+  </div> -->
  </div>
-<div class="next-button">
+<div class="next-button" style="margin-top: 1cm;">
       <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
       <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
     </div>
@@ -1467,6 +1466,7 @@ function validateAndNextQuestion9() {
                   // Create input field for last name
                   var lastNameInputField = document.createElement("input");
                   lastNameInputField.type = "text";
+                  lastNameInputField.style.marginRight = "5px";
                   lastNameInputField.placeholder = "Last Name";
                   lastNameInputField.name = "member" + i + "_last_name";
                   lastNameInputField.className = "input-field";
@@ -1513,12 +1513,14 @@ function validateAndNextQuestion9() {
                   var RTHHSelect = document.createElement("select");
                   RTHHSelect.name = "member" + i + "_RTHH";
                   RTHHSelect.className = "input-field2";
+                  RTHHSelect.style.marginLeft = "5px"; // Set the left margin to 10px
                   var RTHHOptions = ["Head", "Spouse", "Son", "Daughter", "Step Son", "Step Daughter", "Son-in-law", "Daughter-in-law", "Granddaughter", "Grandson", "Father", "Mother",  "Father-in-law", "Mother-in-law", "Brother", "Sister"];
                   var placeholderOption = document.createElement("option");
                   placeholderOption.value = ""; // Set the value to an empty string
                   placeholderOption.textContent = "Relationship to the Head"; // Placeholder text
                   RTHHSelect.required = true; // Add required attribute
                   RTHHSelect.appendChild(placeholderOption);
+
 
                   for (var j = 0; j < RTHHOptions.length; j++) {
                       var option = document.createElement("option");
@@ -1559,7 +1561,7 @@ function validateAndNextQuestion9() {
 </script>
 
 <script>
-  let currentPage = 16;
+  let currentPage = 1;
 
   function validateAndNextQuestion() {
     // Scroll to the top of the page
