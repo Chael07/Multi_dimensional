@@ -16,6 +16,53 @@
 }
 
 
+.custom-options1 {
+  display: flex;
+  gap: 0.4em;
+}
+
+.custom-options1 input[type="radio"] {
+  display: none;
+}
+
+.custom-options1 label {
+  position: relative;
+  color: #4189e0;
+  font-family: sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 0.8em; 
+  border: 3px solid #4189e0;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  align-items: center;
+  margin-top: 0.5cm;
+  margin-left:3cm ;
+  margin-right:-1cm ;
+}
+
+.custom-options1 label::before {
+  content: " ";
+  height: 1em;
+  width: 1em;
+  border: 3px solid #4189e0;
+  border-radius: 50%;
+}
+
+.custom-options1 input[type="radio"]:checked + label::before {
+  height: 0.5em;
+  width: 0.5em;
+  border: 0.65em solid white;
+  background-color: #4189e0;
+}
+
+.custom-options1 input[type="radio"]:checked + label {
+  background-color: #4189e0;
+  color: white;
+}
+
+
+
 .custom-options {
     display: flex;
     gap: 0.8em;

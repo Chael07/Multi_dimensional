@@ -18,6 +18,48 @@
 <!-- end of header -->
 
 <style>
+
+  /* Style for the container of the privacy policy */
+.Data_privacy {
+  max-height: 300px; /* Adjust the maximum height as needed */
+  width: 550px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-left: -2.5cm;
+  margin-bottom: 1cm;
+  text-align: justify;
+  padding: 15px;
+}
+
+/* Style for the vertical scrollbar */
+.Data_privacy::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+/* Track (background) of the scrollbar */
+.Data_privacy::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light gray */
+}
+
+/* Handle (thumb) of the scrollbar */
+.Data_privacy::-webkit-scrollbar-thumb {
+  background: #00008B; /* Dark blue */
+}
+
+/* Handle on hover */
+.Data_privacy::-webkit-scrollbar-thumb:hover {
+  background: #0000CD; /* Medium blue */
+}
+
+    .follow_question{
+        margin-bottom: 0.5cm;
+        font-size: 17px;
+        font-family: sans-serif;
+   }
+
+   .follow_options{
+    size: 17px;
+   }
+   
      .form-label {
             display: block;
             margin-bottom: 8px;
@@ -49,212 +91,1235 @@
             border-color: #4682b4; /* Steel Blue */
             outline: none;
         }
-</style>
+        .question-container {
+           display: none;
+             }
 
+        .question-container.active {
+            display: block;
+            }
+
+            .gray-box2 {
+            font-family: sans-serif;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 2px solid #ffffff;
+            width: 1200px; /* Increased width */
+            margin-left: -8cm;
+            border-radius: 10px;
+        }
+
+    .gray-box {
+        font-family: sans-serif;
+        background-color: #ffffff00;
+        padding: 20px;
+        border: 2px solid #ffffff00;
+        width: 400px; /* Increased width */
+        margin: 40px auto;
+        border-radius: 10px;
+        font-family: sans-serif;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .label {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .profile-heading {
+        font-family: sans-serif;
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+        text-align: center;
+        margin-top: -2cm;
+        /* Add more styles as needed */
+    }
+    .select {
+        margin-bottom: 20px;
+    }
+
+    .input-field {
+        width: 5cm;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #3092fb;
+        border-radius: 5px;
+    }
+    .input-field2{
+        width: 3cm;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #3092fb;
+        border-radius: 5px;
+    }
+    .input-field + .input-field {
+       margin-right: 5px;
+    }
+
+    .input-field2 + .input-field2 {
+        margin-right: 5px;
+    }
+    /* Increase the width of the select box */
+    #household-members {
+        font-family: sans-serif;
+        width: 100%; /* Make the select box fill the container width */
+        padding: 10px; /* Add padding to make it visually appealing */
+        background-color: #ffffff; /* Set selected color to blue */
+        color: #000000; /* Set text color to white */
+        border: 1px solid #3092fb; /* Set border color to blue */
+    }
+
+    /* Set hover color to blue */
+    #household-members:hover {
+        background-color: #b6d7f9; /* Darker blue */
+    }
+
+    /* Set dropdown options background color to blue */
+    #household-members option {
+        background-color: #fcfcfc; /* Blue */
+        color: #000000; /* White */
+    }
+    #household-members-relationship {
+        font-family: sans-serif;
+        width: 100%; /* Make the select box fill the container width */
+        padding: 10px; /* Add padding to make it visually appealing */
+        background-color: #ffffff; /* Set selected color to blue */
+        color: #000000; /* Set text color to white */
+        border: 1px solid #3092fb; /* Set border color to blue */
+    }
+
+    /* Set hover color to blue */
+    #household-members-relationship {
+        background-color: #b6d7f9; /* Darker blue */
+    }
+
+    /* Set dropdown options background color to blue */
+    #household-members-relationship {
+        background-color: #fcfcfc; /* Blue */
+        color: #000000; /* White */
+    }
+    .Follow_up_options {
+    display: none;
+  }
+  .Follow_up_options2 {
+    display: none;
+  }
+  .Follow_up_options3 {
+    display: none;
+  }
+  .Follow_up_options4 {
+    display: none;
+  }
+  .Follow_up_options5 {
+    display: none;
+  }
+  .Follow_up_options6 {
+    display: none;
+  }
+  .Follow_up_options7 {
+    display: none;
+  }
+  .Follow_up_options8 {
+    display: none;
+  }
+  .Follow_up_options9 {
+    display: none;
+  }
+  .Follow_up_options10 {
+    display: none;
+  }
+  .Follow_up_options11 {
+    display: none;
+  }
+  .Follow_up_options12,
+  .Follow_up_options12_1,
+  .Follow_up_options12_2,
+  .Follow_up_options12_3 {
+    display: none;
+  }
+  .Follow_up_options13 {
+    display: none;
+  }
+
+.next_button{
+  margin-top: 1cm;
+}
+</style>
 
 <div class="question_contain">
   <form id="questionForm" action="{% url 'submit_household' %}" method="post" onsubmit="return householdValidateForm();">
      {% csrf_token %}
 
-<h3 style="margin-top: 1cm; padding-bottom: 0.8cm;">Personal Information</h3>
+<div class="question-container active"  id="page1">
 
-      <div class="form-group">
-        <label class="form-label" for="first_name">First Name:</label>
-        <input class="form-input-short" type="text" id="first_name" name="first_name" placeholder="Enter First Name" required>
-      </div>
+         <h3 style="margin-top: 0.5cm; padding-bottom: 0.8cm;">Demographic Profile</h3>
 
-      <div class="form-group">
-        <label class="form-label" for="last_name">Last Name:</label>
-        <input class="form-input-short" type="text" id="last_name" name="last_name" placeholder="Enter Last Name" required>
-      </div>
+         <div class="form-group">
+           <label class="form-label" for="first_name">First Name:</label>
+           <input class="form-input-short" type="text" id="first_name" name="first_name" placeholder="Enter First Name" required>
+         </div>
 
-      <div class="form-group">
-        <label class="form-label" for="email">Email:</label>
-        <input class="form-input-short" type="email" id="email" name="email" placeholder="Enter Email" required>
-      </div>
+         <div class="form-group" style="left: 8.5cm; top: -2.7cm;">
+            <label class="form-label" for="last_name">Last Name:</label>
+           <input class="form-input-short" type="text" id="last_name" name="last_name" placeholder="Enter Last Name" required>
+         </div>
 
-      <div class="form-group">
-        <label class="form-label" for="Cnumber">Contact Number</label>
-        <input class="form-input-short" type="tel" id="Cnumber" name="Cnumber" placeholder="09123456789" required>
-      </div>
+         <div class="form-group" style="margin-top: -3cm;">
+           <label class="form-label" for="email">Email:</label>
+           <input class="form-input-short" type="email" id="email" name="email" placeholder="Enter Email" required>
+          </div>
 
-      <div class="form-group">
-        <label class="form-label" for="Address">Address</label>
-        <input class="form-input" type="text" id="Address" name="Address" placeholder="Enter your Address" required>
-      </div>
+         <div class="form-group">
+           <label class="form-label" for="Cnumber">Contact Number</label>
+           <input class="form-input-short" type="tel" id="Cnumber" name="Cnumber" placeholder="09123456789" required>
+         </div>
 
-    <h3 style="margin-top: 1cm; ">Questions for Evaluation </h3>
-
-      <div class="question">
-          <span>1. Is there a household member aged 18 or older who does not complete basic k-12 curriculum?</span>
-          <div class="custom-options">
-            <input type="radio" name="q1" id="q1_yes" value="0.076923077" ><label for="q1_yes"> Yes</label>
-            <input type="radio" name="q1" id="q1_no" value="0" ><label for="q1_no"> No</label>
-          </div>
-        </div>
-    
-        <div class="question">
-          <span>2. Is there a household member whose age ranges from 5 to 18 that is not attending school?</span>
-          <div class="custom-options">
-            <input type="radio" name="q2" id="q2_yes" value="0.076923077" ><label for="q2_yes"> Yes</label>
-            <input type="radio" name="q2" id="q2_no" value="0" ><label for="q2_no"> No</label>
-          </div>
-        </div>
-    
-        <div class="question">
-          <span>3. Is there a household member that experienced hunger for the past months?</span>
-          <div class="custom-options">
-            <input type="radio" name="q3" id="q3_yes" value="0.076923077" ><label for="q3_yes"> Yes</label>
-            <input type="radio" name="q3" id="q3_no" value="0" ><label for="q3_no"> No</label>
-          </div>
-        </div>
-    
-        <div class="question">
-          <span>4. Is there a household member who does not eat three times a day?</span>
-          <div class="custom-options">
-            <input type="radio" name="q4" id="q4_yes" value="0.076923077" ><label for="q4_yes"> Yes</label>
-            <input type="radio" name="q4" id="q4_no" value="0" ><label for="q4_no"> No</label>
-          </div>
-        </div>
-    
-        <div class="question">
-          <span>5. Is there a household member who does not have access to health insurance?</span>
-          <div class="custom-options">
-            <input type="radio" name="q5" id="q5_yes" value="0.076923077" ><label for="q5_yes"> Yes</label>
-            <input type="radio" name="q5" id="q5_no" value="0" ><label for="q5_no"> No</label>
-          </div>
-        </div>
-    
-        <div class="question">
-            <span>6.	Does the household lack basic appliances such as a TV, cellphone, radio, etc.?</span>
-            <div class="custom-options">
-                <input type="radio" name="q6" id="q6_yes" value="0.076923077" ><label for="q6_yes"> Yes</label>
-                <input type="radio" name="q6" id="q6_no" value="0" ><label for="q6_no"> No</label>
-            </div>
-          </div>
-      
-          <div class="question">
-            <span>7.	Does the household lack its own toilet facility?</span>
-            <div class="custom-options">
-                <input type="radio" name="q7" id="q7_yes" value="0.076923077" ><label for="q7_yes"> Yes</label>
-                <input type="radio" name="q7" id="q7_no" value="0" ><label for="q7_no"> No</label>
-            </div>
-          </div>
-    
-          <div class="question">
-            <span>8.	Does the household lack access to safe drinking water?</span>
-            <div class="custom-options">
-                <input type="radio" name="q8" id="q8_yes" value="0.076923077" ><label for="q8_yes"> Yes</label>
-                <input type="radio" name="q8" id="q8_no" value="0" ><label for="q8_no"> No</label>
-            </div>
-          </div>
-      
-          <div class="question">
-            <span>9.	Does the household lack access to electricity?</span>
-            <div class="custom-options">
-                <input type="radio" name="q9" id="q9_yes" value="0.076923077" ><label for="q9_yes"> Yes</label>
-                <input type="radio" name="q9" id="q9_no" value="0" ><label for="q9_no"> No</label>
-            </div>
-          </div>
-    
-          <div class="question">
-            <span>10.	Does the household lack ownership rights to its dwelling?</span>
-            <div class="custom-options">
-                <input type="radio" name="q10" id="q10_yes" value="0.076923077" ><label for="q10_yes"> Yes</label>
-                <input type="radio" name="q10" id="q10_no" value="0" ><label for="q10_no"> No</label>
-            </div>
-          </div>
-      
-          <div class="question">
-            <span>11.	Is the house made entirely of wood?</span>
-            <div class="custom-options">
-                <input type="radio" name="q11" id="q11_yes" value="0.076923077" ><label for="q11_yes"> Yes</label>
-                <input type="radio" name="q11" id="q11_no" value="0" ><label for="q11_no"> No</label>
-            </div>
-          </div>
-    
-          <div class="question">
-            <span>12.	Is there a household member capable of working but currently not employed?</span>
-            <div class="custom-options">
-                <input type="radio" name="q12" id="q12_yes" value="0.076923077" ><label for="q12_yes"> Yes</label>
-                <input type="radio" name="q12" id="q12_no" value="0" ><label for="q12_no"> No</label>
-            </div>
-          </div>
-      
-          <div class="question">
-            <span>13.	Is there a household member aged 5 to 17 who is employed rather than attending school?</span>
-            <div class="custom-options">
-                <input type="radio" name="q13" id="q13_yes" value="0.076923077" ><label for="q13_yes"> Yes</label>
-                <input type="radio" name="q13" id="q13_no" value="0" ><label for="q13_no"> No</label>
-            </div>
-          </div>
-          <p id="formErrorMessage" style="color: red; display: none;">Please answer all questions before submitting.</p> 
-          <div class="submit-button">
-            <button type="submit" class="btn-solid-reg page-scroll eval-submit-button" onclick="return householdSubmitForm();">Submit</button>
-          </div>           
-
-</form>
+          <div class="form-group">
+           <label class="form-label" for="Address">Address</label>
+           <input class="form-input" style="width: 604px;" type="text" id="Address" name="Address" placeholder="Enter your Address" required>
+         </div>
+       
+         <button onclick="nextQuestion()" class="btn-solid-lg page-scroll" style="position: absolute; left: 15.5cm; ">Next</button>
+         
 </div>
 
+<div class="question-container"  id="page2">
+  <div class="gray-box">
+    <div class="label" style="text-align: center;">Number of Household Members:</div>
+    <div class="select">
+        <select id="household-members" onchange="showAdditionalFields()">
+            <option value="1">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+</div>
+
+<div id="additional-fields" class="gray-box2 hidden">
+   
+</div>
+    <div style="position: absolute; left: 14cm;">
+      <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+      <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    </div>
+ 
+</div>
+<div class="question-container"  id="page3">
+  <div class="gray-box">
+    <div class="label" style="text-align: center;">Respondent’s Relation to the Household Head</div>
+    <div class="select">
+        <select id="household-members-relationship">
+            <option value="1">Head</option>
+            <option value="2">Spouse</option>
+            <option value="3">Son</option>
+            <option value="4">Daughter</option>
+            <option value="5">Step Son</option>
+            <option value="6">Step Daughter</option>
+            <option value="7">Son-in-law</option>
+            <option value="8">Daughter-in-law</option>
+            <option value="9">Granddaughter</option>
+            <option value="10">Grandson</option>
+            <option value="11">Father</option>
+            <option value="12">Mother</option>
+            <option value="13">Father-in-law</option>
+            <option value="14">mother-in-law</option>
+            <option value="15">Brother</option>
+            <option value="15">Sister</option>
+        </select>
+    </div>
+</div>
+    <div style="position: absolute; left: 14cm;">
+      <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+      <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    </div>
+ 
+</div>
+<div class="question-container"  id="page4">
+  <div class="gray-box" style="margin-top: -0.2cm;">
+    <div class="label" style="text-align: center; font-size: 22px;">Data Privacy Policy   </div>
+    <div class="Data_privacy">
+<b>Collection of Personal Information:</b><br>
+In accordance with the Data Privacy Act of 2012, we collect demographic data and socio-economic information solely for the purposes of our study. This data collection process strictly adheres to the principles outlined in the Act, ensuring that personal information is gathered only for specified and legitimate purposes. Article III, Section 11 of the Act allows the processing of personal information, provided it complies with the Act's requirements and other relevant laws. Our collection process is transparent, and we disclose the purposes of data collection to ensure informed consent from respondents.
+<br><br><b>Purpose of Data Collection:</b> <br>
+The personal information we collect is exclusively intended for the conduct of our study and will not be used for any other purposes. This commitment aligns with the provisions of the Data Privacy Act of 2012, particularly Section 11, which emphasizes that personal information must be collected for specific and legitimate purposes declared prior to or promptly after collection. We ensure that respondents are informed about the intended use of their data and have the opportunity to provide consent before proceeding with data collection.
+<br><br><b> Storage and Security Measures:</b> <br>
+We prioritize the security and confidentiality of your personal information through the implementation of rigorous organizational, physical, and technical measures. These measures are mandated by the Data Privacy Act of 2012, which requires personal information controllers to safeguard personal data against any accidental or unlawful processing. Article V, Section 20 of the Act emphasizes the importance of implementing security measures to protect personal information from unauthorized access, disclosure, alteration, or destruction. Our systems are regularly monitored and updated to mitigate any potential security risks and ensure compliance with data protection standards.
+<br><br><b>Access to Personal Information:</b><br>
+As stipulated by the Data Privacy Act of 2012, you have the right to reasonable access to your personal information upon request. This includes accessing the contents of your personal information, identifying the sources from which it was obtained, and disclosing the names of recipients, among other details. Article IV, Section 16 of the Act outlines the rights of data subjects, ensuring transparency and accountability in the processing of personal data. We are committed to facilitating access requests in a timely manner and providing clear and comprehensive information about the processing of personal data.
+<br><br><b>Correction of Personal Information:</b><br>
+You retain the right to dispute any inaccuracies or errors in your personal information and request immediate correction. This right is enshrined in the Data Privacy Act of 2012, which mandates personal information controllers to rectify inaccurate or incomplete data promptly. Article IV, Section 16 of the Act underscores the obligation of controllers to ensure the accuracy and integrity of personal information and to facilitate corrections as needed. We provide mechanisms for data subjects to easily request corrections and updates to their personal information, ensuring its accuracy and reliability.
+<br><br><b>Consent and Agreement:</b><br>
+By clicking "Agree," you acknowledge and agree to abide by the terms and conditions outlined in this privacy policy. This consent mechanism ensures compliance with the Data Privacy Act of 2012, which requires data subjects to provide informed consent for the processing of their personal information. Your agreement signifies your understanding of the privacy policy and your willingness to adhere to its provisions. We prioritize transparency and informed decision-making, ensuring that respondents are fully aware of their rights and responsibilities regarding the processing of their personal data.
+This comprehensive privacy policy reflects our commitment to upholding the principles and requirements set forth in the Data Privacy Act of 2012, ensuring the protection and confidentiality of your personal information throughout our study.
+
+<div class="custom-options1">
+  <input type="radio" name="q1" required id="Agree" value="1" ><label for="Agree"> Agree</label>
+  <input type="radio" name="q1" required id="Disagree" value="0" ><label for="Disagree"> Disagree</label>
+</div>
+    </div>
+  
+</div>
+    <div style="position: absolute; left: 14.2cm;">
+      <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+      <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    </div>
+</div>
+
+<div class="question-container"  id="page5">
+  <div class="question">
+    <span>1. Is there a household member aged 18 or older who does not complete basic k-12 curriculum?</span>
+    <div class="custom-options">
+      <input type="radio" name="q1" id="q1_yes" onchange="showFollowUpOptions()" value="0.076923077" ><label for="q1_yes"> Yes</label>
+      <input type="radio" name="q1" id="q1_no" onchange="showFollowUpOptions()" value="0" ><label for="q1_no"> No</label>
+    </div>
+  </div>
+
+  <div id="followUpQuestion" class="Follow_up_options">
+    <div class="follow_question">
+      What is the highest educational attainment?
+    </div>
+    <div class="follow_options">
+      <input type="radio" id="early-childhood" name="education" value="early-childhood">
+      <label for="early-childhood">Early Childhood Education</label><br>
+      <input type="radio" id="elementary" name="education" value="elementary">
+      <label for="elementary">Elementary Education</label><br>
+      <input type="radio" id="High" name="education" value="junior-high">
+      <label for="junior-high">Junior High School</label><br>
+      <input type="radio" id="senior" name="education" value="none">
+      <label for="none">Did not complete any</label>
+    </div>
+  </div>
+  <div class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+
+<div class="question-container"  id="page6">
+  <div class="question">
+    <span>2. Is there a household member whose age ranges from 5 to 18 that is not attending school?</span>
+    <div class="custom-options">
+      <input type="radio" name="q2" id="q2_yes" onchange="showFollowUpOptions2()" value="0.076923077" ><label for="q2_yes"> Yes</label>
+      <input type="radio" name="q2" id="q2_no" onchange="showFollowUpOptions2()" value="0" ><label for="q2_no"> No</label>
+    </div>
+  </div>
+
+  <div id="followUpQuestion2" class="Follow_up_options2">
+    <div class="follow_question">
+      Why not attending school?
+    </div>
+    <div class="follow_options">
+      <input type="radio" id="Accessibility" name="School" value="Accessibility of school?">
+      <label for="Accessibility-of-School">Accessibility of School</label><br>
+      <input type="radio" id="mode1" name="reason1" value="example-1">
+      <label for="Illness">Illness</label><br>
+      <input type="radio" id="mode2" name="reason2" value="example-2">
+      <label for="pregnancy">pregnancy</label><br>
+      <input type="radio" id="Mode3" name="reason3" value="example-3">
+      <label for="Marriage">Marriage</label><br>
+      <input type="radio" id="mode4" name="" value="example-4">
+      <label for="HighCost">High cost of education/Financial Concern</label><br>
+      <input type="radio" id="mode5" name="Financial" value="example-5">
+      <label for="Employment">Employment, if ito selected, would add value to Q13</label><br>
+      <input type="radio" name="mode6" id="Example-7">
+      <label for="HighSChool">Finished basic k-12 schooling</label><br>
+      <input type="radio">
+      <label for="job">Looking for Employment</label><br>
+      <input type="radio">
+      <label for="passion">Lack of Professional Interest</label><br>
+      <input type="radio">
+      <label for="Chingga">Fear of Being affected by COVID-19</label><br>
+      <input type="radio">
+      <label for="Childlabour">Too young to go to school</label><br>
+      <input type="radio">
+      <label for="Being a bitch">Bullying</label><br>
+      <input type="radio">
+      <label for="shitshow">Family Problem</label><br>
+      <input type="radio">
+      <label for="Andewtate">No/Weak Internet Connection</label><br>
+      <input type="radio">
+      <label for="Pussy">Modular Learning is Not Preferred</label><br>
+      <input type="radio">
+      <label for="wtf!!!!!">With Problems in School Requirements</label><br>
+      <input type="radio">
+      <label for="Others">OTHER REASONS</label><br>
+    </div>
+  </div>
+  <div class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+<div class="question-container"  id="page7">
+  <div class="question">
+    <span>3. Is there a household member that experienced hunger for the past months?</span>
+    <div class="custom-options">
+      <input type="radio" name="q3" id="q3_yes"onchange="showFollowUpOptions3()" value="0.076923077" ><label for="q3_yes"> Yes</label>
+      <input type="radio" name="q3" id="q3_no"onchange="showFollowUpOptions3()"value="0" ><label for="q3_no"> No</label>
+    </div>
+  </div>
+
+  <div id="followUpQuestion3" class="Follow_up_options3">
+    <div class="question">
+      <span>•	During the past 12 months, was there a time when you or any household member that were worried about not having enough food to eat because of a lack of money or other resources?</span>
+      <div class="custom-options">
+        <input type="radio" name="follow1_q3" id="follow1_q3_yes"  value="0.076923077" ><label for="follow1_q3_yes"> Yes</label>
+        <input type="radio" name="follow1_q3" id="follow1_q3_no" value="0" ><label for="follow1_q3_no"> No</label>
+      </div>
+    </div>
+    <div class="question">
+      <span>•	During the past 12 months, was there a time when you or any household member were unable to eat healthy and nutritious food because of a lack of money or other resources?</span>
+      <div class="custom-options">
+        <input type="radio" name="follow2_q3" id="follow2_q3_yes"  value="0.076923077" ><label for="follow2_q3_yes"> Yes</label>
+        <input type="radio" name="follow2_q3" id="follow2_q3_no" value="0" ><label for="follow2_q3_no"> No</label>
+      </div>
+    </div>
+    <div class="question">
+      <span>•	During the past 12 months, was there a time when you or any household member that ate only a few kinds of food because of a lack of money or other resources?</span>
+      <div class="custom-options">
+        <input type="radio" name="follow3_q3" id="follow3_q3_yes"  value="0.076923077" ><label for="follow3_q3_yes"> Yes</label>
+        <input type="radio" name="follow3_q3" id="follow3_q3_no" value="0" ><label for="follow3_q3_no"> No</label>
+      </div>
+    </div>
+    <div class="question">
+      <span>•	During the past 12 months, was there a time when you or any household member ate less than you though you should because of a lack of money or other resources?</span>
+      <div class="custom-options">
+        <input type="radio" name="follow4_q3" id="follow4_q3_yes"  value="0.076923077" ><label for="follow4_q3_yes"> Yes</label>
+        <input type="radio" name="follow4_q3" id="follow4_q3_no" value="0" ><label for="follow4_q3_no"> No</label>
+      </div>
+    </div>
+    <div class="question">
+      <span>•	During the past 12 months, was there a time when your household ran out of food because of a lack of money or other resources?</span>
+      <div class="custom-options">
+        <input type="radio" name="follow5_q3" id="follow5_q3_yes"  value="0.076923077" ><label for="follow5_q3_yes"> Yes</label>
+        <input type="radio" name="follow5_q3" id="follow5_q3_no" value="0" ><label for="follow5_q3_no"> No</label>
+      </div>
+    </div>
+    <div class="question">
+      <span>•	During the past 12 months, was there a time when you or any household member were hungry but did not eat because there was not enough money or other resources to get food?</span>
+      <div class="custom-options">
+        <input type="radio" name="follow6_q3" id="follow6_q3_yes"  value="0.076923077" ><label for="follow6_q3_yes"> Yes</label>
+        <input type="radio" name="follow6_q3" id="follow6_q3_no" value="0" ><label for="follow6_q3_no"> No</label>
+      </div>
+    </div>
+   
+  </div>
+  <div class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+<div class="question-container"  id="page8">
+  <div class="question">
+    <span>4. Is there a household member who does not eat three times a day?</span>
+    <div class="custom-options">
+      <input type="radio" name="q4" id="q4_yes" onchange="showFollowUpOptions4()" value="0.076923077" ><label for="q4_yes"> Yes</label>
+      <input type="radio" name="q4" id="q4_no" onchange="showFollowUpOptions4()" value="0" ><label for="q4_no"> No</label>
+    </div>
+  </div>
+
+  <div id="followUpQuestion4" class="Follow_up_options4">
+    <div class="question">
+      <span>•	During the past 12 months, was there a time when you or any household member that had to skip meal because there was not enough money or other resources to get food?</span>
+      <div class="custom-options">
+        <input type="radio" name="follow1_q4" id="follow1_q4_yes"  value="0.076923077" ><label for="follow1_q4_yes"> Yes</label>
+        <input type="radio" name="follow1_q4" id="follow1_q4_no" value="0" ><label for="follow1_q4_no"> No</label>
+      </div>
+    </div>
+    <div class="question">
+      <span>•	During the past 12 months, was there a time when you or any household member went without eating for a whole day because of lack of money or other resources?</span>
+      <div class="custom-options">
+        <input type="radio" name="follow2_q4" id="follow2_q4_yes"  value="0.076923077" ><label for="follow2_q4_yes"> Yes</label>
+        <input type="radio" name="follow2_q4" id="follow2_q4_no" value="0" ><label for="follow2_q4_no"> No</label>
+      </div>
+    </div>
+    </div>
+  <div class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+
+<div class="question-container"  id="page9">
+  <div class="question">
+    <span>5. Is there a household member who does not have access to health insurance?</span>
+    <div class="custom-options">
+      <input type="radio" name="q5" id="q5_yes"  value="0.076923077" ><label for="q5_yes"> Yes</label>
+      <input type="radio" name="q5" id="q5_no" value="0" ><label for="q5_no"> No</label>
+    </div>
+  </div>
+
+  <div class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+
+<div class="question-container"  id="page10">
+  <div class="question">
+    <span>6.	Does the household lacks basic appliances?</span>
+    <div class="custom-options">
+        <input type="radio" name="q6" id="q6_yes" onchange="showFollowUpOptions6()" value="0.076923077" ><label for="q6_yes"> Yes</label>
+        <input type="radio" name="q6" id="q6_no"onchange="showFollowUpOptions6()" value="0" ><label for="q6_no"> No</label>
+    </div>
+  </div>
+
+  <div id="followUpQuestion6" class="Follow_up_options6">
+    <div class="follow_question">•	How many of each of the appliances/durable does the household own?</div>
+    <div class="follow_options">
+      <input type="radio" id="6" name="completion" value="1">
+      <label for="radio">Radio/Radio Cassette</label><br>
+      <input type="radio" id="TV" name="set" value="2">
+      <label for="Television Set">Television Set</label><br>
+      <input type="radio" id="CD" name="set" value="3">
+      <label for="CD">Audio Component/Stereo Set Player</label><br>
+      <input type="radio" id="ref" name="set" value="4">
+      <label for="Coolers">Refrigerator/Freezer</label><br>
+      <input type="radio" id="washer" name="set" value="5">
+      <label for="washer">Washing Machine</label><br>
+      <input type="radio" id="AC" name="set" value="6">
+      <label for="AC">Air Conditioning</label><br>
+      <input type="radio" id="TP" name="set" value="7">
+      <label for="transport">Car/Jeep</label><br>
+      <input type="radio" id="Landline" name="set" value="8">
+      <label for="phone">Landline</label><br>
+      <input type="radio" id="Smartphone" name="set" value="9">
+      <label for="phone">Smartphone/cellular phones</label><br>
+      <input type="radio" id="PC" name="set" value="10">
+      <label for="PC">Personal Computer</label><br>
+      <input type="radio" id="Cook" name="set" value="11">
+      <label for="Cook">Stove with Oven/Gas Range</label><br>
+      <input type="radio" id="boats" name="set" value="12">
+      <label for="boats">Motorized Boat/Banca</label><br>
+      <input type="radio" id="Locomotive" name="set" value="13">
+      <label for="transport">Motorcycle/Tricycle</label><br>
+    </div>
+  </div>
+
+  <div class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+<div class="question-container"  id="page11">
+  <div class="question">
+    <span>7.	Does the household lack its own toilet facility?</span>
+    <div class="custom-options">
+        <input type="radio" name="q7" id="q7_yes" onchange="showFollowUpOptions7()" value="0.076923077" ><label for="q7_yes"> Yes</label>
+        <input type="radio" name="q7" id="q7_no" onchange="showFollowUpOptions7()" value="0" ><label for="q7_no"> No</label>
+    </div>
+  </div>
+
+  <div id="followUpQuestion7" class="Follow_up_options7">
+    <div class="follow_question">•	What kind of toilet facility does the household use?</div>
+    <div class="follow_options">
+      <input type="radio" id="Water" name="set" value="1">
+      <label for="Water">Water-sealed, sewer/septic tank, used exclusively by the household</label><br>
+      <input type="radio" id="bath" name="set" value="2">
+      <label for="bath">Water-sealed, sewer/septic tank, shared with other households</label><br>
+      <input type="radio" id="depo" name="set" value="3">
+      <label for="personal">Water-sealed, other depository, used exclusively by the household</label><br>
+      <input type="radio" id="shared-depo" name="set" value="4">
+      <label for="shared">Water-sealed, other depository, shared with other households</label><br>
+      <input type="radio" id="septic" name="set" value="5">
+      <label for="septic">Closed pit</label><br>
+      <input type="radio" id="septic" name="set" value="6">
+      <label for="Open">Open pit</label><br>
+    </div>
+  </div>
+
+  <div  class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+
+<div class="question-container"  id="page12">
+  <div class="question">
+    <span>8.	Does the household lack access to safe drinking water?</span>
+    <div class="custom-options">
+        <input type="radio" name="q8" id="q8_yes"onchange="showFollowUpOptions8()"  value="0.076923077" ><label for="q8_yes"> Yes</label>
+        <input type="radio" name="q8" id="q8_no" onchange="showFollowUpOptions8()"value="0" ><label for="q8_no"> No</label>
+    </div>
+  </div>
+
+  <div id="followUpQuestion8" class="Follow_up_options8">
+    <div class="follow_question">•	What was the main reason that you were unable to access drinking water in sufficient quantities when needed?</div>
+    <div class="follow_options">
+      <input type="radio" id="Water" name="set" value="1">
+      <label for="Water">Water not available from the source</label><br>
+      <input type="radio" id="bath" name="set" value="2">
+      <label for="expensive">Water too expensive</label><br>
+      <input type="radio" id="depo" name="set" value="3">
+      <label for="have access">Source not accessible</label><br>
+    </div>
+    <div class="follow_question">•	What is the household’s main source of water?</div>
+    <div class="follow_options">
+      <input type="radio" id="Water" name="set" value="1">
+      <label for="personal">Own use, faucet, community water system</label><br>
+      <input type="radio" id="bath" name="set" value="2">
+      <label for="shared">Shared faucet, community water system</label><br>
+      <input type="radio" id="depo" name="set" value="3">
+      <label for="have access">Shared, tubed/piped deep well</label><br>
+      <input type="radio" id="bath" name="set" value="4">
+      <label for="shared">Shared faucet, community water system</label><br>
+      <input type="radio" id="bath" name="set" value="5">
+      <label for="shallow">Tubed/piped shallow well</label><br>
+      <input type="radio" id="bath" name="set" value="6">
+      <label for="deep well">deep well</label><br>
+      <input type="radio" id="bath" name="set" value="7">
+      <label for="deep well">deep well</label><br>
+      <input type="radio" id="bath" name="set" value="8">
+      <label for="Protected">Protected Spring</label><br>
+      <input type="radio" id="bath" name="set" value="9">
+      <label for="deep well">Unprotected Spring</label><br>
+      <input type="radio" id="bath" name="set" value="10">
+      <label for="deep well">Lake, river, rain</label><br>
+      <input type="radio" id="bath" name="set" value="11">
+      <label for="deep well">Peddler</label><br>         
+    </div>
+  </div>
+
+  <div class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+<div class="question-container"  id="page13">
+  <div class="question">
+    <span>9.	Does the household lack access to electricity?</span>
+    <div class="custom-options">
+        <input type="radio" name="q9" id="q9_yes" onchange="showFollowUpOptions9()" value="0.076923077" ><label for="q9_yes"> Yes</label>
+        <input type="radio" name="q9" id="q9_no"onchange="showFollowUpOptions9()" value="0" ><label for="q9_no"> No</label>
+    </div>
+  </div>
+  <div id="followUpQuestion9" class="Follow_up_options9">
+  <div class="question">
+    <span>•	Is there electricity in the building/house?</span>
+    <div class="custom-options">
+      <input type="radio" name="follow1_q9" id="follow1_q9_yes"  value="0.076923077" ><label for="follow1_q9_yes"> Yes</label>
+      <input type="radio" name="follow1_q9" id="follow1_q9_no" value="0" ><label for="follow1_q9_no"> No</label>
+    </div>
+  </div>
+  </div>
+
+  <div  class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+
+<div class="question-container"  id="page14">
+  
+  <div class="question">
+    <span>10.	Does the household lack ownership rights to its dwelling?</span>
+    <div class="custom-options">
+        <input type="radio" name="q10" id="q10_yes" onchange="showFollowUpOptions10()" value="0.076923077" ><label for="q10_yes"> Yes</label>
+        <input type="radio" name="q10" id="q10_no" onchange="showFollowUpOptions10()" value="0" ><label for="q10_no"> No</label>
+    </div>
+  </div>
+
+  <div id="followUpQuestion10" class="Follow_up_options10">
+    <div class="follow_question">•	What is the tenure status of the housing unit occupied by the household?</div>
+    <div class="follow_options">
+      <input type="radio">
+      <label for="status-owned">Own house and lot, or owner-like possession</label><br>
+      <input type="radio">
+      <label for="status-rented">Rented house or room, including lot</label><br>
+      <input type="radio">
+      <label for="owned house-rented land">Own house, rented lot</label><br>
+      <input type="radio">
+      <label for="ownedhose">Own house, rent-free lot with consent of owner</label><br>
+      <input type="radio">
+      <label for="rent-free">Own house, rent-free lot without consent of owner</label><br>
+      <input type="radio">
+      <label for="rent-free-lot">Rent-free house and lot with consent of owner</label><br>
+      <input type="radio">
+      <label for="rentfreewithoutconsent">Rent-free house and lot without consent of owner</label><br>
+      <input type="radio">
+      <label for="">Not applicable</label><br>                                   
+    </div>
+    <div class="follow_question">•	In what type of building/house does the household reside?</div>
+    <div class="follow_options">
+      <input type="radio">
+      <label for="Single">Single House</label><br>
+      <input type="radio">
+      <label for="Duplex">Duplex</label><br>
+      <input type="radio">
+      <label for="Condo">Multi Residential (Tree units or more)</label><br>
+      <input type="radio">
+      <label for="Commercial">Commercial/Industrial/Agricultural Building</label><br>
+      <input type="radio">
+      <label for="Institutional">Institutional living quarters</label><br>        
+</div>                   
+  </div>
+
+  <div  class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+<div class="question-container"  id="page15">
+  <div class="question">
+    <span>11.	Is the house made entirely of wood?</span>
+    <div class="custom-options">
+        <input type="radio" name="q11" id="q11_yes" onchange="showFollowUpOptions11()" value="0.076923077" ><label for="q11_yes"> Yes</label>
+        <input type="radio" name="q11" id="q11_no" onchange="showFollowUpOptions11()" value="0" ><label for="q11_no"> No</label>
+    </div>
+  </div>
+
+  <div id="followUpQuestion11" class="Follow_up_options11">
+    <div class="follow_question">•	What type of construction materials are the roofs made of?</div>
+    <div class="follow_options">
+      <input type="radio" id="strong-materials" name="roof-materials" value="strong-materials">
+      <label for="strong-materials">Strong Materials</label><br>
+      <input type="radio" id="light-materials" name="roof-materials" value="light-materials">
+      <label for="light-materials">Light Materials</label><br>
+      <input type="radio" id="salvaged-materials" name="roof-materials" value="salvaged-materials">
+      <label for="salvaged-materials">Salvaged/Makeshift Materials</label><br>
+      <input type="radio" id="Mixed" name="roof-materials" value="salvaged-materials">
+      <label for="Mixed but predominantly strong materials">Mixed but predominantly strong material</label><br>
+      <input type="radio" id="Mixed" name="roof-materials" value="salvaged-materials">
+      <label for="Mixed but predominantly light materials">Mixed but predominantly light materials</label><br>
+      <input type="radio" id="Mixed" name="roof-materials" value="salvaged-materials">
+      <label for="Mixed but predominantly salvaged">Mix but predominantly salvaged materials</label><br>
+      <input type="radio" id="none" name="roof-materials" value="salvaged-materials">
+      <label for="none">Not applicable</label><br>                                                       
+    </div>
+           
+  </div>
+
+  <div  class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+
+<div class="question-container" id="page16">
+
+  <div class="question">
+    <span>12. Is there a household member capable of working but currently not employed?</span>
+    <div class="custom-options">
+      <input type="radio" name="q12" id="q12_yes" onchange="showFollowUpOptions12()" value="0.076923077" ><label for="q12_yes"> Yes</label>
+      <input type="radio" name="q12" id="q12_no" onchange="showFollowUpOptions12()" value="0" ><label for="q12_no"> No</label>
+    </div>
+  </div>
+
+  <div id="followUpQuestion12" class="Follow_up_options12">
+    <div class="question">
+      <span>• Did a household member do any work for at least one (1) hour, including work from home or telecommuting, during the past week?</span>
+      <div class="custom-options">
+        <input type="radio" name="follow1_q12" id="follow1_q12_yes" onchange="showFollowUpOptions12_1()" value="0.076923077" ><label for="follow1_q12_yes"> Yes</label>
+        <input type="radio" name="follow1_q12" id="follow1_q12_no" onchange="showFollowUpOptions12_2()" value="0" ><label for="follow1_q12_no"> No</label>
+
+      </div>
+    </div>  
+  </div>
+
+  <div id="followUpQuestion12_1" class="Follow_up_options12_1">
+    <div class="follow_question">• What is the working arrangement?</div>
+    <div class="follow_options">
+      <input type="radio">
+      <label for="working">Working in a default place of work (not at home)</label><br>
+      <input type="radio">
+      <label for="workfromhome">Telecommuting/work from home</label><br>
+      <input type="radio">
+      <label for="Home-based">Home-based work</label><br>
+      <input type="radio">
+      <label for="Rotation">On Job Rotation</label><br>
+      <input type="radio">
+      <label for="Mixed">On a Mixed Arrangement</label><br>
+      <input type="radio">
+      <label for="On Reduced Hours">On Reduced Hours</label><br>                                                  
+    </div>
+
+    <div class="follow_question">• What is the nature of employment?</div>
+    <div class="follow_options">
+      <input type="radio">
+      <label for="Permanent">Permanent</label><br>
+      <input type="radio">
+      <label for="Seasonal or Casual">Seasonal or Casual</label><br>
+      <input type="radio">
+      <label for="Mixed">Work for Different Employers Day-to-Day and Week-to-Week</label>                                                                
+    </div>    
+  </div>
+
+  <div id="followUpQuestion12_2" class="Follow_up_options12_2">
+    <div class="question">
+      <span>• Did a household member do any work for at least one (1) hour, including work from home or telecommuting, during the past week?</span>
+      <div class="custom-options">
+        <input type="radio" name="follow2_q12" id="follow2_q12_yes" onchange="showFollowUpOptions12_3()" value="0.076923077" ><label for="follow2_q12_yes"> Yes</label>
+        <input type="radio" name="follow2_q12" id="follow2_q12_no" onchange="showFollowUpOptions12_3()" value="0" ><label for="follow2_q12_no"> No</label>
+      </div>
+    </div>  
+  </div>
+
+  <div id="followUpQuestion12_3" class="Follow_up_options12_3">
+    <div class="follow_question">• What type of business did the household member engage in during the past week?</div>
+    <div class="follow_options">
+      <input type="radio">
+      <label for="Retail">Retail</label><br>
+      <input type="radio">
+      <label for="Service">Service</label><br>
+      <input type="radio">
+      <label for="Manufacturing">Manufacturing</label><br>
+      <input type="radio">
+      <label for="Agriculture">Agriculture</label><br>
+      <input type="radio">
+      <label for="Fisheries">Fisheries</label><br>
+      <input type="radio">
+      <label for="Construction">Construction</label><br>
+      <input type="text">
+      <label for="Others">Others</label>                                                                  
+    </div> 
+  </div>
+
+  <div  class="next_button" style="position: absolute; left: 14.2cm;">
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
+    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+  </div>
+</div>
+
+<div class="question-container"  id="page17">
+  
+      <div class="question">
+        <span>13.	Is there a household member aged 5 to 17 who is employed rather than attending school?</span>
+        <div class="custom-options">
+            <input type="radio" name="q13" id="q13_yes" onchange="showFollowUpOptions13()" value="0.076923077" ><label for="q13_yes"> Yes</label>
+            <input type="radio" name="q13" id="q13_no" value="0" ><label for="q13_no"> No</label>
+        </div>
+      </div>
+      <div id="followUpQuestion13" class="Follow_up_options13">
+        <div class="follow_question">•	What is the household member’s reason for employment?</div>
+        <div class="follow_options">
+          <input type="radio">
+          <label for="Financial necessity ">Financial necessity </label><br>
+          <input type="radio">
+          <label for="Learning work skills">Learning work skills</label><br>
+          <input type="radio">
+          <label for="Learning work skills">Learning work skills</label><br>
+          <input type="text">
+          <label for="Others">Others</label><br>                                                           
+        </div> 
+      </div>
+  
+   
+      <p id="formErrorMessage" style="color: red; display: none;">Please answer all questions before submitting.</p> 
+      <div class="submit-button">
+        <button type="submit" class="btn-solid-reg page-scroll eval-submit-button" onclick="return householdSubmitForm();">Submit</button>
+        <!-- <button class="btn-solid-reg page-scroll eval-submit-button"onclick="backQuestion()">Back</button> -->
+      </div>
+      
+</div>      
+</form>
+</div>
+<script>
+  function showFollowUpOptions() {
+    var yesRadio = document.getElementById("q1_yes");
+    var followUpDiv = document.getElementById("followUpQuestion");
+  
+    if (yesRadio.checked) {
+      followUpDiv.style.display = "block";
+    } else {
+      followUpDiv.style.display = "none";
+    }
+  }
+  </script>
+
+  <script>
+    function showFollowUpOptions2() {
+      var yesRadio = document.getElementById("q2_yes");
+      var followUpDiv = document.getElementById("followUpQuestion2");
+    
+      if (yesRadio.checked) {
+        followUpDiv.style.display = "block";
+      } else {
+        followUpDiv.style.display = "none";
+      }
+    }
+    </script>
+
+<script>
+  function showFollowUpOptions3() {
+    var yesRadio = document.getElementById("q3_yes");
+    var followUpDiv = document.getElementById("followUpQuestion3");
+  
+    if (yesRadio.checked) {
+      followUpDiv.style.display = "block";
+    } else {
+      followUpDiv.style.display = "none";
+    }
+  }
+  </script>
+<script>
+  function showFollowUpOptions4() {
+    var yesRadio = document.getElementById("q4_yes");
+    var followUpDiv = document.getElementById("followUpQuestion4");
+  
+    if (yesRadio.checked) {
+      followUpDiv.style.display = "block";
+    } else {
+      followUpDiv.style.display = "none";
+    }
+  }
+  </script>
+  <script>
+    function showFollowUpOptions6() {
+      var yesRadio = document.getElementById("q6_yes");
+      var followUpDiv = document.getElementById("followUpQuestion6");
+    
+      if (yesRadio.checked) {
+        followUpDiv.style.display = "block";
+      } else {
+        followUpDiv.style.display = "none";
+      }
+    }
+    </script>
     <script>
-      function householdValidateForm() {
-        // Get all radio button groups
-        var radioGroups = document.querySelectorAll('input[type="radio"]:checked');
+      function showFollowUpOptions7() {
+        var yesRadio = document.getElementById("q7_yes");
+        var followUpDiv = document.getElementById("followUpQuestion7");
       
-        // Check if the number of selected radio buttons is equal to the total number of questions
-        if (radioGroups.length === 13) {
-          // Reset border color for all questions
-          resetQuestionBorders();
-          return true; // All questions are answered, allow form submission
+        if (yesRadio.checked) {
+          followUpDiv.style.display = "block";
         } else {
-          // Display the error message
-          var errorMessage = document.getElementById('formErrorMessage');
-          errorMessage.style.display = 'block';
-      
-          // Identify unanswered questions
-          var unansweredQuestions = [];
-          var questions = document.querySelectorAll('.question');
-      
-          questions.forEach(function (question, index) {
-            var questionName = 'q' + (index + 1);
-            var selectedAnswer = document.querySelector('input[name="' + questionName + '"]:checked');
-            
-            if (!selectedAnswer) {
-              unansweredQuestions.push(index + 1);
-      
-              // Change the border color of the unanswered question to red
-              question.style.border = '1px solid rgb(212, 127, 127)';
-              question.style.borderRadius = '10px';
-            }
-          });
-      
-          // Add an event listener to each radio button to remove the red border when clicked
-          var radioButtons = document.querySelectorAll('input[type="radio"]');
-          radioButtons.forEach(function (radioButton) {
-            radioButton.addEventListener('change', function () {
-              var question = radioButton.closest('.question');
-              question.style.border = 'none';
-            });
-          });
-      
-          // Display a more detailed error message
-          if (unansweredQuestions.length > 0) {
-            errorMessage.innerHTML = 'Please answer questions ' + unansweredQuestions.join(', ') + ' before submitting.';
-          }
-      
-          // Prevent form submission
-          return false;
+          followUpDiv.style.display = "none";
         }
       }
-      
-      // Function to reset the border color for all questions
-      function resetQuestionBorders() {
-        var questions = document.querySelectorAll('.question');
-        questions.forEach(function (question) {
-          question.style.border = 'none'; // Change to the original border color
-        });
-      }
       </script>
+       <script>
+        function showFollowUpOptions8() {
+          var yesRadio = document.getElementById("q8_yes");
+          var followUpDiv = document.getElementById("followUpQuestion8");
+        
+          if (yesRadio.checked) {
+            followUpDiv.style.display = "block";
+          } else {
+            followUpDiv.style.display = "none";
+          }
+        }
+        </script>
+      <script>
+        function showFollowUpOptions9() {
+          var yesRadio = document.getElementById("q9_yes");
+          var followUpDiv = document.getElementById("followUpQuestion9");
+        
+          if (yesRadio.checked) {
+            followUpDiv.style.display = "block";
+          } else {
+            followUpDiv.style.display = "none";
+          }
+        }
+        </script>
+      <script>
+        function showFollowUpOptions10() {
+          var yesRadio = document.getElementById("q10_yes");
+          var followUpDiv = document.getElementById("followUpQuestion10");
+        
+          if (yesRadio.checked) {
+            followUpDiv.style.display = "block";
+          } else {
+            followUpDiv.style.display = "none";
+          }
+        }
+        </script>
+
+         <script>
+          function showFollowUpOptions11() {
+            var yesRadio = document.getElementById("q11_yes");
+            var followUpDiv = document.getElementById("followUpQuestion11");
+          
+            if (yesRadio.checked) {
+              followUpDiv.style.display = "block";
+            } else {
+              followUpDiv.style.display = "none";
+            }
+          }
+          </script>
+           <script>
+            function showFollowUpOptions12() {
+              var yesRadio = document.getElementById("q12_yes");
+              var followUpDiv = document.getElementById("followUpQuestion12");
+              
+              if (yesRadio.checked) {
+                followUpDiv.style.display = "block";
+              } else {
+                followUpDiv.style.display = "none";
+              }
+            }
+            
+            function showFollowUpOptions12_1() {
+              var yesRadio = document.getElementById("follow1_q12_yes");
+              var followUpDiv = document.getElementById("followUpQuestion12_1");
+              
+              if (yesRadio.checked) {
+                followUpDiv.style.display = "block";
+              } else {
+                followUpDiv.style.display = "none";
+              }
+            }
+            
+            function showFollowUpOptions12_2() {
+              var yesRadio = document.getElementById("follow1_q12_no");
+              var followUpDiv = document.getElementById("followUpQuestion12_2");
+              
+              if (yesRadio.checked) {
+                followUpDiv.style.display = "block";
+              } else {
+                followUpDiv.style.display = "none";
+              }
+            }
+            
+            function showFollowUpOptions12_3() {
+              var yesRadio = document.getElementById("follow2_q12_yes");
+              var followUpDiv = document.getElementById("followUpQuestion12_3");
+              
+              if (yesRadio.checked) {
+                followUpDiv.style.display = "block";
+              } else {
+                followUpDiv.style.display = "none";
+              }
+            }
+            </script>
+          <script>
+            function showFollowUpOptions13() {
+              var yesRadio = document.getElementById("q13_yes");
+              var followUpDiv = document.getElementById("followUpQuestion13");
+            
+              if (yesRadio.checked) {
+                followUpDiv.style.display = "block";
+              } else {
+                followUpDiv.style.display = "none";
+              }
+            }
+            </script>
+    <script>
+      function showAdditionalFields() {
+          var numberOfMembers = document.getElementById("household-members").value;
+          var additionalFieldsDiv = document.getElementById("additional-fields");
+
+          // Clear previous additional fields
+          additionalFieldsDiv.innerHTML = "";
+
+          additionalFieldsDiv.classList.remove("hidden");
+
+          var heading = document.createElement("h3");
+          heading.textContent = "Profile of Household Members:";
+          heading.className = "profile-heading"; // Assigning a class
+          additionalFieldsDiv.appendChild(heading);
+
+
+
+          for (var i = 1; i <= numberOfMembers; i++) {
+              // Create input field for last name
+              var lastNameInputField = document.createElement("input");
+              lastNameInputField.type = "text";
+              lastNameInputField.placeholder = "Last Name";
+              lastNameInputField.name = "member" + i + "_last_name";
+              lastNameInputField.className = "input-field";
+              lastNameInputField.required = true; // Add required attribute
+              additionalFieldsDiv.appendChild(lastNameInputField);
+
+              // Create input field for first name
+              var firstNameInputField = document.createElement("input");
+              firstNameInputField.type = "text";
+              firstNameInputField.placeholder = "First Name";
+              firstNameInputField.name = "member" + i + "_first_name";
+              firstNameInputField.className = "input-field";
+              firstNameInputField.required = true; // Add required attribute
+              additionalFieldsDiv.appendChild(firstNameInputField);
+
+              // Create input field for middle name
+              var middleNameInputField = document.createElement("input");
+              middleNameInputField.type = "text";
+              middleNameInputField.placeholder = "Middle Name";
+              middleNameInputField.name = "member" + i + "_middle_name";
+              middleNameInputField.className = "input-field";
+              middleNameInputField.required = true; // Add required attribute
+              additionalFieldsDiv.appendChild(middleNameInputField);
+
+              // Create dropdown for suffix
+              var suffixSelect = document.createElement("select");
+              suffixSelect.name = "member" + i + "_suffix";
+              suffixSelect.className = "input-field2";
+              var suffixOptions = ["None", "Mr.", "Mrs.", "Ms.", "Dr.", "Prof."];
+
+              var placeholderOption = document.createElement("option");
+              placeholderOption.value = ""; // Set the value to an empty string
+              placeholderOption.textContent = "Suffix"; // Placeholder text
+              suffixSelect.required = true; // Add required attribute
+              suffixSelect.appendChild(placeholderOption);
+
+              for (var j = 0; j < suffixOptions.length; j++) {
+                  var option = document.createElement("option");
+                  option.value = suffixOptions[j];
+                  option.textContent = suffixOptions[j];
+                  suffixSelect.appendChild(option);
+              }
+              additionalFieldsDiv.appendChild(suffixSelect);
+
+              var RTHHSelect = document.createElement("select");
+              RTHHSelect.name = "member" + i + "_RTHH";
+              RTHHSelect.className = "input-field2";
+              var RTHHOptions = ["Head", "Spouse", "Son", "Daughter", "Step Son", "Step Daughter", "Son-in-law", "Daughter-in-law", "Granddaughter", "Grandson", "Father", "Mother",  "Father-in-law", "mother -in-law", "Brother", "Sister"];
+              var placeholderOption = document.createElement("option");
+              placeholderOption.value = ""; // Set the value to an empty string
+              placeholderOption.textContent = "Select Relationship to the Head"; // Placeholder text
+              RTHHSelect.required = true; // Add required attribute
+              RTHHSelect.appendChild(placeholderOption);
+
+              for (var j = 0; j < RTHHOptions.length; j++) {
+                  var option = document.createElement("option");
+                  option.value = RTHHOptions[j];
+                  option.textContent = RTHHOptions[j];
+                  RTHHSelect.appendChild(option);
+              }
+              additionalFieldsDiv.appendChild(RTHHSelect);
+
+              var genderSelect = document.createElement("select");
+              genderSelect.name = "member" + i + "_RTHH";
+              genderSelect.className = "input-field2";
+              var genderOptions = ["Male", "Female", "Nonbinary", "Transgender", "Gender Neutral", "Binary"];
+              var placeholderOption = document.createElement("option");
+              placeholderOption.value = ""; // Set the value to an empty string
+              placeholderOption.textContent = "Gender"; // Placeholder text
+              genderSelect.appendChild(placeholderOption);
+              for (var j = 0; j < genderOptions.length; j++) {
+                  var option = document.createElement("option");
+                  option.value = genderOptions[j];
+                  option.textContent = genderOptions[j];
+                  genderSelect.appendChild(option);
+              }
+              genderSelect.required = true; // Add required attribute
+              additionalFieldsDiv.appendChild(genderSelect);
+
+              var BdayInputField = document.createElement("input");
+              BdayInputField.type = "text";
+              BdayInputField.placeholder = "Birthday(MM/DD/YY)";
+              BdayInputField.name = "member" + i + "_bday";
+              BdayInputField.className = "input-field";
+              BdayInputField.required = true; // Add required attribute
+              additionalFieldsDiv.appendChild(BdayInputField);
+
+          }
+      }
+    </script>
+
+<script>
+  let currentPage = 1;
+  let backPage = currentPage; // Initialize backPage with the initial value of currentPage
+
+  function nextQuestion() {
+      // Scroll to the top of the page
+      window.scrollTo(0, 0);
+
+      // Check if all required fields are filled
+      if (validateInputs()) {
+          // Hide the current question
+          document.getElementById('page' + currentPage).classList.remove('active');
+          // Increment the current question number
+          currentPage++;
+          // Update backPage whenever currentPage changes
+          backPage = currentPage - 1;
+          // Show the next question
+          document.getElementById('page' + currentPage).classList.add('active');
+      } else {
+         showAlert();
+      }
+  }
+
+  function backQuestion() {
+      // Scroll to the top of the page
+      window.scrollTo(0, 0);
+
+      // Decrement the current question number first
+      currentPage--;
+      // Hide the current question
+      document.getElementById('page' + (currentPage + 1)).classList.remove('active');
+      // Update backPage whenever currentPage changes
+      backPage = currentPage - 1;
+      // Show the previous question
+      document.getElementById('page' + currentPage).classList.add('active');
+  }
+
+  function validateInputs() {
+      // Get all input fields in the current page
+      const inputs = document.querySelectorAll('#page' + currentPage + ' input[required]');
+      // Check if any required field is empty
+      for (let i = 0; i < inputs.length; i++) {
+          if (inputs[i].value.trim() === '') {
+              return false;
+          }
+      }
+      return true;
+  }
+</script>
+
+
+
+<script>
+  function checkAllQuestionsAnswered() {
+    // Loop through radio buttons from q1_yes to q13_yes and q1_no to q13_no
+    for (var i = 1; i <= 13; i++) {
+      var yesRadioButton = document.getElementById('q' + i + '_yes');
+      var noRadioButton = document.getElementById('q' + i + '_no');
+      
+      // Check if either yes or no radio button for each question is checked
+      if (!(yesRadioButton.checked || noRadioButton.checked)) {
+        return false; // Return false if any question is not answered
+      }
+    }
+    return true; // Return true if all questions are answered
+  }
+  
+  function householdValidateForm() {
+    // Check if all questions are answered
+    if (checkAllQuestionsAnswered()) {
+      // Reset border color for all questions
+      resetQuestionBorders();
+      return true; // All questions are answered, allow form submission
+    } else {
+      // Display the error message
+      var errorMessage = document.getElementById('formErrorMessage');
+      errorMessage.style.display = 'block';
+    
+      // Add an event listener to each radio button to remove the red border when clicked
+      var radioButtons = document.querySelectorAll('input[type="radio"]');
+      radioButtons.forEach(function (radioButton) {
+        radioButton.addEventListener('change', function () {
+          errorMessage.style.display = 'none'; // Hide the error message when a radio button is clicked
+        });
+      });
+    
+      // Display a more detailed error message
+      errorMessage.innerHTML = 'Please answer all questions before submitting.';
+    
+      // Prevent form submission
+      return false;
+    }
+  }
+  
+  // Function to reset the border color for all questions
+  function resetQuestionBorders() {
+    var questions = document.querySelectorAll('.question');
+    questions.forEach(function (question) {
+      question.style.border = 'none'; // Change to the original border color
+    });
+  }
+  </script>
+  
       
 {% endblock content %}
 

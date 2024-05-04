@@ -15,6 +15,7 @@ from .models import Household
 from .models import Contact
 from .models import Contact_Developer
 from .models import HouseholdProfile , result_classify, ResultMPI
+from .models import Backup_Household, Backup_HouseholdProfile, Backup_ResultMPI, Backup_result_classify
 
 import joblib
 from django.conf import settings
@@ -22,6 +23,10 @@ from django.conf import settings
 def home_screen_view(request):
 	print(request.headers)
 	return render(request, "index.html", {})
+
+def user_login_view(request):
+    print(request.headers)
+    return render(request, "user-login.html", {})
 
 def privacy_screen_view(request):
 	print(request.headers)
@@ -34,6 +39,14 @@ def evaluation_screen_view(request):
 def login_acc(request):
 	print(request.headers)
 	return render(request, "admin-login.html", {})
+
+def user_logout(request):
+    logout(request)
+    return redirect('userlogin')
+
+def admin_logout(request):
+    logout(request)
+    return redirect('loginAcc')
 
 
 def officials_dashboard_screen_view(request):
@@ -88,14 +101,10 @@ def officials_dashboard_screen_view(request):
 
     return render(request, "user-admin/dashboard.html", context)
 
-def user_logout(request):
-    logout(request)
-    return redirect('home')
 
 def get_poor_non_poor_counts():
     # Fetch data from the Household model
     result_classify_data = result_classify.objects.values('svm_result')
-
     # Initialize counters
     # poor_count_dt = 0
     # non_poor_count_dt = 0
@@ -108,7 +117,6 @@ def get_poor_non_poor_counts():
     #         poor_count_dt += 1
     #     else:
     #         non_poor_count_dt += 1
-
     for record in result_classify_data:
         if record['svm_result'] == 0.0:
             poor_count_svm += 1
@@ -127,6 +135,52 @@ def map_to_poor_non_poor(value):
         return "Poor"
     else:
         return "None"
+
+def archive_table_screen_view(request):
+    print(request.headers)
+
+    result_mpi_data = Backup_ResultMPI.objects.values('id', 'mpi')
+    result_classify_data = Backup_result_classify.objects.values('id', 'svm_result')
+    household_profile_data = Backup_HouseholdProfile.objects.values('id', 'first_name', 'last_name', 'user_number', 'user_email', 'user_address')
+
+    combined_data = []
+
+    for profile_row in household_profile_data:
+        profile_id = profile_row['id']
+
+        # Find the matching row in result_mpi_data
+        mpi_row = next((row for row in result_mpi_data if row['id'] == profile_id), None)
+
+        # Find the matching row in result_classify_data
+        classify_row = next((row for row in result_classify_data if row['id'] == profile_id), None)
+
+        if mpi_row:
+            # Combine the data from both tables
+            combined_row = {**profile_row, **mpi_row}
+
+            # Add svm_result to the combined data if available
+            if classify_row:
+                combined_row['svm_result'] = map_to_poor_non_poor(classify_row['svm_result'])
+
+            combined_data.append(combined_row)
+
+    # Order the combined data by the 'id' field
+    combined_data = sorted(combined_data, key=lambda x: x['id'])
+    paginator = Paginator(combined_data, 30)
+    page_number = request.GET.get('page')
+
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+
+    context = {
+        'page_obj': page_obj
+    }
+
+    return render(request, "user-admin/archive_data.html", context)
 
 def profile_table_screen_view(request):
     print(request.headers)
@@ -176,9 +230,56 @@ def profile_table_screen_view(request):
 
 
 
-def delete(request, id):
+def archive(request, id):
     # Get the household_profile instance by ID
     household_profile_instance = HouseholdProfile.objects.get(id=id)
+
+        # Create backup instances before deletion
+    backup_household_profile = Backup_HouseholdProfile(
+        id=household_profile_instance.id,
+        first_name=household_profile_instance.first_name,
+        last_name=household_profile_instance.last_name,
+        user_number=household_profile_instance.user_number,
+        user_address=household_profile_instance.user_address,
+        user_email=household_profile_instance.user_email
+    )
+    backup_household_profile.save()
+
+    # Get corresponding Household instance and create backup
+    household_instance = Household.objects.get(id=id)
+    backup_household = Backup_Household(
+        id=household_instance.id,
+        indi1=household_instance.indi1,
+        indi2=household_instance.indi2,
+        indi3=household_instance.indi3,
+        indi4=household_instance.indi4,
+        indi5=household_instance.indi5,
+        indi6=household_instance.indi6,
+        indi7=household_instance.indi7,
+        indi8=household_instance.indi8,
+        indi9=household_instance.indi9,
+        indi10=household_instance.indi10,
+        indi11=household_instance.indi11,
+        indi12=household_instance.indi12,
+        indi13=household_instance.indi13,
+    )
+    backup_household.save()
+
+    # Get corresponding ResultClassify instance and create backup
+    result_classify_instance = result_classify.objects.get(id=id)
+    backup_result_classify = Backup_result_classify(
+        id=result_classify_instance.id,
+        svm_result=result_classify_instance.svm_result
+    )
+    backup_result_classify.save()
+
+    # Get corresponding ResultMPI instance and create backup
+    result_mpi_instance = ResultMPI.objects.get(id=id)
+    backup_result_mpi = Backup_ResultMPI(
+        id=result_mpi_instance.id,
+        mpi=result_mpi_instance.mpi
+    )
+    backup_result_mpi.save()
 
     # Get corresponding Household and result_classify instances
     household_instance = Household.objects.get(id=id)
@@ -193,9 +294,88 @@ def delete(request, id):
 
     return redirect('household_profile_table')
 
+def return_data(request, id):
+    # Get the household_profile instance by ID
+    household_profile_instance = Backup_HouseholdProfile.objects.get(id=id)
+
+        # Create backup instances before deletion
+    backup_household_profile = HouseholdProfile(
+        id=household_profile_instance.id,
+        first_name=household_profile_instance.first_name,
+        last_name=household_profile_instance.last_name,
+        user_number=household_profile_instance.user_number,
+        user_address=household_profile_instance.user_address,
+        user_email=household_profile_instance.user_email
+    )
+    backup_household_profile.save()
+
+    # Get corresponding Household instance and create backup
+    household_instance = Backup_Household.objects.get(id=id)
+    backup_household = Household(
+        id=household_instance.id,
+        indi1=household_instance.indi1,
+        indi2=household_instance.indi2,
+        indi3=household_instance.indi3,
+        indi4=household_instance.indi4,
+        indi5=household_instance.indi5,
+        indi6=household_instance.indi6,
+        indi7=household_instance.indi7,
+        indi8=household_instance.indi8,
+        indi9=household_instance.indi9,
+        indi10=household_instance.indi10,
+        indi11=household_instance.indi11,
+        indi12=household_instance.indi12,
+        indi13=household_instance.indi13,
+    )
+    backup_household.save()
+
+    # Get corresponding ResultClassify instance and create backup
+    result_classify_instance = Backup_result_classify.objects.get(id=id)
+    backup_result_classify = result_classify(
+        id=result_classify_instance.id,
+        svm_result=result_classify_instance.svm_result
+    )
+    backup_result_classify.save()
+
+    # Get corresponding ResultMPI instance and create backup
+    result_mpi_instance = Backup_ResultMPI.objects.get(id=id)
+    backup_result_mpi = ResultMPI(
+        id=result_mpi_instance.id,
+        mpi=result_mpi_instance.mpi
+    )
+    backup_result_mpi.save()
+
+    # Get corresponding Household and result_classify instances
+    household_instance = Backup_Household.objects.get(id=id)
+    result_classify_instance = Backup_result_classify.objects.get(id=id)
+    result_mpi_instance = Backup_ResultMPI.objects.get(id=id)
+
+    # Delete instances from all three tables
+    household_profile_instance.delete()
+    household_instance.delete()
+    result_classify_instance.delete()
+    result_mpi_instance.delete()
+
+    return redirect('archive_table_screen_view')
+
+
 
 def household_table_screen_view(request):
     print(request.headers)
+    indi1_no, indi1_yes = get_indi1_counts()
+    indi2_no, indi2_yes = get_indi2_counts()
+    indi3_no, indi3_yes = get_indi3_counts()
+    indi4_no, indi4_yes = get_indi4_counts()
+    indi5_no, indi5_yes = get_indi5_counts()
+    indi6_no, indi6_yes = get_indi6_counts()
+    indi7_no, indi7_yes = get_indi7_counts()
+    indi8_no, indi8_yes = get_indi8_counts()
+    indi9_no, indi9_yes = get_indi9_counts()
+    indi10_no, indi10_yes = get_indi10_counts()
+    indi11_no, indi11_yes = get_indi11_counts()
+    indi12_no, indi12_yes = get_indi12_counts()
+    indi13_no, indi13_yes = get_indi13_counts()
+
     household_data = Household.objects.values('indi1', 'indi2', 'indi3', 'indi4', 'indi5', 'indi6', 'indi7', 'indi8', 'indi9', 'indi10', 'indi11', 'indi12', 'indi13').order_by('id')
     
     converted_household_data = []
@@ -213,12 +393,205 @@ def household_table_screen_view(request):
         page_obj = paginator.page(paginator.num_pages)
 
     context = {
-        'page_obj': page_obj
+        'page_obj': page_obj,
+        'indi1_no': indi1_no,
+        'indi1_yes': indi1_yes, 
+        'indi2_no': indi2_no,
+        'indi2_yes': indi2_yes,
+        'indi3_no': indi3_no,
+        'indi3_yes': indi3_yes,
+        'indi4_no': indi4_no,
+        'indi4_yes': indi4_yes,
+        'indi5_no': indi5_no,
+        'indi5_yes': indi5_yes, 
+        'indi6_no': indi6_no,
+        'indi6_yes': indi6_yes,
+        'indi7_no': indi7_no,
+        'indi7_yes': indi7_yes,
+        'indi8_no': indi8_no,
+        'indi8_yes': indi8_yes,
+        'indi9_no': indi9_no,
+        'indi9_yes': indi9_yes, 
+        'indi10_no': indi10_no,
+        'indi10_yes': indi10_yes,
+        'indi11_no': indi11_no,
+        'indi11_yes': indi11_yes,
+        'indi12_no': indi12_no,
+        'indi12_yes': indi12_yes,
+        'indi13_no': indi13_no,
+        'indi13_yes': indi13_yes,
     }
 
     return render(request, "user-admin\Household_table.html", context)
 
+def get_indi1_counts():
+    household_data = Household.objects.values('indi1')
+    indi1_no = 0
+    indi1_yes = 0
 
+    for record in household_data:
+        if record['indi1'] == 0.0:
+            indi1_no += 1
+        else:
+            indi1_yes += 1
+
+    return indi1_no, indi1_yes
+
+def get_indi2_counts():
+    household_data = Household.objects.values('indi2')
+    indi2_no = 0
+    indi2_yes = 0
+
+    for record in household_data:
+        if record['indi2'] == 0.0:
+            indi2_no += 1
+        else:
+            indi2_yes += 1
+
+    return indi2_no, indi2_yes
+
+def get_indi3_counts():
+    household_data = Household.objects.values('indi3')
+    indi3_no = 0
+    indi3_yes = 0
+
+    for record in household_data:
+        if record['indi3'] == 0.0:
+            indi3_no += 1
+        else:
+            indi3_yes += 1
+
+    return indi3_no, indi3_yes
+
+def get_indi4_counts():
+    household_data = Household.objects.values('indi4')
+    indi4_no = 0
+    indi4_yes = 0
+
+    for record in household_data:
+        if record['indi4'] == 0.0:
+            indi4_no += 1
+        else:
+            indi4_yes += 1
+
+    return indi4_no, indi4_yes
+
+def get_indi5_counts():
+    household_data = Household.objects.values('indi5')
+    indi5_no = 0
+    indi5_yes = 0
+
+    for record in household_data:
+        if record['indi5'] == 0.0:
+            indi5_no += 1
+        else:
+            indi5_yes += 1
+
+    return indi5_no, indi5_yes
+
+def get_indi6_counts():
+    household_data = Household.objects.values('indi6')
+    indi6_no = 0
+    indi6_yes = 0
+
+    for record in household_data:
+        if record['indi6'] == 0.0:
+            indi6_no += 1
+        else:
+            indi6_yes += 1
+
+    return indi6_no, indi6_yes
+
+def get_indi7_counts():
+    household_data = Household.objects.values('indi7')
+    indi7_no = 0
+    indi7_yes = 0
+
+    for record in household_data:
+        if record['indi7'] == 0.0:
+            indi7_no += 1
+        else:
+            indi7_yes += 1
+
+    return indi7_no, indi7_yes
+
+def get_indi8_counts():
+    household_data = Household.objects.values('indi8')
+    indi8_no = 0
+    indi8_yes = 0
+
+    for record in household_data:
+        if record['indi8'] == 0.0:
+            indi8_no += 1
+        else:
+            indi8_yes += 1
+
+    return indi8_no, indi8_yes
+
+def get_indi9_counts():
+    household_data = Household.objects.values('indi9')
+    indi9_no = 0
+    indi9_yes = 0
+
+    for record in household_data:
+        if record['indi9'] == 0.0:
+            indi9_no += 1
+        else:
+            indi9_yes += 1
+
+    return indi9_no, indi9_yes
+
+def get_indi10_counts():
+    household_data = Household.objects.values('indi10')
+    indi10_no = 0
+    indi10_yes = 0
+
+    for record in household_data:
+        if record['indi10'] == 0.0:
+            indi10_no += 1
+        else:
+            indi10_yes += 1
+
+    return indi10_no, indi10_yes
+
+def get_indi11_counts():
+    household_data = Household.objects.values('indi11')
+    indi11_no = 0
+    indi11_yes = 0
+
+    for record in household_data:
+        if record['indi11'] == 0.0:
+            indi11_no += 1
+        else:
+            indi11_yes += 1
+
+    return indi11_no, indi11_yes
+
+def get_indi12_counts():
+    household_data = Household.objects.values('indi12')
+    indi12_no = 0
+    indi12_yes = 0
+
+    for record in household_data:
+        if record['indi12'] == 0.0:
+            indi12_no += 1
+        else:
+            indi12_yes += 1
+
+    return indi12_no, indi12_yes
+
+def get_indi13_counts():
+    household_data = Household.objects.values('indi13')
+    indi13_no = 0
+    indi13_yes = 0
+
+    for record in household_data:
+        if record['indi13'] == 0.0:
+            indi13_no += 1
+        else:
+            indi13_yes += 1
+
+    return indi13_no, indi13_yes
 
 def convert_to_yes_no(value):
     if value == 0.076923077:
@@ -268,7 +641,7 @@ def add_account_form(request):
         return redirect('AddAcc')
 
     
-def login_account_form(request):
+def Admin_account_form(request):
     if request.method == 'POST':
         loginUsername = request.POST['Username']
         password1 = request.POST['password1']
@@ -289,33 +662,54 @@ def login_account_form(request):
             return redirect('loginAcc')
 
 
-# this is for the contact form
-def submit_contact_form(request):
+def login_account_form(request):
     if request.method == 'POST':
+        loginUsername = request.POST['Username']
+        password1 = request.POST['password1']
+
+        user = authenticate(username=loginUsername, password=password1)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            # Check if the username exists in the database
+            user_with_username = User.objects.filter(username=loginUsername).exists()
+            
+            if not user_with_username:
+                messages.error(request, "Username does not exist.")
+            else:
+                messages.error(request, "Wrong password")
+            return redirect('userlogin')
+
+# this is for the contact form
+
+# def submit_contact_form(request):
+#     if request.method == 'POST':
  
-        first_name = request.POST.get('first_name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
+#         first_name = request.POST.get('first_name')
+#         email = request.POST.get('email')
+#         message = request.POST.get('message')
 
 
-        contact_model_instance = Contact(
-            first_name=first_name,
-            email=email,
-            message=message,
-            submission_time=timezone.now()  # Set the submission time to the current time
-        )
-        contact_model_instance.save()
+#         contact_model_instance = Contact(
+#             first_name=first_name,
+#             email=email,
+#             message=message,
+#             submission_time=timezone.now()  
+#         )
+#         contact_model_instance.save()
 
-        subject = 'Feedback Submission from the User'
-        message_body = f"Name: {first_name}\nEmail: {email}\nMessage: {message}"
+#         subject = 'Feedback Submission from the User'
+#         message_body = f"Name: {first_name}\nEmail: {email}\nMessage: {message}"
 
-        recipient_email = '202080469@psu.palawan.edu.ph'
+#         recipient_email = '202080469@psu.palawan.edu.ph'
 
-        send_mail(subject, message_body, email, [recipient_email])
-        messages.success(request, 'Form submitted successfully!')
-        return redirect('home') 
-    else:
-        return render(request, 'index.html')
+#         send_mail(subject, message_body, email, [recipient_email])
+#         messages.success(request, 'Form submitted successfully!')
+#         return redirect('home') 
+#     else:
+#         return render(request, 'index.html')
 
 
 def submit_developer_contact_form(request):
@@ -330,7 +724,7 @@ def submit_developer_contact_form(request):
         devdeloper_contact_model_instance.save()
 
         subject = 'New Feedback Submission from the Admin'
-        message_body = f"Name: {name_admin}\nIssue: {issue}\nMessage: {message_content}"
+        message_body = f"Name: {name_admin}\nPosition: {issue}\nMessage: {message_content}"
 
         recipient_email = '202080469@psu.palawan.edu.ph'
 

@@ -18,7 +18,7 @@
                             <ol class="breadcrumb ms-auto">
                                 <li><a href="{% url 'household_table' %}" class="fw-normal" style="color: black;" >Refresh</a></li>
                             </ol>
-                            <a href="{% url 'user_logout' %}"
+                            <a href="{% url 'admin_logout' %}"
                                 class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
                         </div>
                     </div>
@@ -31,33 +31,192 @@
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
+
+            <div class="card white-box p-0">
+                <div class="card-heading" style="background-color:#9ee0fc65; margin-bottom: -1cm;">
+                    <h3 style="text-align: center;" class="box-title mb-0">Summary of Evaluation data</h3>
+                </div>
+                <div class="card-body">
+                   
+                    
+                </div>
+            </div>
+
             <div class="container-fluid">
                 <!-- ============================================================== -->
-                <!-- Start Page Content -->
+                <!-- Three charts -->
                 <!-- ============================================================== -->
+                <div class="row justify-content-center">
+                    <!-- <p class="legend">Legend: &emsp;&emsp;DT -&gt; Decision Tree&emsp;&emsp;SVM -&gt; Support Vector Machine</p> -->
+                    <div class="col-lg-4 col-md-12" style="width: 200px;">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title" style="font-size: 15px; text-align: center;">INDICATOR 1</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi1_yes }}</b></span></li>
+                                <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi1_no }}</B> </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12" style="width: 200px;">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title" style="font-size: 15px; text-align: center; ">INDICATOR 2</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                
+                                <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi2_yes }}</b></span></li>
+                                <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi2_no }}</B> </span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12" style="width: 200px">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title" style="font-size: 15px; text-align: center; ">INDICATOR 3</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi3_yes }}</b></span></li>
+                                <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi3_no }}</B> </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12" style="width: 200px">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title" style="font-size: 15px; text-align: center;">INDICATOR 4</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi4_yes }}</b></span></li>
+                                <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi4_no }}</B> </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12" style="width: 200px;">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title" style="font-size: 15px; text-align: center; ">INDICATOR 5</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi5_yes }}</b></span></li>
+                                <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi5_no }}</B> </span></li>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container-fluid">
+                    <!-- ============================================================== -->
+                    <!-- Three charts -->
+                    <!-- ============================================================== -->
+                    <div class="row justify-content-center">
+                        <!-- <p class="legend">Legend: &emsp;&emsp;DT -&gt; Decision Tree&emsp;&emsp;SVM -&gt; Support Vector Machine</p> -->
+                        <div class="col-lg-4 col-md-12" style="width: 200px;">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title" style="font-size: 15px; text-align: center; "> INDICATOR 6</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                   
+                                    <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi6_yes }}</b></span></li>
+                                    <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi6_no }}</B> </span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12" style="width: 200px;">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title" style="font-size: 15px; text-align: center;">INDICATOR 7</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                    
+                                    <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi7_yes }}</b></span></li>
+                                    <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi7_no }}</B> </span></li>
+                                </ul>
+                            </div>
+                        </div>
+    
+                        <div class="col-lg-4 col-md-12" style="width: 200px">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title" style="font-size: 15px; text-align: center; ">INDICATOR 8</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                    <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi8_yes }}</b></span></li>
+                                    <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi8_no }}</B> </span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12" style="width: 200px">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title" style="font-size: 15px; text-align: center; ">INDICATOR 9</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                    <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi9_yes }}</b></span></li>
+                                    <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi9_no }}</B> </span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12" style="width: 200px;">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title" style="font-size: 15px; text-align: center; ">INDICATOR 10</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                    <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi10_yes }}</b></span></li>
+                                    <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi10_no }}</B> </span></li>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <!-- ============================================================== -->
+                        <!-- Three charts -->
+                        <!-- ============================================================== -->
+                        <div class="row justify-content-center">
+                            <!-- <p class="legend">Legend: &emsp;&emsp;DT -&gt; Decision Tree&emsp;&emsp;SVM -&gt; Support Vector Machine</p> -->
+                            <div class="col-lg-4 col-md-12" style="width: 200px;">
+                                <div class="white-box analytics-info">
+                                    <h3 class="box-title" style="font-size: 15px; text-align: center;"> INDICATOR 11</h3>
+                                    <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                       
+                                        <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi11_yes }}</b></span></li>
+                                        <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi11_no }}</B> </span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12" style="width: 200px;">
+                                <div class="white-box analytics-info">
+                                    <h3 class="box-title" style="font-size: 15px; text-align: center;">INDICATOR 12</h3>
+                                    <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                        
+                                        <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi12_yes }}</b></span></li>
+                                        <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi12_no }}</B> </span></li>
+                                    </ul>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-4 col-md-12" style="width: 200px">
+                                <div class="white-box analytics-info">
+                                    <h3 class="box-title" style="font-size: 15px; text-align: center;">INDICATOR 13</h3>
+                                    <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                        <li><span class="counter " style="font-size: 18px; padding-right: 10px; ">Yes: <b style="color: rgb(0, 0, 0);"> {{ indi13_yes }}</b></span></li>
+                                        <li><span class="counter " style="font-size: 18px; padding-right: 10px; " >No: <B style="color: rgb(0, 0, 0);"> {{ indi13_no }}</B> </span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    
+
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Evaluation Data</h3>
+                            <h3 class="box-title" >All of Evaluation Data</h3>
                             <p class="text-muted">You can view here all the data of questions from the evaluation form<code></code></p>
-                            <div class="table-responsive">
+                            <div class="table-responsive" >
                                 <table class="table text-nowrap">
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">ID</th>
-                                            <th class="border-top-0">Q1</th>
-                                            <th class="border-top-0">Q2</th>
-                                            <th class="border-top-0">Q3</th>
-                                            <th class="border-top-0">Q4</th>
-                                            <th class="border-top-0">Q5</th>
-                                            <th class="border-top-0">Q6</th>
-                                            <th class="border-top-0">Q7</th>
-                                            <th class="border-top-0">Q8</th>
-                                            <th class="border-top-0">Q9</th>
-                                            <th class="border-top-0">Q10</th>
-                                            <th class="border-top-0">Q11</th>
-                                            <th class="border-top-0">Q12</th>
-                                            <th class="border-top-0">Q13</th>
+                                            <th class="border-top-0">Indicator 1</th>
+                                            <th class="border-top-0">Indicator 2</th>
+                                            <th class="border-top-0">Indicator 3</th>
+                                            <th class="border-top-0">Indicator 4</th>
+                                            <th class="border-top-0">Indicator 5</th>
+                                            <th class="border-top-0">Indicator 6</th>
+                                            <th class="border-top-0">Indicator 7</th>
+                                            <th class="border-top-0">Indicator 8</th>
+                                            <th class="border-top-0">Indicator 9</th>
+                                            <th class="border-top-0">Indicator 10</th>
+                                            <th class="border-top-0">Indicator 11</th>
+                                            <th class="border-top-0">Indicator 12</th>
+                                            <th class="border-top-0">Indicator 13</th>
                                         </tr>
                                     </thead>
                                     <tbody>

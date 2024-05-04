@@ -108,15 +108,23 @@
                                 <span class="hide-menu"style="color: black;">Household Profile</span>
                             </a>
                         </li>
+                        <li class="sidebar-item" style="margin-top: 0.5cm; font-size: 18px;"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'archive_table_screen_view' %}"
+                                aria-expanded="false">
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                                <span class="hide-menu"style="color: black;">Archive Data</span>
+                            </a>
+                        </li>
+
                         <li class="sidebar-item" style="font-size: 18px; margin-top: 0.5cm; ">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'AddAcc' %}"
                                 aria-expanded="false">
                                 <i class="fa fa-user" aria-hidden="true"></i>
-                                <span class="hide-menu" style="color: black;">Add Admin</span>
+                                <span class="hide-menu" style="color: black;">Add Staff</span>
                             </a>
                         </li>
                         <li class="text-center p-20 upgrade-btn" style="margin-top: 3cm;">
-                            <a href="{% url 'user_logout' %}"
+                            <a href="{% url 'admin_logout' %}"
                                 class="btn d-grid btn-danger text-white">
                                 Log out</a>
                         </li>

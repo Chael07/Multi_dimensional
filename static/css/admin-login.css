@@ -11,7 +11,10 @@
   background: linear-gradient(90deg, #e9e9f5, #1d00f7);		
   height: 900px;
 }
-
+.ynq1_body {
+  background: linear-gradient(90deg, #e9e9f5, #1479c6);		
+  height: 900px;
+}
 .ynq_container {
   display: flex;
   align-items: center;

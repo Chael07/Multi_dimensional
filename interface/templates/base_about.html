@@ -66,30 +66,25 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault" >
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="{% url 'home' %}#header">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link page-scroll" href="{% url 'home' %}#header" style="padding-left: 1cm;">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="{% url 'home' %}#services">Services</a>
                 </li>
-                 <!-- Dropdown Menu -->          
+                 <!-- Dropdown Menu          {% url 'home' %}#about -->
                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle page-scroll" href="{% url 'home' %}#about" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">About</a>
+                    <a class="nav-link dropdown-toggle page-scroll" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">About</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'privacy' %}"><span class="item-text">Privacy Policy</span></a>
                     </div>
                 </li>
                 <!-- end of dropdown menu -->
-                
+
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="{% url 'home' %}#contact">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="{% url 'eval' %}">Evaluation</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="{% url 'loginAcc' %}">ADMIN</a>
+                    <a class="nav-link page-scroll" href=" {% url 'user_logout' %}">Log out</a>
                 </li>
             </ul>
+           
             <span class="nav-item social-icons">
                 <span class="fa-stack">
                     <img src="{% static 'images/brgy.png' %}" alt="">
@@ -110,7 +105,7 @@
 {% endblock content %}
 
    <!-- Footer -->
-   <div class="footer">
+   <div class="footer" style="margin-top: 1.5cm;">
     <div class="container">
         <div class="row">
             <div class="col-md-4">

@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static 'css/admin-login.css' %}">
-  <title>Admin Login</title>
+  <title>Staff Login</title>
   <link rel="icon" href="{% static 'images/MDPA-logo.png' %}">
   <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
@@ -21,18 +21,18 @@
         </div>
     </div>
     <!-- end of preloader -->
-<div class="ynq_body">
+<div class="ynq1_body">
   <div class="ynq_container">
     <div class="ynq_screen">
       <div class="ynq_screen__content">
         <div class="ynq_social-login">
-          <h3>Login as Admin</h3>
+          <h3>Login as Evaluator</h3>
         </div>
-        <form class="ynq_login" method="post" action="{% url 'Admin_account_form' %}">
+        <form class="ynq_login" method="post" action="{% url 'login_account_form' %}">
           {% csrf_token %}
           <div class="ynq_login__field">
             <i class="ynq_login__icon fas fa-user"></i>
-            <input type="text" class="ynq_login__input" name="Username" placeholder="Username" required>
+            <input type="text" class="ynq_login__input" name="Username" placeholder="User name" required>
           </div>
           <div class="ynq_login__field">
             <i class="ynq_login__icon fas fa-lock"></i>
@@ -44,7 +44,7 @@
           </button>				
         </form>
         <p class="forgot-password-link"><a href="{% url 'reset_password' %}">Forgot Password?</a></p>
-        <a class="btn-solid-lg page-scroll" href="{% url 'userlogin' %}" style="background-color: black; border-color: black; margin-left: 2.3cm; margin-top: 1.5cm; " >Login as Evaluator</a>
+        <a class="btn-solid-lg page-scroll" href="{% url 'loginAcc' %}" style="background-color: black; border-color: black; margin-left: 2.3cm; margin-top: 1.5cm; " >Login as Admin</a>
 
         {% if messages %}
         <style>
@@ -71,7 +71,7 @@
     <div class="container" >
         <div class="row">
             <div class="col-lg-12" >
-                <p class="p-small" style="color: black; font-size: 13px;">Copyright © 2023 <a href="{% url 'userlogin' % }" style="color:black ;">Multidimensional Poverty Analyzer</a> - All rights reserved</p>
+                <p class="p-small" style="color: black; font-size: 13px;">Copyright © 2023 <a href="{% url 'home' % }" style="color:black ;">Multidimensional Poverty Analyzer</a> - All rights reserved</p>
             </div> <!-- end of col -->
         </div> <!-- enf of row -->
     </div> <!-- end of container -->

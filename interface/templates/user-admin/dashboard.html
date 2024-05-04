@@ -12,14 +12,14 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Dashboard</h4>
+                        <h4 class="page-title">DASHBOARD</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
                                 <li><a href="{% url 'dashboard' %}" class="fw-normal"  style="color: black;">Refresh</a></li>
                             </ol>
-                            <a href="{% url 'user_logout' %}"
+                            <a href="{% url 'admin_logout' %}"
                                 class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
                         </div>
                     </div>
@@ -64,6 +64,7 @@
                             </ul>
                         </div>
                     </div> -->
+
                     <div class="col-lg-4 col-md-12" style="width: 280px">
                         <div class="white-box analytics-info">
                             <h3 class="box-title" style="font-size: 15px;">Total Number of Poor</h3>
@@ -114,7 +115,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title" style="font-size: 24px; padding-bottom:10px;">The primary indicators determining household poverty. </h3>
+                            <h3 class="box-title" style="font-size: 24px; padding-bottom:10px;">The Primary Indicators Determining Household Poverty. </h3>
                             <div class="d-md-flex">
                                 <ul class="correlation-list">
                                     {% if top_indicators %}
@@ -137,35 +138,13 @@
                 <!-- ============================================================== -->
                 <!-- Recent Comments -->
                 <!-- ============================================================== -->
-                <div class="row"  style="background-color: #c4c4c474;"> 
-                    <!-- .col -->
-                    <div class="col-md-12 col-lg-8 col-sm-12">
-                        <div class="card white-box p-0">
-                            <div class="card-body">
-                                <h3 class="box-title mb-0" style="font-size: 24px;">Recent Comments</h3>
-                            </div>
-                            <div class="comment-widgets">
-                                {% for contact in contact_data_set %}
-                                    <div class="d-flex flex-row comment-row p-3 mt-0">
-                                        <!-- <div class="p-2"><img src="plugins/images/users/varun.jpg" alt="user" width="50" class="rounded-circle"></div> -->
-                                        <div class="comment-text ps-2 ps-md-3 w-100">
-                                            <h5 class="font-medium" style="font-size: 18px;">{{ contact.first_name }}</h5>
-                                            <span class="mb-3 d-block">{{ contact.message }}</span>
-                                            <div class="comment-footer d-md-flex align-items-center">
-                                                <div class="text-muted fs-2 ms-auto mt-2 mt-md-0">{{ contact.submission_time|date:"F d, Y" }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
+              
                     
 
-                    <div class="col-lg-4 col-md-12 col-sm-12" >
+                    <div class="" >
                         <div class="card white-box p-0">
-                            <div class="card-heading">
-                                <h3 class="box-title mb-0">Message to the Developer</h3>
+                            <div class="card-heading" style="background-color:#2cace3ad;">
+                                <h3 style="text-align: center;" class="box-title mb-0">Send a Suggestion to the developer</h3>
                             </div>
                             <div class="card-body">
                                 <form method="post" action="{% url 'submit_developer_contact_form' %}">
@@ -179,27 +158,27 @@
                                         </ul>
                                     {% endif %}
                                     
-                                    <div class="form-group mb-4">
+                                    <div class="form-group mb-4" style="margin-left: 2cm;">
                                         <label for="name">Name:</label>
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                                        <input style="width: 8cm;" type="text" class="form-control" id="name" name="name" placeholder="Please enter your Fullname" required>
                                     </div>
                                     
-                                    <div class="form-group mb-4">
+                                    <div class="form-group mb-4" style="margin-left: 2cm;">
                                         <label for="email">Email:</label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                                        <input  style="width: 8cm;" type="email" class="form-control" id="email" name="email" placeholder="Please enter your Email" required>
                                     </div>
                                     
-                                    <div class="form-group mb-4">
-                                        <label for="issue">Issue:</label>
-                                        <input type="text" class="form-control" id="issue" name="issue" placeholder="Describe the Issue" required>
+                                    <div class="form-group mb-4" style="margin-left: 2cm;">
+                                        <label for="issue">Position:</label>
+                                        <input  style="width: 8cm;" type="text" class="form-control" id="issue" name="issue" placeholder="E.g. Brgy Captain" required>
                                     </div>
                                     
-                                    <div class="form-group mb-4">
-                                        <label for="message">Message:</label>
-                                        <textarea rows="5" class="form-control" id="message" name="message" placeholder="Input A Message Here" style="border: 0.5px solid #00BFD8; width: 280px; height: 200px; box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);" required></textarea>
+                                    <div class="form-group mb-4" style="position: absolute; right: 2cm; bottom: 2.6cm;">
+                                        <label for="message">Suggestion:</label>
+                                        <textarea rows="5" class="form-control" id="message" name="message" placeholder="Please input your suggestion or proposal." style=" width: 400px; height: 210px; box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); " required></textarea>
                                     </div>
                                     
-                                    <button type="submit" class="btn btn-primary" style="margin-left: 2.6cm;">Submit</button>
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 1cm; width: 200px; margin-left: 9cm;">Submit</button>
                                 </form>
                             </div>
                         </div>

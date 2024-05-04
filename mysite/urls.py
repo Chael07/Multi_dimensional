@@ -17,17 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from interface.views import(
-    home_screen_view, privacy_screen_view, evaluation_screen_view, submit_contact_form, submit_household, result_screen_view, login_acc,
+    home_screen_view, privacy_screen_view, evaluation_screen_view, submit_household, result_screen_view, login_acc, user_login_view
     )
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_screen_view, name='home'),
+    path('', user_login_view, name='userlogin'),
+    path('home/', home_screen_view, name='home'),
     path('privacy/', privacy_screen_view, name='privacy'),
     path('evaluations/', evaluation_screen_view, name='eval'),
     path('result/', result_screen_view, name='result'),
-    path('submit_contact_form/', submit_contact_form, name='submit_contact_form'),
+    # path('submit_contact_form/', submit_contact_form, name='submit_contact_form'),
     path('submit_household/', submit_household, name='submit_household'),
     path('login/', login_acc, name='loginAcc'),
     path('', include('interface.urls')),  # Include your app's URLs
