@@ -41,46 +41,45 @@
                             <h3 class="box-title">Households Profile Table</h3>
                             <p class="text-muted">You can view here all the profile data from the evaluation form<code></code></p>
                             <div class="table-responsive">
-                                <table class="table text-nowrap">
+                                <table class="table text-nowrap" style="border: 1px solid #ddd;">
                                     <thead>
                                         <tr>
-                                            <th> </th>
-                                            <th>ID</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Number</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
-                                            <th>Predicted MPI Score</th>
-                                            <!-- <th>DT Result</th> -->
-                                            <th>Household Classification </th>
+                                            <th style="border: 1px solid #ddd;"> </th>
+                                            <th style="border: 1px solid #ddd;">ID</th>
+                                            <th style="border: 1px solid #ddd;">First Name</th>
+                                            <th style="border: 1px solid #ddd;">Last Name</th>
+                                            <th style="border: 1px solid #ddd;">Number</th>
+                                            <th style="border: 1px solid #ddd;">Email</th>
+                                            <th style="border: 1px solid #ddd;">Address</th>
+                                            <th style="border: 1px solid #ddd;">Predicted MPI Score</th>
+                                            <!-- <th style="border: 1px solid #ddd;">DT Result</th> -->
+                                            <th style="border: 1px solid #ddd;">Household Classification</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for row in page_obj.object_list %}
-                                        <tr>
-                                            <td>
+                                        <tr style="border: 1px solid #ddd;">
+                                            <td style="border: 1px solid #ddd;">
                                                 <a href="{% url 'archive' row.id %}" style="background-color: rgb(73, 73, 243); border-color: blue;" class="btn btn-danger">Archive</a>
                                             </td>
-                                            <td>{{ forloop.counter }}</td>
-                                            <td>{{ row.first_name }}</td>
-                                            <td>{{ row.last_name }}</td>
-                                            <td>{{ row.user_number }}</td>
-                                            <td>{{ row.user_email }}</td>
-                                            <td>{{ row.user_address }}</td>
-                                            <td>{{ row.mpi|floatformat:3 }}</td>
-                                            <!-- <td>{{ row.dt_result }}</td> -->
-                                            <td>{{ row.svm_result }}</td>
-                                            
+                                            <td style="border: 1px solid #ddd;">{{ forloop.counter }}</td>
+                                            <td style="border: 1px solid #ddd;">{{ row.first_name }}</td>
+                                            <td style="border: 1px solid #ddd;">{{ row.last_name }}</td>
+                                            <td style="border: 1px solid #ddd;">{{ row.user_number }}</td>
+                                            <td style="border: 1px solid #ddd;">{{ row.user_email }}</td>
+                                            <td style="border: 1px solid #ddd;">{{ row.user_address }}</td>
+                                            <td style="border: 1px solid #ddd;">{{ row.mpi|floatformat:3 }}</td>
+                                            <!-- <td style="border: 1px solid #ddd;">{{ row.dt_result }}</td> -->
+                                            <td style="border: 1px solid #ddd;">{{ row.svm_result }}</td>
                                         </tr>
-                                    {% endfor %}
+                                        {% endfor %}
                                     </tbody>
-                                    
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
+                
                 <div class="container">
                     <div class="row my-5">
                         <div class="col-md-4 ">

@@ -595,9 +595,9 @@ def get_indi13_counts():
 
 def convert_to_yes_no(value):
     if value == 0.076923077:
-        return 'yes'
+        return 'Deprived'
     elif value == 0.0:
-        return 'no'
+        return 'Not-Deprived'
     else:
         return 'none'
 

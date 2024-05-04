@@ -47,56 +47,57 @@
                 <canvas id="barChart"></canvas>
             </div>
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="white-box">
-                            <h3 class="box-title" >All of Evaluation Data</h3>
-                            <p class="text-muted">You can view here all the data of questions from the evaluation form<code></code></p>
-                            <div class="table-responsive" >
-                                <table class="table text-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">ID</th>
-                                            <th class="border-top-0">School Attendance</th>
-                                            <th class="border-top-0">Educational Attainment</th>
-                                            <th class="border-top-0">Hunger</th>
-                                            <th class="border-top-0">Food Consumption</th>
-                                            <th class="border-top-0">Health Insurance</th>
-                                            <th class="border-top-0">Ownership of Assets</th>
-                                            <th class="border-top-0">Toilet Facility</th>
-                                            <th class="border-top-0">Access to Water</th>
-                                            <th class="border-top-0">Access to Electricity</th>
-                                            <th class="border-top-0">House Tenure</th>
-                                            <th class="border-top-0">Housing Material</th>
-                                            <th class="border-top-0">Underemployment</th>
-                                            <th class="border-top-0">Working Children Not in School</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for data in page_obj.object_list %}
-                                            <tr>
-                                                <td>{{ forloop.counter }}</td>
-                                                <td>{{ data.indi1 }}</td>
-                                                <td>{{ data.indi2 }}</td>
-                                                <td>{{ data.indi3 }}</td>
-                                                <td>{{ data.indi4 }}</td>
-                                                <td>{{ data.indi5 }}</td>
-                                                <td>{{ data.indi6 }}</td>
-                                                <td>{{ data.indi7 }}</td>
-                                                <td>{{ data.indi8 }}</td>
-                                                <td>{{ data.indi9 }}</td>
-                                                <td>{{ data.indi10 }}</td>
-                                                <td>{{ data.indi11 }}</td>
-                                                <td>{{ data.indi12 }}</td>
-                                                <td>{{ data.indi13 }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title">All of Evaluation Data</h3>
+                        <p class="text-muted">You can view here all the data of questions from the evaluation form<code></code></p>
+                        <div class="table-responsive">
+                            <table class="table text-nowrap" style="border: 1px solid #ddd;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid #ddd;">ID</th>
+                                        <th style="border: 1px solid #ddd;">School Attendance</th>
+                                        <th style="border: 1px solid #ddd;">Educational Attainment</th>
+                                        <th style="border: 1px solid #ddd;">Hunger</th>
+                                        <th style="border: 1px solid #ddd;">Food Consumption</th>
+                                        <th style="border: 1px solid #ddd;">Health Insurance</th>
+                                        <th style="border: 1px solid #ddd;">Ownership of Assets</th>
+                                        <th style="border: 1px solid #ddd;">Toilet Facility</th>
+                                        <th style="border: 1px solid #ddd;">Access to Water</th>
+                                        <th style="border: 1px solid #ddd;">Access to Electricity</th>
+                                        <th style="border: 1px solid #ddd;">House Tenure</th>
+                                        <th style="border: 1px solid #ddd;">Housing Material</th>
+                                        <th style="border: 1px solid #ddd;">Underemployment</th>
+                                        <th style="border: 1px solid #ddd;">Working Children Not in School</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in page_obj.object_list %}
+                                    <tr style="border: 1px solid #ddd;">
+                                        <td style="border: 1px solid #ddd;">{{ forloop.counter }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi1 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi2 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi3 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi4 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi5 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi6 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi7 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi8 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi9 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi10 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi11 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi12 }}</td>
+                                        <td style="border: 1px solid #ddd;">{{ data.indi13 }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+            </div>
+            
                 <div class="container">
                     <div class="row my-5">
                         <div class="col-md-4 ">
@@ -180,13 +181,13 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Yes',
+                    label: 'Deprived',
                     data: indiYesCounts,
                     backgroundColor: 'rgba(54, 162, 235, 0.5)', // Blue color
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 }, {
-                    label: 'No',
+                    label: 'Not Deprived',
                     data: indiNoCounts,
                     backgroundColor: 'rgba(255, 99, 132, 0.5)', // Red color
                     borderColor: 'rgba(255, 99, 132, 1)',
