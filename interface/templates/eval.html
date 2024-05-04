@@ -285,10 +285,10 @@
      {% csrf_token %}
 
 
-<div class="question-container "  id="page1">
+<div class="question-container active"  id="page1">
   <div class="gray-box">
     <div class="label" style="text-align: center; font-size: 16px;">Number of Household Members:</div>
-    <div class="select">
+    <div class="select" >
         <select  id="household-members" onchange="showAdditionalFields()" required>
           <option value="" hidden></option> <!-- Blank placeholder -->
             <option value="1">1</option>
@@ -318,51 +318,17 @@
     </div>
 </div>
 
-<div class="question-container" id="page2">
+<div class="question-container " id="page2">
   
  <div style="text-align: center;">
   <h3 style="margin-top: 0.5cm; padding-bottom: 0.8cm;">Who's answering this evaluation?</h3>
 
-  <div class="form-group">
-    <label class="form-label" for="first_name">First Name:</label>
-    <input class="form-input-short" type="text" id="first_name" name="first_name" placeholder=" Please Enter First Name" required>
-  </div>
-
-  <div class="form-group">
-     <label class="form-label" for="last_name">Last Name:</label>
-    <input class="form-input-short" type="text" id="last_name" name="last_name" placeholder="Please Enter Last Name" required>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label" for="email">Email:</label>
-    <input class="form-input-short" type="email" id="email" name="email" placeholder="Please Enter Email" required>
-   </div>
-
-  <div class="form-group">
-    <label class="form-label" for="Cnumber">Contact Number</label>
-    <input class="form-input-short" type="tel" id="Cnumber" name="Cnumber" placeholder="09123456789" required>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label" for="Address">Purok</label>
-    <select class="form-input-short" id="Address" name="Address" required>
-        <option value="">Select Purok</option>
-        <option value="purok1">Dalisay</option>
-        <option value="purok2">Golden Shark</option>
-        <option value="purok3">Pagatpat</option>
-        <option value="purok2">Rosas</option>
-        <option value="purok3">Sampaguita</option>
-        <!-- Add more options as needed -->
-    </select>
-</div>
-
- </div>
-  
+   
   <div class="gray-box" style="margin-top: -0.5cm;">
     <div class="form-label" style="text-align: center;">Relationship to the Household Head</div>
     <div class="select">
         <select id="household-members-relationship">
-          <option value=" " style="color: #ffffffb0;">Select Relationship</option> <!-- Blank placeholder -->
+          <option value=" " style="color: #ffffffb0;">Select</option> <!-- Blank placeholder -->
             <option value="1">Head</option>
             <option value="2">Spouse</option>
             <option value="3">Son</option>
@@ -381,7 +347,41 @@
             <option value="15">Sister</option>
         </select>
     </div>
+    </div>
+    <div class="form-group" style="margin-top: -1.5cm;">
+      <label class="form-label" for="Address">Purok</label>
+      <select class="form-input-short" id="Address" name="Address" required>
+          <option value="">Select</option>
+          <option value="purok1">Dalisay</option>
+          <option value="purok2">Golden Shark</option>
+          <option value="purok3">Pagatpat</option>
+          <option value="purok2">Rosas</option>
+          <option value="purok3">Sampaguita</option>
+          <!-- Add more options as needed -->
+      </select>
+  </div>
+
+
+  <div class="form-group">
+    <label class="form-label" for="email" >Email:</label>
+    <input class="form-input-short" type="email" id="email" name="email" placeholder="Please Enter Email" required>
+   </div>
+
+  <div class="form-group">
+    <label class="form-label" for="Cnumber">Contact Number</label>
+    <input class="form-input-short" type="tel" id="Cnumber" name="Cnumber" placeholder="09123456789" required>
+  </div>
+
+<div class="form-group">
+  <label class="form-label" for="first_name">First Name:</label>
+  <input class="form-input-short" type="text" id="first_name" name="first_name" placeholder=" Please Enter First Name" required>
 </div>
+
+<div class="form-group">
+   <label class="form-label" for="last_name">Last Name:</label>
+  <input class="form-input-short" type="text" id="last_name" name="last_name" placeholder="Please Enter Last Name" required>
+</div>
+ </div>
 <div class="next-button">
       <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
       <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
@@ -423,7 +423,7 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
     </div>
 </div>
 
-<div class="question-container active"  id="page4">
+<div class="question-container"  id="page4">
   <div class="question">
     <span>1. Is there a household member aged 18 or older who does not complete basic k-12 curriculum?</span>
     <div class="custom-options">
@@ -454,7 +454,7 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   </div>
 </div>
 
-<div class="question-container"  id="page5">
+<div class="question-container "  id="page5">
   <div class="question">
     <span>2. Is there a household member whose age ranges from 5 to 18 that is not attending school?</span>
     <div class="custom-options">
@@ -465,50 +465,52 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
 
   <div id="followUpQuestion2" class="Follow_up_options2">
     <div class="follow_question">
-      Why not attending school?
+      Why is the household member not attending school?
     </div>
     <div class="follow_options">
-      <input type="radio" id="Accessibility" name="School" value="Accessibility of school?">
-      <label for="Accessibility-of-School">Accessibility of School</label><br>
-      <input type="radio" id="mode1" name="reason1" value="example-1">
-      <label for="Illness">Illness</label><br>
-      <input type="radio" id="mode2" name="reason2" value="example-2">
-      <label for="pregnancy">pregnancy</label><br>
-      <input type="radio" id="Mode3" name="reason3" value="example-3">
-      <label for="Marriage">Marriage</label><br>
-      <input type="radio" id="mode4" name="" value="example-4">
-      <label for="HighCost">High cost of education/Financial Concern</label><br>
-      <input type="radio" id="mode5" name="Financial" value="example-5">
-      <label for="Employment">Employment, if ito selected, would add value to Q13</label><br>
-      <input type="radio" name="mode6" id="Example-7">
-      <label for="HighSChool">Finished basic k-12 schooling</label><br>
-      <input type="radio">
-      <label for="job">Looking for Employment</label><br>
-      <input type="radio">
+      <input type="checkbox" id="Accessibility" name="School" value="Accessibility of school?">
+      <label for="Accessibility">Accessibility of School</label><br>
+      <input type="checkbox" id="mode1" name="School" value="Illness">
+      <label for="mode1">Illness</label><br>
+      <input type="checkbox" id="mode2" name="School" value="Pregnancy">
+      <label for="mode2">Pregnancy</label><br>
+      <input type="checkbox" id="Mode3" name="School" value="Marriage">
+      <label for="Mode3">Marriage</label><br>
+      <input type="checkbox" id="mode4" name="School" value="High cost of education/Financial Concern">
+      <label for="mode4">High cost of education/Financial Concern</label><br>
+      <input type="checkbox" id="mode5" name="School" value="Employment">
+      <label for="mode5">Employment (if selected, would add value to Q13)</label><br>
+      <input type="checkbox" id="Example-7" name="School" value="Finished basic k-12 schooling">
+      <label for="Example-7">Finished basic K-12 schooling</label><br>
+      <input type="checkbox" name="School" value="Looking for Employment">
+      <label for="Looking for Employment">Looking for Employment</label><br>
+      <input type="checkbox" name="School">
       <label for="passion">Lack of Professional Interest</label><br>
-      <input type="radio">
-      <label for="Chingga">Fear of Being affected by COVID-19</label><br>
-      <input type="radio">
-      <label for="Childlabour">Too young to go to school</label><br>
-      <input type="radio">
-      <label for="Being a bitch">Bullying</label><br>
-      <input type="radio">
-      <label for="shitshow">Family Problem</label><br>
-      <input type="radio">
-      <label for="Andewtate">No/Weak Internet Connection</label><br>
-      <input type="radio">
-      <label for="Pussy">Modular Learning is Not Preferred</label><br>
-      <input type="radio">
-      <label for="wtf!!!!!">With Problems in School Requirements</label><br>
-      <input type="radio">
-      <label for="Others">OTHER REASONS</label><br>
+      <input type="checkbox" name="School">
+      <label for="">Fear of Being affected by COVID-19</label><br>
+      <input type="checkbox" name="School">
+      <label for="">Too young to go to school</label><br>
+      <input type="checkbox" name="School">
+      <label for="">Bullying</label><br>
+      <input type="checkbox" name="School">
+      <label for="">Family Problem</label><br>
+      <input type="checkbox" name="School">
+      <label for="">No/Weak Internet Connection</label><br>
+      <input type="checkbox" name="School">
+      <label for="">Modular Learning is Not Preferred</label><br>
+      <input type="checkbox" name="School">
+      <label for="">With Problems in School Requirements</label><br>
+      <input type="checkbox" name="School">
+      <label for="">OTHER REASONS</label><br>
     </div>
   </div>
+   
   <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
-    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    <button onclick="validateAndNextQuestion2()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
+
 <div class="question-container"  id="page6">
   <div class="question">
     <span>3. Is there a household member that experienced hunger for the past months?</span>
@@ -568,6 +570,7 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
     <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
+
 <div class="question-container"  id="page7">
   <div class="question">
     <span>4. Is there a household member who does not eat three times a day?</span>
@@ -593,9 +596,10 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
       </div>
     </div>
     </div>
+    
     <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
-    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    <button onclick="validateAndNextQuestion4()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
 
@@ -614,7 +618,7 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   </div>
 </div>
 
-<div class="question-container"  id="page9">
+<div class="question-container "  id="page9">
   <div class="question">
     <span>6.	Does the household lacks basic appliances?</span>
     <div class="custom-options">
@@ -626,41 +630,42 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div id="followUpQuestion6" class="Follow_up_options6">
     <div class="follow_question">•	How many of each of the appliances/durable does the household own?</div>
     <div class="follow_options">
-      <input type="radio" id="6" name="completion" value="1">
+      <input type="checkbox" id="6" name="completion" value="1">
       <label for="radio">Radio/Radio Cassette</label><br>
-      <input type="radio" id="TV" name="set" value="2">
+      <input type="checkbox" id="TV" name="set" value="2">
       <label for="Television Set">Television Set</label><br>
-      <input type="radio" id="CD" name="set" value="3">
+      <input type="checkbox" id="CD" name="set" value="3">
       <label for="CD">Audio Component/Stereo Set Player</label><br>
-      <input type="radio" id="ref" name="set" value="4">
+      <input type="checkbox" id="ref" name="set" value="4">
       <label for="Coolers">Refrigerator/Freezer</label><br>
-      <input type="radio" id="washer" name="set" value="5">
+      <input type="checkbox" id="washer" name="set" value="5">
       <label for="washer">Washing Machine</label><br>
-      <input type="radio" id="AC" name="set" value="6">
+      <input type="checkbox" id="AC" name="set" value="6">
       <label for="AC">Air Conditioning</label><br>
-      <input type="radio" id="TP" name="set" value="7">
+      <input type="checkbox" id="TP" name="set" value="7">
       <label for="transport">Car/Jeep</label><br>
-      <input type="radio" id="Landline" name="set" value="8">
+      <input type="checkbox" id="Landline" name="set" value="8">
       <label for="phone">Landline</label><br>
-      <input type="radio" id="Smartphone" name="set" value="9">
+      <input type="checkbox" id="Smartphone" name="set" value="9">
       <label for="phone">Smartphone/cellular phones</label><br>
-      <input type="radio" id="PC" name="set" value="10">
+      <input type="checkbox"id="PC" name="set" value="10">
       <label for="PC">Personal Computer</label><br>
-      <input type="radio" id="Cook" name="set" value="11">
+      <input type="checkbox" id="Cook" name="set" value="11">
       <label for="Cook">Stove with Oven/Gas Range</label><br>
-      <input type="radio" id="boats" name="set" value="12">
+      <input type="checkbox" id="boats" name="set" value="12">
       <label for="boats">Motorized Boat/Banca</label><br>
-      <input type="radio" id="Locomotive" name="set" value="13">
+      <input type="checkbox" id="Locomotive" name="set" value="13">
       <label for="transport">Motorcycle/Tricycle</label><br>
     </div>
   </div>
 
   <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
-    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    <button onclick="validateAndNextQuestion6()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
-<div class="question-container"  id="page10">
+
+<div class="question-container "  id="page10">
   <div class="question">
     <span>7.	Does the household lack its own toilet facility?</span>
     <div class="custom-options">
@@ -689,62 +694,60 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
 
   <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
-    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    <button onclick="validateAndNextQuestion7()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
 
-<div class="question-container"  id="page11">
+<div class="question-container" id="page11">
   <div class="question">
-    <span>8.	Does the household lack access to safe drinking water?</span>
+    <span>8. Does the household lack access to safe drinking water?</span>
     <div class="custom-options">
-        <input type="radio" name="q8" id="q8_yes"onchange="showFollowUpOptions8()"  value="0.076923077" required><label for="q8_yes"> Yes</label>
-        <input type="radio" name="q8" id="q8_no" onchange="showFollowUpOptions8()"value="0" required><label for="q8_no"> No</label>
+        <input type="radio" name="q8" id="q8_yes" onchange="showFollowUpOptions8()" value="0.076923077" required><label for="q8_yes"> Yes</label>
+        <input type="radio" name="q8" id="q8_no" onchange="showFollowUpOptions8()" value="0" required><label for="q8_no"> No</label>
     </div>
   </div>
 
-  <div id="followUpQuestion8" class="Follow_up_options8">
-    <div class="follow_question">•	What was the main reason that you were unable to access drinking water in sufficient quantities when needed?</div>
+  <div id="followUpQuestion8" class="Follow_up_options8" style="display: none;">
+    <div class="follow_question">• What was the main reason that you were unable to access drinking water in sufficient quantities when needed?</div>
     <div class="follow_options">
-      <input type="radio" id="Water" name="set" value="1">
-      <label for="Water">Water not available from the source</label><br>
-      <input type="radio" id="bath" name="set" value="2">
+      <input type="radio" id="Water1" name="set1" value="1">
+      <label for="Water1">Water not available from the source</label><br>
+      <input type="radio" id="expensive" name="set1" value="2">
       <label for="expensive">Water too expensive</label><br>
-      <input type="radio" id="depo" name="set" value="3">
-      <label for="have access">Source not accessible</label><br>
+      <input type="radio" id="access" name="set1" value="3">
+      <label for="access">Source not accessible</label><br>
     </div>
-    <div class="follow_question">•	What is the household’s main source of water?</div>
+    <br>
+    <div class="follow_question">• What is the household’s main source of water?</div>
     <div class="follow_options">
-      <input type="radio" id="Water" name="set" value="1">
-      <label for="personal">Own use, faucet, community water system</label><br>
-      <input type="radio" id="bath" name="set" value="2">
+      <input type="radio" id="Water2" name="set2" value="1">
+      <label for="Water2">Own use, faucet, community water system</label><br>
+      <input type="radio" id="shared" name="set2" value="2">
       <label for="shared">Shared faucet, community water system</label><br>
-      <input type="radio" id="depo" name="set" value="3">
-      <label for="have access">Shared, tubed/piped deep well</label><br>
-      <input type="radio" id="bath" name="set" value="4">
-      <label for="shared">Shared faucet, community water system</label><br>
-      <input type="radio" id="bath" name="set" value="5">
+      <input type="radio" id="tubed" name="set2" value="3">
+      <label for="tubed">Shared, tubed/piped deep well</label><br>
+      <input type="radio" id="shallow" name="set2" value="4">
       <label for="shallow">Tubed/piped shallow well</label><br>
-      <input type="radio" id="bath" name="set" value="6">
-      <label for="deep well">deep well</label><br>
-      <input type="radio" id="bath" name="set" value="7">
-      <label for="deep well">deep well</label><br>
-      <input type="radio" id="bath" name="set" value="8">
-      <label for="Protected">Protected Spring</label><br>
-      <input type="radio" id="bath" name="set" value="9">
-      <label for="deep well">Unprotected Spring</label><br>
-      <input type="radio" id="bath" name="set" value="10">
-      <label for="deep well">Lake, river, rain</label><br>
-      <input type="radio" id="bath" name="set" value="11">
-      <label for="deep well">Peddler</label><br>         
+      <input type="radio" id="deep2" name="set2" value="6">
+      <label for="deep2">Dug well</label><br>
+      <input type="radio" id="spring1" name="set2" value="7">
+      <label for="spring1">Protected Spring</label><br>
+      <input type="radio" id="spring2" name="set2" value="8">
+      <label for="spring2">Unprotected Spring</label><br>
+      <input type="radio" id="lake" name="set2" value="9">
+      <label for="lake">Lake, river, rain</label><br>
+      <input type="radio" id="peddler" name="set2" value="10">
+      <label for="peddler">Peddler</label><br>         
     </div>
   </div>
 
   <div class="next_button">
-    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
-    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll">Back</button>   
+    <button onclick="validateAndNextQuestion8()" class="btn-solid-lg page-scroll">Next</button>
   </div>
 </div>
-<div class="question-container"  id="page12">
+
+<div class="question-container "  id="page12">
   <div class="question">
     <span>9.	Does the household lack access to electricity?</span>
     <div class="custom-options">
@@ -756,7 +759,7 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>•	Is there electricity in the building/house?</span>
     <div class="custom-options">
-      <input type="radio" name="follow1_q9" id="follow1_q9_yes"  value="0.076923077" ><label for="follow1_q9_yes"> Yes</label>
+      <input type="radio" name="follow1_q9" id="follow1_q9_yes"  value="0.076923077"><label for="follow1_q9_yes"> Yes</label>
       <input type="radio" name="follow1_q9" id="follow1_q9_no" value="0" ><label for="follow1_q9_no"> No</label>
     </div>
   </div>
@@ -764,71 +767,76 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
 
   <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
-    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    <button onclick="validateAndNextQuestion9()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
 
-<div class="question-container"  id="page13">
-  
+<div class="question-container" id="page13">
   <div class="question">
-    <span>10.	Does the household lack ownership rights to its dwelling?</span>
+    <span>10. Does the household lack ownership rights to its dwelling?</span>
     <div class="custom-options">
-        <input type="radio" name="q10" id="q10_yes" onchange="showFollowUpOptions10()" value="0.076923077" required><label for="q10_yes"> Yes</label>
-        <input type="radio" name="q10" id="q10_no" onchange="showFollowUpOptions10()" value="0" required><label for="q10_no"> No</label>
+      <input type="radio" name="q10" id="q10_yes" onchange="showFollowUpOptions10()" value="0.076923077" required>
+      <label for="q10_yes">Yes</label>
+      <input type="radio" name="q10" id="q10_no" onchange="showFollowUpOptions10()" value="0" required>
+      <label for="q10_no">No</label>
     </div>
   </div>
 
   <div id="followUpQuestion10" class="Follow_up_options10">
-    <div class="follow_question">•	What is the tenure status of the housing unit occupied by the household?</div>
+    <div class="follow_question">• What is the tenure status of the housing unit occupied by the household?</div>
     <div class="follow_options">
-      <input type="radio">
+      <input type="radio" name="set1">
       <label for="status-owned">Own house and lot, or owner-like possession</label><br>
-      <input type="radio">
+      <input type="radio" name="set1">
       <label for="status-rented">Rented house or room, including lot</label><br>
-      <input type="radio">
+      <input type="radio" name="set1">
       <label for="owned house-rented land">Own house, rented lot</label><br>
-      <input type="radio">
+      <input type="radio" name="set1">
       <label for="ownedhose">Own house, rent-free lot with consent of owner</label><br>
-      <input type="radio">
+      <input type="radio" name="set1">
       <label for="rent-free">Own house, rent-free lot without consent of owner</label><br>
-      <input type="radio">
+      <input type="radio" name="set1">
       <label for="rent-free-lot">Rent-free house and lot with consent of owner</label><br>
-      <input type="radio">
+      <input type="radio" name="set1">
       <label for="rentfreewithoutconsent">Rent-free house and lot without consent of owner</label><br>
-      <input type="radio">
-      <label for="">Not applicable</label><br>                                   
+      <input type="radio" name="set1">
+      <label for="">Not applicable</label><br>
     </div>
-    <div class="follow_question">•	In what type of building/house does the household reside?</div>
+    <br>
+    <div class="follow_question">• In what type of building/house does the household reside?</div>
     <div class="follow_options">
-      <input type="radio">
+      <input type="radio" name="set2">
       <label for="Single">Single House</label><br>
-      <input type="radio">
+      <input type="radio" name="set2">
       <label for="Duplex">Duplex</label><br>
-      <input type="radio">
-      <label for="Condo">Multi Residential (Tree units or more)</label><br>
-      <input type="radio">
+      <input type="radio" name="set2">
+      <label for="Condo">Multi Residential (Three units or more)</label><br>
+      <input type="radio" name="set2">
       <label for="Commercial">Commercial/Industrial/Agricultural Building</label><br>
-      <input type="radio">
-      <label for="Institutional">Institutional living quarters</label><br>        
-</div>                   
+      <input type="radio" name="set2">
+      <label for="Institutional">Institutional living quarters</label><br>
+    </div>
   </div>
 
   <div class="next_button">
-    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
-    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll">Back</button>
+    <button onclick="validateAndNextQuestion10()" class="btn-solid-lg page-scroll">Next</button>
   </div>
 </div>
-<div class="question-container"  id="page14">
+
+<div class="question-container" id="page14">
   <div class="question">
-    <span>11.	Is the house made entirely of wood?</span>
+    <span>11. Is the house made entirely of wood?</span>
     <div class="custom-options">
-        <input type="radio" name="q11" id="q11_yes" onchange="showFollowUpOptions11()" value="0.076923077" required><label for="q11_yes"> Yes</label>
-        <input type="radio" name="q11" id="q11_no" onchange="showFollowUpOptions11()" value="0" required><label for="q11_no"> No</label>
+      <input type="radio" name="q11" id="q11_yes" onchange="showFollowUpOptions11()" value="0.076923077" required>
+      <label for="q11_yes">Yes</label>
+      <input type="radio" name="q11" id="q11_no" onchange="showFollowUpOptions11()" value="0" required>
+      <label for="q11_no">No</label>
     </div>
   </div>
 
-  <div id="followUpQuestion11" class="Follow_up_options11">
-    <div class="follow_question">•	What type of construction materials are the roofs made of?</div>
+  <div id="followUpQuestion11" class="Follow_up_options11" style="display: none;">
+    <div class="follow_question">• What type of construction materials are the roofs made of?</div>
     <div class="follow_options">
       <input type="radio" id="strong-materials" name="roof-materials" value="strong-materials">
       <label for="strong-materials">Strong Materials</label><br>
@@ -843,18 +851,17 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
       <input type="radio" id="Mixed" name="roof-materials" value="salvaged-materials">
       <label for="Mixed but predominantly salvaged">Mix but predominantly salvaged materials</label><br>
       <input type="radio" id="none" name="roof-materials" value="salvaged-materials">
-      <label for="none">Not applicable</label><br>                                                       
+      <label for="none">Not applicable</label><br>
     </div>
-           
   </div>
 
   <div class="next_button">
-    <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
-    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    <button onclick="backQuestion()" class="btn-solid-lg page-scroll">Back</button>
+    <button onclick="validateAndNextQuestion11()" class="btn-solid-lg page-scroll">Next</button>
   </div>
 </div>
 
-<div class="question-container" id="page15">
+<div class="question-container " id="page15">
 
   <div class="question">
     <span>12. Is there a household member capable of working but currently not employed?</span>
@@ -939,37 +946,38 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   </div>
 </div>
 
-<div class="question-container"  id="page16">
+<div class="question-container" id="page16">
   
-      <div class="question">
-        <span>13.	Is there a household member aged 5 to 17 who is employed rather than attending school?</span>
-        <div class="custom-options">
-            <input type="radio" name="q13" id="q13_yes" onchange="showFollowUpOptions13()" value="0.076923077" required><label for="q13_yes"> Yes</label>
-            <input type="radio" name="q13" id="q13_no" value="0" required><label for="q13_no"> No</label>
-        </div>
-      </div>
-      <div id="followUpQuestion13" class="Follow_up_options13">
-        <div class="follow_question">•	What is the household member’s reason for employment?</div>
-        <div class="follow_options">
-          <input type="radio">
-          <label for="Financial necessity ">Financial necessity </label><br>
-          <input type="radio">
-          <label for="Learning work skills">Learning work skills</label><br>
-          <input type="radio">
-          <label for="Learning work skills">Learning work skills</label><br>
-          <input type="text">
-          <label for="Others">Others</label><br>                                                           
-        </div> 
-      </div>
-  
-   
-      <p id="formErrorMessage" style="color: red; display: none;">Please answer all questions before submitting.</p> 
-      <div class="submit-button">
-        <button type="submit" class="btn-solid-reg page-scroll eval-submit-button" onclick="return householdSubmitForm();">Submit</button>
-        <!-- <button class="btn-solid-reg page-scroll eval-submit-button"onclick="backQuestion()">Back</button> -->
-      </div>
+  <div class="question">
+    <span>13. Is there a household member aged 5 to 17 who is employed rather than attending school?</span>
+    <div class="custom-options">
+        <input type="radio" name="q13" id="q13_yes" onchange="showFollowUpOptions13()" value="0.076923077" required>
+        <label for="q13_yes">Yes</label>
+        <input type="radio" name="q13" id="q13_no" value="0" required>
+        <label for="q13_no">No</label>
+    </div>
+  </div>
+
+  <div id="followUpQuestion13" class="Follow_up_options13" style="display: none;">
+    <div class="follow_question">• What is the household member’s reason for employment?</div>
+    <div class="follow_options">
+      <input type="radio">
+      <label for="Financial necessity">Financial necessity</label><br>
+      <input type="radio">
+      <label for="Learning work skills">Learning work skills</label><br>
+      <label for="Others">Others &nbsp;</label><input type="text">                                                           
+    </div> 
+  </div>
+
+  <p id="formErrorMessage" style="color: red; display: none;">Please answer all questions before submitting.</p> 
+  <div class="submit-button">
+    <button type="submit" class="btn-solid-reg page-scroll eval-submit-button" onclick="return householdSubmitForm();">Submit</button>
+    <!-- <button class="btn-solid-reg page-scroll eval-submit-button"onclick="backQuestion()">Back</button> -->
+  </div>
       
-</div>      
+</div>
+      
+
 </form>
 </div>
 
@@ -1012,23 +1020,37 @@ function showFollowUpOptions() {
 </script>
 
 <script>
-    function showFollowUpOptions2() {
-      var yesRadio = document.getElementById("q2_yes");
-      var followUpDiv = document.getElementById("followUpQuestion2");
-    
-      if (yesRadio.checked) {
-        followUpDiv.style.display = "block";
-      } else {
-        followUpDiv.style.display = "none";
+  function validateAndNextQuestion2() {
+    const q2Yes = document.getElementById('q2_yes');
+    const q2No = document.getElementById('q2_no');
+    const followUpQuestion = document.getElementById('followUpQuestion2');
+    const followUpCheckboxes = document.getElementsByName('School');
+
+    // Check if "Yes" is selected and if the follow-up question is visible
+    if (q2Yes.checked && followUpQuestion.style.display !== 'none') {
+      // Check if at least one follow-up option is selected
+      let followUpAnswered = false;
+      for (let i = 0; i < followUpCheckboxes.length; i++) {
+        if (followUpCheckboxes[i].checked) {
+          followUpAnswered = true;
+          break;
+        }
+      }
+      // If no follow-up option is selected, display an alert and return
+      if (!followUpAnswered) {
+        alert('Please select at least one option for the follow-up question');
+        return;
       }
     }
-</script>
 
-<script>
-  function showFollowUpOptions3() {
-    var yesRadio = document.getElementById("q3_yes");
-    var followUpDiv = document.getElementById("followUpQuestion3");
-  
+    // Proceed to the next page
+    nextQuestion();
+  }
+
+  function showFollowUpOptions2() {
+    var yesRadio = document.getElementById("q2_yes");
+    var followUpDiv = document.getElementById("followUpQuestion2");
+
     if (yesRadio.checked) {
       followUpDiv.style.display = "block";
     } else {
@@ -1038,6 +1060,78 @@ function showFollowUpOptions() {
 </script>
 
 <script>
+  function validateAndNextQuestion3() {
+    const q3Yes = document.getElementById('q3_yes');
+    const followUpQuestions = document.querySelectorAll('#followUpQuestion3 input[type="radio"]');
+    
+    if (q3Yes.checked) {
+      // Check if any follow-up question is unanswered
+      for (let i = 0; i < followUpQuestions.length; i++) {
+        if (!followUpQuestions[i].checked) {
+          alert('Please answer all follow-up questions');
+          return;
+        }
+      }
+    }
+    
+    // Proceed to the next page
+    nextQuestion();
+  }
+
+  function showFollowUpOptions3() {
+    var yesRadio = document.getElementById("q3_yes");
+    var followUpDiv = document.getElementById("followUpQuestion3");
+
+    if (yesRadio.checked) {
+      followUpDiv.style.display = "block";
+    } else {
+      followUpDiv.style.display = "none";
+    }
+  }
+</script>
+
+<script>
+function validateAndNextQuestion4() {
+  const q4Yes = document.getElementById('q4_yes');
+  const followUpQuestions = document.querySelectorAll('#followUpQuestion4 input[type="radio"]');
+  let allFollowUpAnswered = true;
+
+  if (q4Yes.checked) {
+    // Group follow-up questions by their name attribute
+    const followUpGroups = {};
+    followUpQuestions.forEach((radio) => {
+      const groupName = radio.name;
+      if (!followUpGroups[groupName]) {
+        followUpGroups[groupName] = [];
+      }
+      followUpGroups[groupName].push(radio);
+    });
+
+    // Check if any follow-up question is unanswered
+    Object.keys(followUpGroups).forEach((groupName) => {
+      const groupRadios = followUpGroups[groupName];
+      let groupAnswered = false;
+      groupRadios.forEach((radio) => {
+        if (radio.checked) {
+          groupAnswered = true;
+        }
+      });
+      if (!groupAnswered) {
+        allFollowUpAnswered = false;
+      }
+    });
+
+    // If not all follow-up questions are answered, show alert
+    if (!allFollowUpAnswered) {
+      alert('Please answer all follow-up questions');
+      return;
+    }
+  }
+
+  // Proceed to the next page
+  nextQuestion();
+}
+
   function showFollowUpOptions4() {
     var yesRadio = document.getElementById("q4_yes");
     var followUpDiv = document.getElementById("followUpQuestion4");
@@ -1051,9 +1145,126 @@ function showFollowUpOptions() {
 </script>
 
 <script>
-    function showFollowUpOptions6() {
-      var yesRadio = document.getElementById("q6_yes");
-      var followUpDiv = document.getElementById("followUpQuestion6");
+  function validateAndNextQuestion6() {
+    const q6Yes = document.getElementById('q6_yes');
+    const q6No = document.getElementById('q6_no');
+    const followUpQuestion = document.getElementById('followUpQuestion6');
+    const followUpCheckboxes = document.getElementsByName('set');
+
+    // Check if "Yes" is selected and if the follow-up question is visible
+    if (q6Yes.checked && followUpQuestion.style.display !== 'none') {
+      // Check if at least one follow-up option is selected
+      let followUpAnswered = false;
+      for (let i = 0; i < followUpCheckboxes.length; i++) {
+        if (followUpCheckboxes[i].checked) {
+          followUpAnswered = true;
+          break;
+        }
+      }
+      // If no follow-up option is selected, display an alert and return
+      if (!followUpAnswered) {
+        alert('Please select at least one option for the follow-up question');
+        return;
+      }
+    }
+
+    // Proceed to the next page
+    nextQuestion();
+  }
+
+  function showFollowUpOptions6() {
+    var yesRadio = document.getElementById("q6_yes");
+    var followUpDiv = document.getElementById("followUpQuestion6");
+
+    if (yesRadio.checked) {
+      followUpDiv.style.display = "block";
+    } else {
+      followUpDiv.style.display = "none";
+    }
+  }
+</script>
+
+<script>
+  function validateAndNextQuestion7() {
+    const q7Yes = document.getElementById('q7_yes');
+    const q7No = document.getElementById('q7_no');
+    const followUpQuestion = document.getElementById('followUpQuestion7');
+    const followUpCheckboxes = document.getElementsByName('set');
+
+    // Check if "Yes" is selected and if the follow-up question is visible
+    if (q7Yes.checked && followUpQuestion.style.display !== 'none') {
+      // Check if at least one follow-up option is selected
+      let followUpAnswered = false;
+      for (let i = 0; i < followUpCheckboxes.length; i++) {
+        if (followUpCheckboxes[i].checked) {
+          followUpAnswered = true;
+          break;
+        }
+      }
+      // If no follow-up option is selected, display an alert and return
+      if (!followUpAnswered) {
+        alert('Please select one option for the follow-up question');
+        return;
+      }
+    }
+
+    // Proceed to the next page
+    nextQuestion();
+  }
+
+  function showFollowUpOptions7() {
+    var yesRadio = document.getElementById("q7_yes");
+    var followUpDiv = document.getElementById("followUpQuestion7");
+
+    if (yesRadio.checked) {
+      followUpDiv.style.display = "block";
+    } else {
+      followUpDiv.style.display = "none";
+    }
+  }
+</script>
+
+  <script>
+    function validateAndNextQuestion8() {
+      const q8Yes = document.getElementById('q8_yes');
+      const followUpQuestion = document.getElementById('followUpQuestion8');
+      const followUpRadios1 = document.querySelectorAll('input[name="set1"]');
+      const followUpRadios2 = document.querySelectorAll('input[name="set2"]');
+      
+      // Check if "Yes" is selected and if the follow-up question is visible
+      if (q8Yes.checked && followUpQuestion.style.display !== 'none') {
+        // Check if both follow-up questions are answered
+        let followUpAnswered1 = false;
+        let followUpAnswered2 = false;
+
+        for (let i = 0; i < followUpRadios1.length; i++) {
+          if (followUpRadios1[i].checked) {
+            followUpAnswered1 = true;
+            break;
+          }
+        }
+
+        for (let i = 0; i < followUpRadios2.length; i++) {
+          if (followUpRadios2[i].checked) {
+            followUpAnswered2 = true;
+            break;
+          }
+        }
+        
+        // If any follow-up question is unanswered, display an alert and return
+        if (!followUpAnswered1 || !followUpAnswered2) {
+          alert('Please answer all follow-up questions');
+          return;
+        }
+      }
+      
+      // Proceed to the next page
+      nextQuestion();
+    }
+
+    function showFollowUpOptions8() {
+      var yesRadio = document.getElementById("q8_yes");
+      var followUpDiv = document.getElementById("followUpQuestion8");
     
       if (yesRadio.checked) {
         followUpDiv.style.display = "block";
@@ -1061,71 +1272,119 @@ function showFollowUpOptions() {
         followUpDiv.style.display = "none";
       }
     }
+  </script>
+      
+<script>
+ const q9Yes = document.getElementById('q9_yes');
+const followUpQuestion = document.getElementById('follow1_q9_yes');
+const followUpQuestion2 = document.getElementById('follow1_q9_no');
+const followUpDiv = document.getElementById("followUpQuestion9");
+
+// Add event listener for 'Yes' radio button
+q9Yes.addEventListener('change', showFollowUpOptions9);
+
+function validateAndNextQuestion9() {
+  if (q9Yes.checked) {
+    if (followUpQuestion.checked || followUpQuestion2.checked) {
+      nextQuestion();
+    } else {
+      alert('Please answer the follow-up question');
+    }
+  } else {
+    nextQuestion();
+  }
+}
+
+  function showFollowUpOptions9() {
+    var yesRadio = document.getElementById("q9_yes");
+    var followUpDiv = document.getElementById("followUpQuestion9");
+
+    if (yesRadio.checked) {
+      followUpDiv.style.display = "block";
+    } else {
+      followUpDiv.style.display = "none";
+    }
+  }
 </script>
 
 <script>
-      function showFollowUpOptions7() {
-        var yesRadio = document.getElementById("q7_yes");
-        var followUpDiv = document.getElementById("followUpQuestion7");
-      
-        if (yesRadio.checked) {
-          followUpDiv.style.display = "block";
-        } else {
-          followUpDiv.style.display = "none";
+  function validateAndNextQuestion10() {
+    const q10Yes = document.getElementById('q10_yes');
+    const followUpQuestion = document.getElementById('followUpQuestion10');
+    const followUpRadios3 = document.querySelectorAll('#followUpQuestion10 input[name="set1"]');
+    const followUpRadios4 = document.querySelectorAll('#followUpQuestion10 input[name="set2"]');
+    
+    // Check if "Yes" is selected and if the follow-up question is visible
+    if (q10Yes.checked && followUpQuestion.style.display !== 'none') {
+      // Check if both follow-up questions are answered
+      let followUpAnswered3 = false;
+      let followUpAnswered4 = false;
+
+      for (let i = 0; i < followUpRadios3.length; i++) {
+        if (followUpRadios3[i].checked) {
+          followUpAnswered3 = true;
+          break;
         }
       }
+
+      for (let i = 0; i < followUpRadios4.length; i++) {
+        if (followUpRadios4[i].checked) {
+          followUpAnswered4 = true;
+          break;
+        }
+      }
+      
+      // If any follow-up question is unanswered, display an alert and return
+      if (!followUpAnswered3 || !followUpAnswered4) {
+        alert('Please answer all follow-up questions');
+        return;
+      }
+    }
+    
+    // Proceed to the next page
+    nextQuestion();
+  }
+
+  function showFollowUpOptions10() {
+    const q10Yes = document.getElementById('q10_yes');
+    const followUpDiv = document.getElementById('followUpQuestion10');
+    
+    if (q10Yes.checked) {
+      followUpDiv.style.display = 'block';
+    } else {
+      followUpDiv.style.display = 'none';
+    }
+  }
 </script>
 
 <script>
-        function showFollowUpOptions8() {
-          var yesRadio = document.getElementById("q8_yes");
-          var followUpDiv = document.getElementById("followUpQuestion8");
-        
-          if (yesRadio.checked) {
-            followUpDiv.style.display = "block";
-          } else {
-            followUpDiv.style.display = "none";
-          }
-        }
-</script>
-      
-<script>
-        function showFollowUpOptions9() {
-          var yesRadio = document.getElementById("q9_yes");
-          var followUpDiv = document.getElementById("followUpQuestion9");
-        
-          if (yesRadio.checked) {
-            followUpDiv.style.display = "block";
-          } else {
-            followUpDiv.style.display = "none";
-          }
-        }
-</script>
-      
-<script>
-        function showFollowUpOptions10() {
-          var yesRadio = document.getElementById("q10_yes");
-          var followUpDiv = document.getElementById("followUpQuestion10");
-        
-          if (yesRadio.checked) {
-            followUpDiv.style.display = "block";
-          } else {
-            followUpDiv.style.display = "none";
-          }
-        }
-</script>
+  function showFollowUpOptions11() {
+    var yesRadio = document.getElementById("q11_yes");
+    var followUpDiv = document.getElementById("followUpQuestion11");
 
- <script>
-          function showFollowUpOptions11() {
-            var yesRadio = document.getElementById("q11_yes");
-            var followUpDiv = document.getElementById("followUpQuestion11");
-          
-            if (yesRadio.checked) {
-              followUpDiv.style.display = "block";
-            } else {
-              followUpDiv.style.display = "none";
-            }
-          }
+    if (yesRadio.checked) {
+      followUpDiv.style.display = "block";
+    } else {
+      followUpDiv.style.display = "none";
+    }
+  }
+
+  function validateAndNextQuestion11() {
+    const q11Yes = document.getElementById('q11_yes');
+    const followUpRadios = document.querySelectorAll('#followUpQuestion11 input[type="radio"]:checked');
+
+    // Check if "Yes" is selected for q11 and if the follow-up question is visible
+    if (q11Yes.checked) {
+      // Check if any follow-up question is unanswered
+      if (followUpRadios.length === 0) {
+        alert('Please answer the follow-up question');
+        return;
+      }
+    }
+
+    // Proceed to the next page
+    nextQuestion();
+  }
 </script>
 
 <script>
@@ -1300,7 +1559,7 @@ function showFollowUpOptions() {
 </script>
 
 <script>
-  let currentPage = 4;
+  let currentPage = 16;
 
   function validateAndNextQuestion() {
     // Scroll to the top of the page
@@ -1346,6 +1605,13 @@ function showFollowUpOptions() {
   }
 
   function validateInputs() {
+    // Get the dropdown menu element
+    const dropdown = document.getElementById('household-members');
+    // Check if a value is selected
+    if (dropdown.selectedIndex === 0) {
+      return false; // Return false if no value is selected
+    }
+
     // Get all input fields in the current page
     const inputs = document.querySelectorAll('#page' + currentPage + ' input[required]');
     // Check if any required field is empty
@@ -1374,7 +1640,6 @@ function showFollowUpOptions() {
     alert(message);
   }
 </script>
-
 
 <script>
   function checkAllQuestionsAnswered() {
