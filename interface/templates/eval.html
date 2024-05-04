@@ -302,7 +302,7 @@
 <div class="question-container" id="page2">
   
  <div style="text-align: center;">
-  <h3 style="margin-top: 0.5cm; padding-bottom: 0.8cm;">Demographic Profile</h3>
+  <h3 style="margin-top: 0.5cm; padding-bottom: 0.8cm;">Who's answering this evaluation?</h3>
 
   <div class="form-group">
     <label class="form-label" for="first_name">First Name:</label>
@@ -328,9 +328,11 @@
     <label class="form-label" for="Address">Purok</label>
     <select class="form-input-short" id="Address" name="Address" required>
         <option value="">Select Purok</option>
-        <option value="purok1">Purok 1</option>
-        <option value="purok2">Purok 2</option>
-        <option value="purok3">Purok 3</option>
+        <option value="purok1">Dalisay</option>
+        <option value="purok2">Golden Shark</option>
+        <option value="purok3">Pagatpat</option>
+        <option value="purok2">Rosas</option>
+        <option value="purok3">Sampaguita</option>
         <!-- Add more options as needed -->
     </select>
 </div>
@@ -338,9 +340,10 @@
  </div>
   
   <div class="gray-box" style="margin-top: -0.5cm;">
-    <div class="form-label" style="text-align: center;">Respondent’s Relation to the Household Head</div>
+    <div class="form-label" style="text-align: center;">Relationship to the Household Head</div>
     <div class="select">
         <select id="household-members-relationship">
+          <option value=" " style="color: #ffffffb0;">Select Relationship</option> <!-- Blank placeholder -->
             <option value="1">Head</option>
             <option value="2">Spouse</option>
             <option value="3">Son</option>
@@ -1182,7 +1185,7 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
                   var suffixSelect = document.createElement("select");
                   suffixSelect.name = "member" + i + "_suffix";
                   suffixSelect.className = "input-field2";
-                  var suffixOptions = ["None", "Mr.", "Mrs.", "Ms.", "Dr.", "Prof."];
+                  var suffixOptions = ["None", "Jr.", "Sr.", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 
                   var placeholderOption = document.createElement("option");
                   placeholderOption.value = ""; // Set the value to an empty string
@@ -1201,7 +1204,7 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
                   var RTHHSelect = document.createElement("select");
                   RTHHSelect.name = "member" + i + "_RTHH";
                   RTHHSelect.className = "input-field2";
-                  var RTHHOptions = ["Head", "Spouse", "Son", "Daughter", "Step Son", "Step Daughter", "Son-in-law", "Daughter-in-law", "Granddaughter", "Grandson", "Father", "Mother",  "Father-in-law", "mother -in-law", "Brother", "Sister"];
+                  var RTHHOptions = ["Head", "Spouse", "Son", "Daughter", "Step Son", "Step Daughter", "Son-in-law", "Daughter-in-law", "Granddaughter", "Grandson", "Father", "Mother",  "Father-in-law", "Mother-in-law", "Brother", "Sister"];
                   var placeholderOption = document.createElement("option");
                   placeholderOption.value = ""; // Set the value to an empty string
                   placeholderOption.textContent = "Relationship to the Head"; // Placeholder text
@@ -1219,7 +1222,7 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
                   var genderSelect = document.createElement("select");
                   genderSelect.name = "member" + i + "_RTHH";
                   genderSelect.className = "input-field2";
-                  var genderOptions = ["Male", "Female", "Nonbinary", "Transgender", "Gender Neutral", "Binary"];
+                  var genderOptions = ["Male", "Female", "Lesbian", "Gay", "Transgender", "Queer", "Intersex"];
                   var placeholderOption = document.createElement("option");
                   placeholderOption.value = ""; // Set the value to an empty string
                   placeholderOption.textContent = "Gender"; // Placeholder text
