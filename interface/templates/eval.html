@@ -259,6 +259,25 @@
   .next-button {
     text-align: center;
   }
+
+  .custom-options2 {
+    display: flex; /* Use flexbox to align items horizontally */
+    align-items: center; /* Center items vertically */
+  }
+
+  /* Style for the radio button */
+  .custom-options2 input[type="radio"] {
+    transform: scale(1.5); /* Make the radio button bigger */
+    margin-right: 10px; /* Add some space between the radio button and text */
+    border-color: darkblue;
+  }
+
+  /* Style for the label */
+  .custom-options2 label {
+    color: rgb(0, 0, 0); /* Change the text color to dark blue */
+    font-size: 16px; /* Adjust the font size */
+  }
+  
 </style>
 
 <div class="question_contain">
@@ -266,7 +285,7 @@
      {% csrf_token %}
 
 
-<div class="question-container active"  id="page1">
+<div class="question-container "  id="page1">
   <div class="gray-box">
     <div class="label" style="text-align: center; font-size: 16px;">Number of Household Members:</div>
     <div class="select">
@@ -369,6 +388,7 @@
     </div>
  
 </div>
+
 <div class="question-container"  id="page3">
   <div class="gray-box" style="margin-top: -0.2cm;">
     <div class="label" style="text-align: center; font-size: 22px;">Data Privacy Policy   </div>
@@ -386,11 +406,15 @@ You retain the right to dispute any inaccuracies or errors in your personal info
 <br><br><b>Consent and Agreement:</b><br>
 By clicking "Agree," you acknowledge and agree to abide by the terms and conditions outlined in this privacy policy. This consent mechanism ensures compliance with the Data Privacy Act of 2012, which requires data subjects to provide informed consent for the processing of their personal information. Your agreement signifies your understanding of the privacy policy and your willingness to adhere to its provisions. We prioritize transparency and informed decision-making, ensuring that respondents are fully aware of their rights and responsibilities regarding the processing of their personal data.
 This comprehensive privacy policy reflects our commitment to upholding the principles and requirements set forth in the Data Privacy Act of 2012, ensuring the protection and confidentiality of your personal information throughout our study.
+<br><br>
 
-<div class="custom-options1">
-  <input type="radio" name="q1" required id="Agree" value="1" ><label for="Agree"> Agree</label> 
+<div class="custom-options2">
+  <input type="radio" name="agree_dataPrivacy" required id="Agree" value="1">
+  <label for="Agree" style="padding-right: 10px;"> Agree </label>
 </div>
+<p>By clicking "Agree," you acknowledge and agree to abide by the terms and conditions outlined in this privacy policy.</p>
     </div>
+    
   
 </div>
 <div class="next-button">
@@ -399,12 +423,12 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
     </div>
 </div>
 
-<div class="question-container"  id="page4">
+<div class="question-container active"  id="page4">
   <div class="question">
     <span>1. Is there a household member aged 18 or older who does not complete basic k-12 curriculum?</span>
     <div class="custom-options">
-      <input type="radio" name="q1" id="q1_yes" onchange="showFollowUpOptions()" value="0.076923077" ><label for="q1_yes"> Yes</label>
-      <input type="radio" name="q1" id="q1_no" onchange="showFollowUpOptions()" value="0" ><label for="q1_no"> No</label>
+      <input type="radio" name="q1" id="q1_yes" onchange="showFollowUpOptions()" value="0.076923077" required><label for="q1_yes"> Yes</label>
+      <input type="radio" name="q1" id="q1_no" onchange="showFollowUpOptions()" value="0" required><label for="q1_no"> No</label>
     </div>
   </div>
 
@@ -412,20 +436,21 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
     <div class="follow_question">
       What is the highest educational attainment?
     </div>
+    
     <div class="follow_options">
-      <input type="radio" id="early-childhood" name="education" value="early-childhood">
+      <input type="radio" id="early-childhood" name="education" value="early-childhood" required>
       <label for="early-childhood">Early Childhood Education</label><br>
-      <input type="radio" id="elementary" name="education" value="elementary">
+      <input type="radio" id="elementary" name="education" value="elementary" required>
       <label for="elementary">Elementary Education</label><br>
-      <input type="radio" id="High" name="education" value="junior-high">
+      <input type="radio" id="High" name="education" value="junior-high"required>
       <label for="junior-high">Junior High School</label><br>
-      <input type="radio" id="senior" name="education" value="none">
+      <input type="radio" id="senior" name="education" value="none"required>
       <label for="none">Did not complete any</label>
     </div>
   </div>
   <div class="next_button">
     <button onclick="backQuestion()" class="btn-solid-lg page-scroll" >Back</button>   
-    <button onclick="nextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
+    <button onclick="validateAndNextQuestion()" class="btn-solid-lg page-scroll"  >Next</button>
   </div>
 </div>
 
@@ -433,8 +458,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>2. Is there a household member whose age ranges from 5 to 18 that is not attending school?</span>
     <div class="custom-options">
-      <input type="radio" name="q2" id="q2_yes" onchange="showFollowUpOptions2()" value="0.076923077" ><label for="q2_yes"> Yes</label>
-      <input type="radio" name="q2" id="q2_no" onchange="showFollowUpOptions2()" value="0" ><label for="q2_no"> No</label>
+      <input type="radio" name="q2" id="q2_yes" onchange="showFollowUpOptions2()" value="0.076923077" required><label for="q2_yes"> Yes</label>
+      <input type="radio" name="q2" id="q2_no" onchange="showFollowUpOptions2()" value="0" required><label for="q2_no"> No</label>
     </div>
   </div>
 
@@ -488,8 +513,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>3. Is there a household member that experienced hunger for the past months?</span>
     <div class="custom-options">
-      <input type="radio" name="q3" id="q3_yes"onchange="showFollowUpOptions3()" value="0.076923077" ><label for="q3_yes"> Yes</label>
-      <input type="radio" name="q3" id="q3_no"onchange="showFollowUpOptions3()"value="0" ><label for="q3_no"> No</label>
+      <input type="radio" name="q3" id="q3_yes"onchange="showFollowUpOptions3()" value="0.076923077"required ><label for="q3_yes"> Yes</label>
+      <input type="radio" name="q3" id="q3_no"onchange="showFollowUpOptions3()"value="0" required><label for="q3_no"> No</label>
     </div>
   </div>
 
@@ -547,8 +572,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>4. Is there a household member who does not eat three times a day?</span>
     <div class="custom-options">
-      <input type="radio" name="q4" id="q4_yes" onchange="showFollowUpOptions4()" value="0.076923077" ><label for="q4_yes"> Yes</label>
-      <input type="radio" name="q4" id="q4_no" onchange="showFollowUpOptions4()" value="0" ><label for="q4_no"> No</label>
+      <input type="radio" name="q4" id="q4_yes" onchange="showFollowUpOptions4()" value="0.076923077" required><label for="q4_yes"> Yes</label>
+      <input type="radio" name="q4" id="q4_no" onchange="showFollowUpOptions4()" value="0" required><label for="q4_no"> No</label>
     </div>
   </div>
 
@@ -578,8 +603,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>5. Is there a household member who does not have access to health insurance?</span>
     <div class="custom-options">
-      <input type="radio" name="q5" id="q5_yes"  value="0.076923077" ><label for="q5_yes"> Yes</label>
-      <input type="radio" name="q5" id="q5_no" value="0" ><label for="q5_no"> No</label>
+      <input type="radio" name="q5" id="q5_yes"  value="0.076923077" required><label for="q5_yes"> Yes</label>
+      <input type="radio" name="q5" id="q5_no" value="0"required ><label for="q5_no"> No</label>
     </div>
   </div>
 
@@ -593,8 +618,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>6.	Does the household lacks basic appliances?</span>
     <div class="custom-options">
-        <input type="radio" name="q6" id="q6_yes" onchange="showFollowUpOptions6()" value="0.076923077" ><label for="q6_yes"> Yes</label>
-        <input type="radio" name="q6" id="q6_no"onchange="showFollowUpOptions6()" value="0" ><label for="q6_no"> No</label>
+        <input type="radio" name="q6" id="q6_yes" onchange="showFollowUpOptions6()" value="0.076923077"required ><label for="q6_yes"> Yes</label>
+        <input type="radio" name="q6" id="q6_no"onchange="showFollowUpOptions6()" value="0" required><label for="q6_no"> No</label>
     </div>
   </div>
 
@@ -639,8 +664,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>7.	Does the household lack its own toilet facility?</span>
     <div class="custom-options">
-        <input type="radio" name="q7" id="q7_yes" onchange="showFollowUpOptions7()" value="0.076923077" ><label for="q7_yes"> Yes</label>
-        <input type="radio" name="q7" id="q7_no" onchange="showFollowUpOptions7()" value="0" ><label for="q7_no"> No</label>
+        <input type="radio" name="q7" id="q7_yes" onchange="showFollowUpOptions7()" value="0.076923077" required ><label for="q7_yes"> Yes</label>
+        <input type="radio" name="q7" id="q7_no" onchange="showFollowUpOptions7()" value="0" required><label for="q7_no"> No</label>
     </div>
   </div>
 
@@ -672,8 +697,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>8.	Does the household lack access to safe drinking water?</span>
     <div class="custom-options">
-        <input type="radio" name="q8" id="q8_yes"onchange="showFollowUpOptions8()"  value="0.076923077" ><label for="q8_yes"> Yes</label>
-        <input type="radio" name="q8" id="q8_no" onchange="showFollowUpOptions8()"value="0" ><label for="q8_no"> No</label>
+        <input type="radio" name="q8" id="q8_yes"onchange="showFollowUpOptions8()"  value="0.076923077" required><label for="q8_yes"> Yes</label>
+        <input type="radio" name="q8" id="q8_no" onchange="showFollowUpOptions8()"value="0" required><label for="q8_no"> No</label>
     </div>
   </div>
 
@@ -723,8 +748,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>9.	Does the household lack access to electricity?</span>
     <div class="custom-options">
-        <input type="radio" name="q9" id="q9_yes" onchange="showFollowUpOptions9()" value="0.076923077" ><label for="q9_yes"> Yes</label>
-        <input type="radio" name="q9" id="q9_no"onchange="showFollowUpOptions9()" value="0" ><label for="q9_no"> No</label>
+        <input type="radio" name="q9" id="q9_yes" onchange="showFollowUpOptions9()" value="0.076923077"required ><label for="q9_yes"> Yes</label>
+        <input type="radio" name="q9" id="q9_no"onchange="showFollowUpOptions9()" value="0"required ><label for="q9_no"> No</label>
     </div>
   </div>
   <div id="followUpQuestion9" class="Follow_up_options9">
@@ -748,8 +773,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>10.	Does the household lack ownership rights to its dwelling?</span>
     <div class="custom-options">
-        <input type="radio" name="q10" id="q10_yes" onchange="showFollowUpOptions10()" value="0.076923077" ><label for="q10_yes"> Yes</label>
-        <input type="radio" name="q10" id="q10_no" onchange="showFollowUpOptions10()" value="0" ><label for="q10_no"> No</label>
+        <input type="radio" name="q10" id="q10_yes" onchange="showFollowUpOptions10()" value="0.076923077" required><label for="q10_yes"> Yes</label>
+        <input type="radio" name="q10" id="q10_no" onchange="showFollowUpOptions10()" value="0" required><label for="q10_no"> No</label>
     </div>
   </div>
 
@@ -797,8 +822,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>11.	Is the house made entirely of wood?</span>
     <div class="custom-options">
-        <input type="radio" name="q11" id="q11_yes" onchange="showFollowUpOptions11()" value="0.076923077" ><label for="q11_yes"> Yes</label>
-        <input type="radio" name="q11" id="q11_no" onchange="showFollowUpOptions11()" value="0" ><label for="q11_no"> No</label>
+        <input type="radio" name="q11" id="q11_yes" onchange="showFollowUpOptions11()" value="0.076923077" required><label for="q11_yes"> Yes</label>
+        <input type="radio" name="q11" id="q11_no" onchange="showFollowUpOptions11()" value="0" required><label for="q11_no"> No</label>
     </div>
   </div>
 
@@ -834,8 +859,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
   <div class="question">
     <span>12. Is there a household member capable of working but currently not employed?</span>
     <div class="custom-options">
-      <input type="radio" name="q12" id="q12_yes" onchange="showFollowUpOptions12()" value="0.076923077" ><label for="q12_yes"> Yes</label>
-      <input type="radio" name="q12" id="q12_no" onchange="showFollowUpOptions12()" value="0" ><label for="q12_no"> No</label>
+      <input type="radio" name="q12" id="q12_yes" onchange="showFollowUpOptions12()" value="0.076923077" required><label for="q12_yes"> Yes</label>
+      <input type="radio" name="q12" id="q12_no" onchange="showFollowUpOptions12()" value="0" required ><label for="q12_no"> No</label>
     </div>
   </div>
 
@@ -919,8 +944,8 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
       <div class="question">
         <span>13.	Is there a household member aged 5 to 17 who is employed rather than attending school?</span>
         <div class="custom-options">
-            <input type="radio" name="q13" id="q13_yes" onchange="showFollowUpOptions13()" value="0.076923077" ><label for="q13_yes"> Yes</label>
-            <input type="radio" name="q13" id="q13_no" value="0" ><label for="q13_no"> No</label>
+            <input type="radio" name="q13" id="q13_yes" onchange="showFollowUpOptions13()" value="0.076923077" required><label for="q13_yes"> Yes</label>
+            <input type="radio" name="q13" id="q13_no" value="0" required><label for="q13_no"> No</label>
         </div>
       </div>
       <div id="followUpQuestion13" class="Follow_up_options13">
@@ -949,16 +974,41 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
 </div>
 
 <script>
-  function showFollowUpOptions() {
-    var yesRadio = document.getElementById("q1_yes");
-    var followUpDiv = document.getElementById("followUpQuestion");
-  
-    if (yesRadio.checked) {
-      followUpDiv.style.display = "block";
-    } else {
-      followUpDiv.style.display = "none";
+function validateAndNextQuestion() {
+  const q1Yes = document.getElementById('q1_yes');
+  const q1No = document.getElementById('q1_no');
+  const followUpQuestion = document.getElementById('followUpQuestion');
+  const followUpRadios = document.getElementsByName('education');
+
+  // Check if "Yes" is selected and if the follow-up question is visible
+  if (q1Yes.checked && followUpQuestion.style.display !== 'none') {
+    // Check if at least one follow-up option is selected
+    let followUpAnswered = false;
+    for (let i = 0; i < followUpRadios.length; i++) {
+      if (followUpRadios[i].checked) {
+        followUpAnswered = true;
+        break;
+      }
+    }
+    // If no follow-up option is selected, display an alert and return
+    if (!followUpAnswered) {
+      alert('Please select one option for the follow-up question');
+      return;
     }
   }
+
+  // Proceed to the next page or page 5
+  nextQuestion();
+}
+
+function showFollowUpOptions() {
+  const followUpQuestion = document.getElementById('followUpQuestion');
+  if (document.getElementById('q1_yes').checked) {
+    followUpQuestion.style.display = 'block';
+  } else {
+    followUpQuestion.style.display = 'none';
+  }
+}
 </script>
 
 <script>
@@ -1250,66 +1300,78 @@ This comprehensive privacy policy reflects our commitment to upholding the princ
 </script>
 
 <script>
-  let currentPage = 1;
-  let backPage = currentPage; // Initialize backPage with the initial value of currentPage
+  let currentPage = 4;
 
-  function nextQuestion() {
-      // Scroll to the top of the page
-      window.scrollTo(0, 0);
+  function validateAndNextQuestion() {
+    // Scroll to the top of the page
+    window.scrollTo(0, 0);
 
-      // Check if the current page is page1 and if the selection is still blank
-      if (currentPage === 1 && !validateSelection()) {
-          showAlert(); // Show alert if selection is still blank on page one
-          return; // Exit the function to prevent proceeding
-      }
+    // Check if a radio button is selected
+    const q1_yes = document.getElementById('q1_yes');
+    const q1_no = document.getElementById('q1_no');
 
-      // Check if all required fields are filled
-      if (validateInputs()) {
-          // Hide the current question
-          document.getElementById('page' + currentPage).classList.remove('active');
-          // Increment the current question number
-          currentPage++;
-          // Update backPage whenever currentPage changes
-          backPage = currentPage - 1;
-          // Show the next question
-          document.getElementById('page' + currentPage).classList.add('active');
-      } else {
-          showAlert();
-      }
+    if (!q1_yes.checked && !q1_no.checked) {
+      showAlert("Please select an option.");
+      return;
+    }
+
+    // Proceed to the next question
+    nextQuestion();
   }
 
-  // Add a function to validate the selection on page one
-  function validateSelection() {
-      // Get the select element
-      const selectElement = document.getElementById('household-members');
-      // Check if the selected value is not empty
-      return selectElement.value.trim() !== '';
+  function nextQuestion() {
+    // Check if all required fields are filled
+    if (validateInputs()) {
+      // Hide the current question
+      document.getElementById('page' + currentPage).classList.remove('active');
+      // Increment the current question number
+      currentPage++;
+      // Show the next question
+      document.getElementById('page' + currentPage).classList.add('active');
+    } else {
+      showAlert("Please fill in all required fields.");
+    }
   }
 
   function backQuestion() {
-      // Scroll to the top of the page
-      window.scrollTo(0, 0);
+    // Scroll to the top of the page
+    window.scrollTo(0, 0);
 
-      // Decrement the current question number first
-      currentPage--;
-      // Hide the current question
-      document.getElementById('page' + (currentPage + 1)).classList.remove('active');
-      // Update backPage whenever currentPage changes
-      backPage = currentPage - 1;
-      // Show the previous question
-      document.getElementById('page' + currentPage).classList.add('active');
+    // Decrement the current question number
+    currentPage--;
+    // Hide the current question
+    document.getElementById('page' + (currentPage + 1)).classList.remove('active');
+    // Show the previous question
+    document.getElementById('page' + currentPage).classList.add('active');
   }
 
   function validateInputs() {
-      // Get all input fields in the current page
-      const inputs = document.querySelectorAll('#page' + currentPage + ' input[required]');
-      // Check if any required field is empty
-      for (let i = 0; i < inputs.length; i++) {
-          if (inputs[i].value.trim() === '') {
-              return false;
-          }
+    // Get all input fields in the current page
+    const inputs = document.querySelectorAll('#page' + currentPage + ' input[required]');
+    // Check if any required field is empty
+    for (let i = 0; i < inputs.length; i++) {
+      if (inputs[i].type === 'radio' && !checkRadioSelected(inputs[i].name)) {
+        return false;
       }
-      return true;
+      if (inputs[i].value.trim() === '') {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function checkRadioSelected(name) {
+    const radios = document.querySelectorAll(`input[name="${name}"]`);
+    for (let i = 0; i < radios.length; i++) {
+      if (radios[i].checked) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function showAlert(message) {
+    alert(message);
   }
 </script>
 
